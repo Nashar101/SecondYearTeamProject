@@ -21,6 +21,8 @@ public interface PostRepository extends PostRepositoryWithBagRelationships, JpaR
         return this.fetchBagRelationships(this.findOneWithToOneRelationships(id));
     }
 
+    Page<Post> findByBlogUserLoginOrderByDateDesc(String currentUserLogin, Pageable pageable);
+
     default List<Post> findAllWithEagerRelationships() {
         return this.fetchBagRelationships(this.findAllWithToOneRelationships());
     }
