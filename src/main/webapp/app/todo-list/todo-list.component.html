@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="todo-list.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To-do List</title>
@@ -25,7 +26,8 @@
         height: 35vh;
       }
 
-      .container {
+      .Detail-Window {
+        padding: 2%;
         position: absolute;
         top: 10px;
         right: 1.25vw;
@@ -36,21 +38,9 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       }
 
-      .todo {
-        position: relative;
-        padding: 15px;
-        background-color: white;
-        border-radius: 25px;
-        margin-bottom: 20px;
-      }
-
-      .done {
-        position: relative;
-        padding: 15px;
-        background-color: #b3b3b3;
-        border-radius: 25px;
-        margin-bottom: 20px;
-        color: gray;
+      .title {
+        font-size: 18px;
+        font-weight: bold;
       }
 
       .window {
@@ -64,22 +54,22 @@
         height: 8px;
       }
 
-      .title {
-        font-size: 18px;
-        font-weight: bold;
-      }
-
-      .content {
-        padding: 10px;
-      }
-
       .list {
         list-style: none;
-        padding: 0;
         margin: 0;
+        padding: 2%;
       }
 
-      .form-control {
+      .item {
+        position: relative;
+        padding: 15px;
+        border-radius: 25px;
+        margin-bottom: 20px;
+        background: white;
+      }
+
+      .Detail-Heading,
+      .Detail-Description {
         position: relative;
         top: auto;
         left: auto;
@@ -89,9 +79,9 @@
 
       .add-button {
         position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: #3e8acc;
+        bottom: 2vh;
+        right: 2vw;
+        background-color: #3754fc;
         color: white;
         width: 50px;
         height: 50px;
@@ -99,7 +89,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 25px;
+        font-size: 30px;
         cursor: pointer;
       }
 
@@ -129,70 +119,46 @@
       <div class="todo-items">
         <span class="title">to-dos</span>
         <div class="window">
-          <div class="content">
-            <ul class="list">
-              <li class="todo" onclick="">
-                <label> <input type="checkbox" /> Task 1 </label>
-              </li>
-              <li class="todo" onclick="">
-                <label> <input type="checkbox" /> Task 2 </label>
-              </li>
-              <li class="todo" onclick="">
-                <label> <input type="checkbox" /> Task 3 </label>
-              </li>
-              <li class="todo" onclick="">
-                <label> <input type="checkbox" /> Task 4 </label>
-              </li>
-              <li class="todo" onclick="">
-                <label> <input type="checkbox" /> Task 5 </label>
-              </li>
-            </ul>
-          </div>
+          <ul class="list" id="todo-list">
+            <li class="item" onclick="">
+              <label> <input type="checkbox" onclick="moveItem(this)" /> Task 1 </label>
+            </li>
+            <li class="item" onclick="">
+              <label> <input type="checkbox" onclick="moveItem(this)" /> Task 2 </label>
+            </li>
+            <li class="item" onclick="">
+              <label> <input type="checkbox" onclick="moveItem(this)" /> Task 3 </label>
+            </li>
+            <li class="item" onclick="">
+              <label> <input type="checkbox" onclick="moveItem(this)" /> Task 4 </label>
+            </li>
+            <li class="item" onclick="">
+              <label> <input type="checkbox" onclick="moveItem(this)" /> Task 5 </label>
+            </li>
+          </ul>
         </div>
       </div>
       <div class="done-items">
         <span class="title">Dones</span>
         <div class="window">
-          <div class="content">
-            <ul class="list">
-              <li class="done" onclick="">
-                <label> <input type="checkbox" /> Task 5 </label>
-              </li>
-              <li class="done" onclick="">
-                <label> <input type="checkbox" /> Task 5 </label>
-              </li>
-              <li class="done" onclick="">
-                <label> <input type="checkbox" /> Task 5 </label>
-              </li>
-              <li class="done" onclick="">
-                <label> <input type="checkbox" /> Task 5 </label>
-              </li>
-              <li class="done" onclick="">
-                <label> <input type="checkbox" /> Task 5 </label>
-              </li>
-            </ul>
-          </div>
+          <ul class="list" id="done-list"></ul>
         </div>
       </div>
-      <div class="container">
-        <div class="card-header">
-          <h3 class="card-title">Heading</h3>
+      <div class="Detail-Window">
+        <div>
+          <h3>Heading</h3>
+          <textarea class="Detail-Heading" placeholder="Heading"></textarea>
         </div>
-        <div class="card-body">
-          <textarea class="form-control" placeholder="Heading"></textarea>
-        </div>
-        <div class="card-header">
+        <div>
           <h3 class="card-title">Description</h3>
+          <textarea class="Detail-Description" rows="6" placeholder="Description"></textarea>
         </div>
-        <div class="card-body">
-          <textarea class="form-control" rows="6" placeholder="Description"></textarea>
-        </div>
-        <div class="card-footer text-muted">
+        <div>
           <p>Created: [Creation Time] Last Edited: [Last Edit Time]</p>
           Priority: [Priority]
-          <button type="save">Save</button>
-          <button type="cancel">Cancel</button>
         </div>
+        <button type="save">Save</button>
+        <button type="cancel">Cancel</button>
       </div>
     </div>
     <div class="add-button">＋</div>
