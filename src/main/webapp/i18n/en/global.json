@@ -10,6 +10,7 @@
         "blog": "Blog",
         "post": "Post",
         "tag": "Tag",
+        "todolistItem": "Todolist Item",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

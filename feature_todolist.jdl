@@ -1,0 +1,7 @@
+entity TodolistItem {
+    heading String required minlength(3)
+    description String required
+    creationTime Instant required
+    lastEditTime Instant required
+    completed Boolean required
+}
