@@ -19,11 +19,6 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'teamprojectApp.tag.home.title' },
         loadChildren: () => import('./tag/tag.module').then(m => m.TagModule),
       },
-      {
-        path: 'todolist-item',
-        data: { pageTitle: 'teamprojectApp.todolistItem.home.title' },
-        loadChildren: () => import('./todolist-item/todolist-item.module').then(m => m.TodolistItemModule),
-      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],
