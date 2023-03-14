@@ -10,6 +10,9 @@ import { TodolistItemFormService } from './todolist-item-form.service';
 import { TodolistItemService } from '../service/todolist-item.service';
 import { ITodolistItem } from '../todolist-item.model';
 
+import { IUser } from 'app/entities/user/user.model';
+import { UserService } from 'app/entities/user/user.service';
+
 import { TodolistItemUpdateComponent } from './todolist-item-update.component';
 
 describe('TodolistItem Management Update Component', () => {
@@ -18,6 +21,7 @@ describe('TodolistItem Management Update Component', () => {
   let activatedRoute: ActivatedRoute;
   let todolistItemFormService: TodolistItemFormService;
   let todolistItemService: TodolistItemService;
+  let userService: UserService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -40,17 +44,43 @@ describe('TodolistItem Management Update Component', () => {
     activatedRoute = TestBed.inject(ActivatedRoute);
     todolistItemFormService = TestBed.inject(TodolistItemFormService);
     todolistItemService = TestBed.inject(TodolistItemService);
+    userService = TestBed.inject(UserService);
 
     comp = fixture.componentInstance;
   });
 
   describe('ngOnInit', () => {
-    it('Should update editForm', () => {
+    it('Should call User query and add missing value', () => {
       const todolistItem: ITodolistItem = { id: 456 };
+      const user: IUser = { id: 30735 };
+      todolistItem.user = user;
+
+      const userCollection: IUser[] = [{ id: 68320 }];
+      jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
+      const additionalUsers = [user];
+      const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
+      jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
       activatedRoute.data = of({ todolistItem });
       comp.ngOnInit();
 
+      expect(userService.query).toHaveBeenCalled();
+      expect(userService.addUserToCollectionIfMissing).toHaveBeenCalledWith(
+        userCollection,
+        ...additionalUsers.map(expect.objectContaining)
+      );
+      expect(comp.usersSharedCollection).toEqual(expectedCollection);
+    });
+
+    it('Should update editForm', () => {
+      const todolistItem: ITodolistItem = { id: 456 };
+      const user: IUser = { id: 58602 };
+      todolistItem.user = user;
+
+      activatedRoute.data = of({ todolistItem });
+      comp.ngOnInit();
+
+      expect(comp.usersSharedCollection).toContain(user);
       expect(comp.todolistItem).toEqual(todolistItem);
     });
   });
@@ -120,6 +150,18 @@ describe('TodolistItem Management Update Component', () => {
       expect(todolistItemService.update).toHaveBeenCalled();
       expect(comp.isSaving).toEqual(false);
       expect(comp.previousState).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Compare relationships', () => {
+    describe('compareUser', () => {
+      it('Should forward to userService', () => {
+        const entity = { id: 123 };
+        const entity2 = { id: 456 };
+        jest.spyOn(userService, 'compareUser');
+        comp.compareUser(entity, entity2);
+        expect(userService.compareUser).toHaveBeenCalledWith(entity, entity2);
+      });
     });
   });
 });

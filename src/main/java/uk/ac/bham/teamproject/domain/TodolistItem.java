@@ -45,6 +45,9 @@ public class TodolistItem implements Serializable {
     @Column(name = "completed", nullable = false)
     private Boolean completed;
 
+    @ManyToOne
+    private User user;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -123,6 +126,19 @@ public class TodolistItem implements Serializable {
 
     public void setCompleted(Boolean completed) {
         this.completed = completed;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public TodolistItem user(User user) {
+        this.setUser(user);
+        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

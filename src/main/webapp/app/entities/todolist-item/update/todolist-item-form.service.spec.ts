@@ -25,6 +25,7 @@ describe('TodolistItem Form Service', () => {
             creationTime: expect.any(Object),
             lastEditTime: expect.any(Object),
             completed: expect.any(Object),
+            user: expect.any(Object),
           })
         );
       });
@@ -40,6 +41,7 @@ describe('TodolistItem Form Service', () => {
             creationTime: expect.any(Object),
             lastEditTime: expect.any(Object),
             completed: expect.any(Object),
+            user: expect.any(Object),
           })
         );
       });

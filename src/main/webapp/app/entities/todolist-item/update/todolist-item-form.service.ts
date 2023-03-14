@@ -37,6 +37,7 @@ type TodolistItemFormGroupContent = {
   creationTime: FormControl<TodolistItemFormRawValue['creationTime']>;
   lastEditTime: FormControl<TodolistItemFormRawValue['lastEditTime']>;
   completed: FormControl<TodolistItemFormRawValue['completed']>;
+  user: FormControl<TodolistItemFormRawValue['user']>;
 };
 
 export type TodolistItemFormGroup = FormGroup<TodolistItemFormGroupContent>;
@@ -71,6 +72,7 @@ export class TodolistItemFormService {
       completed: new FormControl(todolistItemRawValue.completed, {
         validators: [Validators.required],
       }),
+      user: new FormControl(todolistItemRawValue.user),
     });
   }
 

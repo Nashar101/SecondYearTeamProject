@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
@@ -155,12 +154,13 @@ public class TodolistItemResource {
     /**
      * {@code GET  /todolist-items} : get all the todolistItems.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of todolistItems in body.
      */
     @GetMapping("/todolist-items")
-    public List<TodolistItem> getAllTodolistItems() {
+    public List<TodolistItem> getAllTodolistItems(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all TodolistItems");
-        return todolistItemRepository.findAll();
+        return todolistItemRepository.findByUserIsCurrentUser();
     }
 
     /**
@@ -172,7 +172,7 @@ public class TodolistItemResource {
     @GetMapping("/todolist-items/{id}")
     public ResponseEntity<TodolistItem> getTodolistItem(@PathVariable Long id) {
         log.debug("REST request to get TodolistItem : {}", id);
-        Optional<TodolistItem> todolistItem = todolistItemRepository.findById(id);
+        Optional<TodolistItem> todolistItem = todolistItemRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(todolistItem);
     }
 
@@ -190,11 +190,5 @@ public class TodolistItemResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
-    }
-
-    public String showTodoList(Model model) {
-        List<TodolistItem> todolistItems = todolistItemRepository.findAll();
-        model.addAttribute("todolistItems", todolistItems);
-        return "todo-list";
     }
 }

@@ -22,7 +22,8 @@
       "description": "Description",
       "creationTime": "Creation Time",
       "lastEditTime": "Last Edit Time",
-      "completed": "Completed"
+      "completed": "Completed",
+      "user": "User"
     }
   }
 }
