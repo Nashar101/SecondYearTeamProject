@@ -32,7 +32,7 @@ type TodolistItemFormDefaults = Pick<NewTodolistItem, 'id' | 'creationTime' | 'l
 
 type TodolistItemFormGroupContent = {
   id: FormControl<TodolistItemFormRawValue['id'] | NewTodolistItem['id']>;
-  heading: FormControl<TodolistItemFormRawValue['heading']>;
+  heading: FormControl<TodolistItemFormRawValue['heading'] | null>;
   description: FormControl<TodolistItemFormRawValue['description']>;
   creationTime: FormControl<TodolistItemFormRawValue['creationTime']>;
   lastEditTime: FormControl<TodolistItemFormRawValue['lastEditTime']>;

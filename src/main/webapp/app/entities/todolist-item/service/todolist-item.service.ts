@@ -70,7 +70,7 @@ export class TodolistItemService {
   }
 
   getTodolistItemIdentifier(todolistItem: Pick<ITodolistItem, 'id'>): number {
-    return todolistItem.id;
+    return todolistItem.id as number;
   }
 
   compareTodolistItem(o1: Pick<ITodolistItem, 'id'> | null, o2: Pick<ITodolistItem, 'id'> | null): boolean {

@@ -12,47 +12,52 @@
         <span class="title">to-dos</span>
         <div class="window">
           <ul class="list" id="todo-list">
-            <li class="item" onclick="">
-              <label> <input type="checkbox" onclick="moveItem(this)" /> Task 1 </label>
-            </li>
-            <li class="item" onclick="">
-              <label> <input type="checkbox" onclick="moveItem(this)" /> Task 2 </label>
-            </li>
-            <li class="item" onclick="">
-              <label> <input type="checkbox" onclick="moveItem(this)" /> Task 3 </label>
-            </li>
-            <li class="item" onclick="">
-              <label> <input type="checkbox" onclick="moveItem(this)" /> Task 4 </label>
-            </li>
-            <li class="item" onclick="">
-              <label> <input type="checkbox" onclick="moveItem(this)" /> Task 5 </label>
+            <li class="item" *ngFor="let item of todoItems">
+              <input type="checkbox" (click)="moveItem($event, item)" />
+              <span (click)="showDetails(item)">{{ item.heading }} </span>
             </li>
           </ul>
         </div>
       </div>
       <div class="done-items">
-        <span class="title">Dones</span>
+        <span class="title">dones</span>
         <div class="window">
-          <ul class="list" id="done-list"></ul>
+          <ul class="list" id="done-list">
+            <li class="item" *ngFor="let item of doneItems">
+              <input type="checkbox" (click)="moveItem($event, item)" [checked]="item.completed" />
+              <span (click)="showDetails(item)">{{ item.heading }} </span>
+            </li>
+          </ul>
         </div>
       </div>
       <div class="Detail-Window">
         <div>
           <h3>Heading</h3>
-          <textarea class="Detail-Heading" placeholder="Heading"></textarea>
+          <textarea
+            class="Detail-Heading"
+            placeholder="Heading"
+            [ngModel]="selectedItem?.heading"
+            (ngModelChange)="updateHeading($event)"
+          ></textarea>
         </div>
         <div>
           <h3 class="card-title">Description</h3>
-          <textarea class="Detail-Description" rows="6" placeholder="Description"></textarea>
+          <textarea
+            class="Detail-Description"
+            rows="6"
+            placeholder="Description"
+            [ngModel]="selectedItem?.description"
+            (ngModelChange)="updateDescription($event)"
+          ></textarea>
         </div>
         <div>
-          <p>Created: [Creation Time] Last Edited: [Last Edit Time]</p>
-          Priority: [Priority]
+          <p>Created: {{ selectedItem?.creationTime }}</p>
+          <p>Last Edited: {{ selectedItem?.lastEditTime }}</p>
         </div>
-        <button type="save">Save</button>
-        <button type="cancel">Cancel</button>
+        <button (click)="saveChanges()" type="save">Save</button>
+        <button (click)="cancelChanges()" type="cancel">Cancel</button>
       </div>
     </div>
-    <div class="add-button">＋</div>
+    <div class="add-button" (click)="createNewItem()">＋</div>
   </body>
 </html>
