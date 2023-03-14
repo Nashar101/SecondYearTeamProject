@@ -1,0 +1,29 @@
+{
+  "teamprojectApp": {
+    "antiProcrastination": {
+      "home": {
+        "title": "Anti Procrastinations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Anti Procrastination",
+        "createOrEditLabel": "Add a new Website to Block",
+        "notFound": "No Anti Procrastinations found"
+      },
+      "created": "A new Anti Procrastination is created with identifier {{ param }}",
+      "updated": "A Anti Procrastination is updated with identifier {{ param }}",
+      "deleted": "A Anti Procrastination is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Anti Procrastination {{ id }}?"
+      },
+      "detail": {
+        "title": "Anti Procrastination"
+      },
+      "id": "ID",
+      "url": "Url",
+      "type": "Block Duration",
+      "days": "Days",
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "seconds": "Seconds"
+    }
+  }
+}

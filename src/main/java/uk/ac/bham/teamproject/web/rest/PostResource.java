@@ -23,7 +23,6 @@ import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 import uk.ac.bham.teamproject.domain.Post;
 import uk.ac.bham.teamproject.repository.PostRepository;
-import uk.ac.bham.teamproject.security.SecurityUtils;
 import uk.ac.bham.teamproject.web.rest.errors.BadRequestAlertException;
 
 /**
@@ -164,7 +163,11 @@ public class PostResource {
     ) {
         log.debug("REST request to get a page of Posts");
         Page<Post> page;
-        page = postRepository.findByBlogUserLoginOrderByDateDesc(SecurityUtils.getCurrentUserLogin().orElse(null), pageable);
+        if (eagerload) {
+            page = postRepository.findAllWithEagerRelationships(pageable);
+        } else {
+            page = postRepository.findAll(pageable);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

@@ -149,7 +149,11 @@ public class BlogResource {
     @GetMapping("/blogs")
     public List<Blog> getAllBlogs(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Blogs");
-        return blogRepository.findByUserIsCurrentUser();
+        if (eagerload) {
+            return blogRepository.findAllWithEagerRelationships();
+        } else {
+            return blogRepository.findAll();
+        }
     }
 
     /**

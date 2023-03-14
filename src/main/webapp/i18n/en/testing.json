@@ -1,0 +1,24 @@
+{
+  "teamprojectApp": {
+    "testing": {
+      "home": {
+        "title": "Testings",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Testing",
+        "createOrEditLabel": "Create or edit a Testing",
+        "notFound": "No Testings found"
+      },
+      "created": "A new Testing is created with identifier {{ param }}",
+      "updated": "A Testing is updated with identifier {{ param }}",
+      "deleted": "A Testing is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Testing {{ id }}?"
+      },
+      "detail": {
+        "title": "Testing"
+      },
+      "id": "ID",
+      "suwi": "Suwi"
+    }
+  }
+}

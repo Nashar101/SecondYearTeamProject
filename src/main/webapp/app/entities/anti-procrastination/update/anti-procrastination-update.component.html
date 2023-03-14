@@ -1,0 +1,203 @@
+<div class="d-flex justify-content-center">
+  <style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type='number'] {
+      width: 50px;
+      height: 45px;
+      display: flex;
+      outline: none;
+      border: none;
+      text-align: center;
+      background: #ebebeb;
+      border-radius: 10%;
+    }
+    .rgtDiv {
+      color: #888888;
+      border: 1px #737373;
+      background: #ebebeb;
+      padding: 0;
+      border-radius: 4px;
+    }
+  </style>
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-anti-procrastination-heading"
+        data-cy="AntiProcrastinationCreateUpdateHeading"
+        jhiTranslate="teamprojectApp.antiProcrastination.home.createOrEditLabel"
+        style="font-weight: bold; color: #545454"
+      >
+        Add a new Website
+      </h2>
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <input
+            width="200px"
+            type="text"
+            class="rgtDiv"
+            name="url"
+            id="field_url"
+            placeholder="Enter a website URL"
+            data-cy="url"
+            formControlName="url"
+          />
+          <div *ngIf="editForm.get('url')!.invalid && (editForm.get('url')!.dirty || editForm.get('url')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('url')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <h2
+            class="form-label"
+            jhiTranslate="teamprojectApp.antiProcrastination.type"
+            for="field_type"
+            style="color: #716d6d; font-size: 22px; font-weight: bold"
+          >
+            Block Duration
+          </h2>
+        </div>
+
+        <div class="col mb-3" style="display: inline-flex">
+          <label style="font-size: 16px; margin-top: 8.5px; margin-right: 35px">Permanent</label>
+          <input
+            type="checkbox"
+            style="width: 28px; margin-top: -6px; margin-right: 75px"
+            class="form-check"
+            name="type"
+            id="field_type"
+            data-cy="type"
+            formControlName="type"
+          />
+          <label style="font-size: 16px; margin-top: 8.5px; margin-right: 35px">Timed</label>
+          <div *ngIf="editForm.get('type')!.invalid && (editForm.get('type')!.dirty || editForm.get('type')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('type')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+
+          <input type="number" class="form-control" name="days" id="field_days" data-cy="days" formControlName="days" min="0" max="99" />
+          <label style="font-size: 50px; margin-top: -22px">:</label>
+          <div *ngIf="editForm.get('days')!.invalid && (editForm.get('days')!.dirty || editForm.get('days')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('days')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('days')?.errors?.number" jhiTranslate="entity.validation.number">
+              This field should be a number.
+            </small>
+          </div>
+
+          <input
+            type="number"
+            class="form-control"
+            name="hours"
+            id="field_hours"
+            data-cy="hours"
+            formControlName="hours"
+            min="0"
+            max="24"
+          />
+          <label style="font-size: 50px; margin-top: -22px">:</label>
+          <div *ngIf="editForm.get('hours')!.invalid && (editForm.get('hours')!.dirty || editForm.get('hours')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('hours')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('hours')?.errors?.number" jhiTranslate="entity.validation.number">
+              This field should be a number.
+            </small>
+          </div>
+
+          <input
+            type="number"
+            class="form-control"
+            name="minutes"
+            id="field_minutes"
+            data-cy="minutes"
+            formControlName="minutes"
+            min="0"
+            max="59"
+          />
+          <label style="font-size: 50px; margin-top: -22px">:</label>
+          <div *ngIf="editForm.get('minutes')!.invalid && (editForm.get('minutes')!.dirty || editForm.get('minutes')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('minutes')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('minutes')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+
+          <input
+            type="number"
+            class="form-control"
+            name="seconds"
+            id="field_seconds"
+            data-cy="seconds"
+            formControlName="seconds"
+            min="0"
+            max="59"
+          />
+          <div *ngIf="editForm.get('seconds')!.invalid && (editForm.get('seconds')!.dirty || editForm.get('seconds')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('seconds')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('seconds')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div>
+          <label class="form-label" jhiTranslate="teamprojectApp.antiProcrastination.days" for="field_days">Days</label>
+          <label class="form-label" jhiTranslate="teamprojectApp.antiProcrastination.hours" for="field_hours">Hours</label>
+          <label class="form-label" jhiTranslate="teamprojectApp.antiProcrastination.minutes" for="field_minutes">Minutes</label>
+          <label class="form-label" jhiTranslate="teamprojectApp.antiProcrastination.seconds" for="field_secons">Seconds</label>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">+</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

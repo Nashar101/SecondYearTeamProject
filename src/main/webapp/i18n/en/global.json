@@ -10,6 +10,8 @@
         "blog": "Blog",
         "post": "Post",
         "tag": "Tag",
+        "antiProcrastination": "Anti Procrastination",
+        "testing": "Testing",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
