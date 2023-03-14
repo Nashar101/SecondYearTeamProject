@@ -26,6 +26,7 @@ import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
+import { DPIAFormComponent } from './dpia-form/dpia-form.component';
 
 @NgModule({
   imports: [
@@ -54,6 +55,7 @@ import { TodoListComponent } from './todo-list/todo-list.component';
     ActiveMenuDirective,
     FooterComponent,
     TodoListComponent,
+    DPIAFormComponent,
   ],
   bootstrap: [MainComponent],
 })

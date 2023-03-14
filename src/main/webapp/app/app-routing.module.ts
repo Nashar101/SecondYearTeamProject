@@ -7,6 +7,7 @@ import { DEBUG_INFO_ENABLED } from 'app/app.constants';
 import { Authority } from 'app/config/authority.constants';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
+import { DPIAFormComponent } from './dpia-form/dpia-form.component';
 
 @NgModule({
   imports: [
@@ -35,6 +36,10 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access.service'
         {
           path: 'to-do-list',
           component: TodoListComponent,
+        },
+        {
+          path: 'DPIAForm',
+          component: DPIAFormComponent,
         },
         navbarRoute,
         ...errorRoute,
