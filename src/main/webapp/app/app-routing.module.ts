@@ -38,7 +38,7 @@ import { DPIAFormComponent } from './dpia-form/dpia-form.component';
           component: TodoListComponent,
         },
         {
-          path: 'DPIAForm',
+          path: 'GDPR-policy&DPIAForm',
           component: DPIAFormComponent,
         },
         navbarRoute,
