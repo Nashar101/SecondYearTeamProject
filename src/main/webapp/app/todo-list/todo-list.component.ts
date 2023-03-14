@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ITodolistItem } from '../entities/todolist-item/todolist-item.model';
 import { AccountService } from 'app/core/auth/account.service';
 import { UserService } from 'app/entities/user/user.service';
@@ -14,7 +14,12 @@ export class TodoListComponent implements OnInit {
   todoItems: ITodolistItem[] = [];
   doneItems: ITodolistItem[] = [];
 
-  constructor(private todolistItemService: TodolistItemService, private userService: UserService, private accountService: AccountService) {}
+  constructor(
+    private todolistItemService: TodolistItemService,
+    private userService: UserService,
+    private accountService: AccountService,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {}
 
   loadAll(): void {
     this.todolistItemService.query().subscribe(response => {
@@ -92,6 +97,7 @@ export class TodoListComponent implements OnInit {
             };
             this.todoItems.push(newItem);
             this.showDetails(newItem);
+            this.changeDetectorRef.detectChanges();
           }
         });
       }
