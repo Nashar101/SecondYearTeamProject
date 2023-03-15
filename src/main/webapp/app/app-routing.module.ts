@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { errorRoute } from './layouts/error/error.route';
 import { navbarRoute } from './layouts/navbar/navbar.route';
 import { DEBUG_INFO_ENABLED } from 'app/app.constants';
 import { Authority } from 'app/config/authority.constants';
-
+import { TodoListComponent } from './todo-list/todo-list.component';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
+import { DPIAFormComponent } from './dpia-form/dpia-form.component';
 
 @NgModule({
   imports: [
@@ -31,6 +32,14 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access.service'
         {
           path: '',
           loadChildren: () => import(`./entities/entity-routing.module`).then(m => m.EntityRoutingModule),
+        },
+        {
+          path: 'to-do-list',
+          component: TodoListComponent,
+        },
+        {
+          path: 'GDPR-policy&DPIAForm',
+          component: DPIAFormComponent,
         },
         navbarRoute,
         ...errorRoute,

@@ -1,6 +1,6 @@
 {
   "global": {
-    "title": "Teamproject",
+    "title": "Time Management",
     "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
     "menu": {
       "home": "Home",
@@ -10,6 +10,7 @@
         "blog": "Blog",
         "post": "Post",
         "tag": "Tag",
+        "todolistItem": "Todolist Item",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -146,5 +147,5 @@
       "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""
     }
   },
-  "footer": "This is your footer"
+  "footer": "Team23-22"
 }

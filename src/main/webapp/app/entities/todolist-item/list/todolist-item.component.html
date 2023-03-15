@@ -1,0 +1,125 @@
+<div>
+  <h2 id="page-heading" data-cy="TodolistItemHeading">
+    <span jhiTranslate="teamprojectApp.todolistItem.home.title">Todolist Items</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="teamprojectApp.todolistItem.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-todolist-item"
+        [routerLink]="['/todolist-item/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="teamprojectApp.todolistItem.home.createLabel"> Create a new Todolist Item </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="todolistItems?.length === 0">
+    <span jhiTranslate="teamprojectApp.todolistItem.home.notFound">No Todolist Items found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="todolistItems && todolistItems.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="heading">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.todolistItem.heading">Heading</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.todolistItem.description">Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="creationTime">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.todolistItem.creationTime">Creation Time</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastEditTime">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.todolistItem.lastEditTime">Last Edit Time</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="completed">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.todolistItem.completed">Completed</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="user.login">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.todolistItem.user">User</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let todolistItem of todolistItems; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/todolist-item', todolistItem.id, 'view']">{{ todolistItem.id }}</a>
+          </td>
+          <td>{{ todolistItem.heading }}</td>
+          <td>{{ todolistItem.description }}</td>
+          <td>{{ todolistItem.creationTime | formatMediumDatetime }}</td>
+          <td>{{ todolistItem.lastEditTime | formatMediumDatetime }}</td>
+          <td>{{ todolistItem.completed }}</td>
+          <td>
+            {{ todolistItem.user?.login }}
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/todolist-item', todolistItem.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/todolist-item', todolistItem.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(todolistItem)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
