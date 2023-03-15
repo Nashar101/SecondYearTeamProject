@@ -67,7 +67,7 @@ export class AntiProcrastinationComponent implements OnInit {
       alert('Please enter a List item');
     }
   }
-  interval1: number;
+  interval1: number = 0;
   startTimer2(number1: number) {
     this.interval1 = setInterval(() => {
       if (this.todos[number1].seconds > -1) {
