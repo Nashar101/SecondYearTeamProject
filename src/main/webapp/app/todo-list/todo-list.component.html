@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-do List</title>
+  </head>
+  <body>
+    <h1>To-do List</h1>
+    <div class="todo-list">
+      <div class="todo-items">
+        <span class="title">to-dos</span>
+        <div class="window">
+          <ul class="list" id="todo-list">
+            <li class="item" *ngFor="let item of todoItems">
+              <input type="checkbox" (click)="moveItem($event, item)" />
+              <span (click)="showDetails(item)">{{ item.heading }} </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="done-items">
+        <span class="title">dones</span>
+        <div class="window">
+          <ul class="list" id="done-list">
+            <li class="item" *ngFor="let item of doneItems">
+              <input type="checkbox" (click)="moveItem($event, item)" [checked]="item.completed" />
+              <span (click)="showDetails(item)">{{ item.heading }} </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="Detail-Window">
+        <div>
+          <h3>Heading</h3>
+          <textarea
+            class="Detail-Heading"
+            placeholder="Heading"
+            [ngModel]="selectedItem?.heading"
+            (ngModelChange)="updateHeading($event)"
+          ></textarea>
+        </div>
+        <div>
+          <h3 class="card-title">Description</h3>
+          <textarea
+            class="Detail-Description"
+            rows="6"
+            placeholder="Description"
+            [ngModel]="selectedItem?.description"
+            (ngModelChange)="updateDescription($event)"
+          ></textarea>
+        </div>
+        <div>
+          <p>Created: {{ selectedItem?.creationTime }}</p>
+          <p>Last Edited: {{ selectedItem?.lastEditTime }}</p>
+        </div>
+        <button (click)="saveChanges()" type="save">Save</button>
+        <button (click)="cancelChanges()" type="cancel">Cancel</button>
+      </div>
+    </div>
+    <button class="add-button" (click)="createNewItem()">
+      <span class="add-button-icon">+</span>
+    </button>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+entity AntiProcrastination {
+    url String required
+    type Boolean required
+    days Integer required
+    hours Integer required
+    minutes Integer required
+    Seconds Integer required
+}
+
+entity Testing{
+    suwi String required
+}

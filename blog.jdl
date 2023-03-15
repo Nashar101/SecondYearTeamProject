@@ -13,8 +13,17 @@ entity Tag {
     name String required minlength (2)
 }
 
+entity TodolistItem {
+    heading String required minlength(3)
+    description String required
+    creationTime Instant required
+    lastEditTime Instant required
+    completed Boolean required
+}
+
 relationship ManyToOne {
     Blog { user ( login ) } to User
+    TodolistItem { user ( login ) } to User
     Post { blog ( name ) } to Blog
 }
 
