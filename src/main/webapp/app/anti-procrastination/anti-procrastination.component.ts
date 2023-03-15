@@ -4,15 +4,15 @@ import { Component, Input, OnInit } from '@angular/core';
 //import { Subject } from 'rxjs';
 
 export class List {
-  link: string;
-  type: string;
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
-  empty: string;
-  idk: string;
-  idk1: string;
+  link!: string;
+  type!: string;
+  days!: number;
+  hours!: number;
+  minutes!: number;
+  seconds!: number;
+  empty!: string;
+  idk!: string;
+  idk1!: string;
 }
 
 export interface Timespan {
