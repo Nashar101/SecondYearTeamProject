@@ -30,30 +30,20 @@ export class AntiProcrastinationComponent implements OnInit {
   constructor() {}
 
   todos: List[] = [];
-  newTodo: string;
-  type: string;
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
-  empty: string;
+  newTodo: string = '';
+  type: string = '';
+  days: number = 0;
+  hours: number = 0;
+  minutes: number = 0;
+  seconds: number = 0;
+  empty: string = '';
 
   saveTodo() {
     var element = <HTMLInputElement>document.getElementById('Permanent?');
     var isChecked = element.checked;
-    if (this.days == null) {
-      this.days = 0;
-    }
-    if (this.hours == null) {
-      this.hours = 0;
-    }
-    if (this.minutes == null) {
-      this.minutes = 0;
-    }
-    if (this.seconds == null) {
-      this.seconds = 0;
-    }
-    if (this.newTodo) {
+    if (this.days == 0 && this.hours == 0 && this.minutes == 0 && this.seconds == 0 && !isChecked) {
+      alert('all timer values cannot be zero');
+    } else if (this.newTodo) {
       let todo = new List();
       todo.link = this.newTodo;
       if (isChecked) {
@@ -83,17 +73,25 @@ export class AntiProcrastinationComponent implements OnInit {
       if (this.todos[number1].seconds > -1) {
         this.todos[number1].seconds--;
       }
-      if (this.todos[number1].seconds == -1 && this.todos[number1].minutes > -1) {
-        this.todos[number1].seconds = 60;
+      if (this.todos[number1].seconds == -1 && this.todos[number1].minutes >= 0) {
+        this.todos[number1].seconds = 59;
         this.todos[number1].minutes--;
       }
-      if (this.todos[number1].minutes == -1 && this.todos[number1].hours > -1) {
-        this.todos[number1].minutes = 60;
+      if (this.todos[number1].minutes == -1 && this.todos[number1].hours >= 0) {
+        this.todos[number1].minutes = 59;
         this.todos[number1].hours--;
       }
-      if (this.todos[number1].hours == -1 && this.todos[number1].days > -1) {
+      if (this.todos[number1].hours == -1 && this.todos[number1].days >= 0) {
         this.todos[number1].hours = 24;
         this.todos[number1].days--;
+      }
+      if (
+        this.todos[number1].days == 0 &&
+        this.todos[number1].hours == 0 &&
+        this.todos[number1].minutes == 0 &&
+        this.todos[number1].seconds == -1
+      ) {
+        this.todos.splice(number1, 1);
       }
     }, 1000);
   }
