@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<p>anti-procrastination works!</p>
 <html lang="en">
   <style>
     h1 {
@@ -27,8 +25,8 @@
     }
 
     .size {
-      height: 25px;
-      padding: px;
+      height: 40px;
+      width: 65px;
       border-radius: 10%;
     }
 
@@ -68,7 +66,7 @@
   </head>
   <body style="background: #f5f5f5">
     <p style="font-family: Calibri"></p>
-    <h1 style="color: #545454">Blocked Sites</h1>
+    <h1 style="color: #545454; font-weight: bold">Blocked Sites</h1>
 
     <div class="rgtDiv">
       <div contenteditable="true" class="rgtDiv" style="color: #888888">
@@ -76,29 +74,72 @@
           type="text"
           placeholder="Enter a website URL"
           style="width: 595px; height: 30px; background: #ebebeb; border: none; outline: none"
+          [(ngModel)]="newTodo"
         />
       </div>
-      <div><img style="padding-left: -100px" src=Images/image.png class="flt_rght"/></div>
+      <div></div>
     </div>
-    <p style="font-size: 22px; color: #716d6d">Block Duration</p>
+    <p style="font-size: 22px; color: #716d6d; font-weight: bold">Block Duration</p>
     <div style="display: flex">
       <div style="display: flex; padding-top: 1em">
         <label style="font-size: 22px; padding-right: 1.5rem; color: #676262">Permanent</label>
-        <input type="checkbox" class="larger" />
+        <input id="Permanent?" type="checkbox" class="larger" />
       </div>
       <div style="padding-top: 0.8rem; padding-left: 2rem; display: flex">
         <div style="padding-left: 2px; display: flex">
           <label style="font-size: 22px; padding-right: 35px; color: #676262">Timer</label>
-          <input type="number" min="0" max="99" class="size" style="background: #ebebeb; outline: none; border: none" />
-          <b style="font-size: 30px; color: #424242">:</b>
-          <input type="number" min="0" max="24" class="size" style="background: #ebebeb; outline: none; border: none" />
-          <b style="font-size: 30px; color: #424242">:</b>
-          <input type="number" min="0" max="60" class="size" style="background: #ebebeb; outline: none; border: none" />
-          <b style="font-size: 30px; color: #424242">:</b>
-          <input type="number" min="0" max="60" class="size" style="background: #ebebeb; outline: none; border: none" />
+          <input
+            type="number"
+            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            min="0"
+            max="99"
+            maxlength="2"
+            class="size"
+            style="text-align: center; background: #ebebeb; outline: none; border: none"
+            [(ngModel)]="days"
+          />
+          <b style="font-size: 30px; margin-top: -6px; color: #424242">:</b>
+          <input
+            type="number"
+            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            min="0"
+            max="24"
+            maxlength="2"
+            class="size"
+            style="text-align: center; background: #ebebeb; outline: none; border: none"
+            [(ngModel)]="hours"
+          />
+          <b style="font-size: 30px; margin-top: -6px; color: #424242">:</b>
+          <input
+            type="number"
+            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            min="0"
+            max="60"
+            maxlength="2"
+            class="size"
+            style="text-align: center; background: #ebebeb; outline: none; border: none"
+            [(ngModel)]="minutes"
+          />
+          <b style="font-size: 30px; margin-top: -6px; color: #424242">:</b>
+          <input
+            type="number"
+            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            min="0"
+            max="60"
+            maxlength="2"
+            class="size"
+            style="text-align: center; background: #ebebeb; outline: none; border: none"
+            [(ngModel)]="seconds"
+          />
         </div>
         <div style="display: flex">
-          <button style="padding: -10px; font-size: 30px; border: none; background: transparent">+</button>
+          <button
+            style="margin-top: -7px; margin-left: 35px; padding: -10px; font-size: 30px; border: none; background: transparent"
+            type="button"
+            (click)="saveTodo()"
+          >
+            +
+          </button>
         </div>
       </div>
     </div>
@@ -109,7 +150,15 @@
       <label style="margin-left: 11px">Seconds</label>
     </div>
     <div
-      style="background: #ffffff; margin-top: 20px; width: 650px; height: 300px; box-shadow: 0px 0px 4px 3px #969696; border-radius: 0.8%"
+      style="
+        background: #ffffff;
+        margin-top: 20px;
+        min-width: 650px;
+        width: 650px;
+        min-height: 300px;
+        box-shadow: 0px 0px 4px 3px #969696;
+        border-radius: 0.8%;
+      "
     >
       <label style="margin-left: 19px; color: #646464; font-weight: bold; font-size: 25px">Blocked Sites</label>
       <div style="color: #d6d6d6; font-size: 18px">
@@ -117,25 +166,21 @@
         <label style="margin-left: 275px">Type</label>
         <label style="margin-left: 90px">Time Left</label>
       </div>
-      <div><hr style="margin-left: 15px; margin-top: 18px; width: 590px" /></div>
-      <div style="margin-top: -20px; display: flex; color: #939191">
-        <img src="Images/youtube.png" width="75" height="75" />
-        <label style="margin-top: 27px; margin-right: 70px">https://www.youtube.com/</label>
-        <label style="margin-top: 27px; margin-right: 87px">Timed</label>
-        <label style="margin-top: 27px">00:18:36:54</label>
-      </div>
-      <div style="margin-top: -15px; margin-left: 10px; display: flex; color: #939191">
-        <img src="Images/instagram.png" width="50" height="50" />
-        <label style="margin-top: 14px; margin-right: 60px; margin-left: 15px">https://www.instagram.com/</label>
-        <label style="margin-top: 14px; margin-right: 56px">Permanent</label>
-        <label style="margin-top: 14px">--:--:--:--</label>
-      </div>
-      <div style="margin-top: 2px; margin-left: 10px; display: flex; color: #939191">
-        <img src="Images/download.png" width="50" height="50" />
-        <label style="margin-top: 14px; margin-left: 15px; margin-right: 87px">https://www.tiktok.com/</label>
-        <label style="margin-top: 14px; margin-right: 87px">Timed</label>
-        <label style="margin-top: 14px">00:18:36:54</label>
-      </div>
+
+      <table class="table table-striped" style="background: transparent; color: transparent">
+        <body style="background: transparent">
+          <tr *ngFor="let todo of todos; let i = index">
+            <label style="margin-left: 7px">{{ todo.link }}</label>
+            <label style="position: absolute; left: 330px">{{ todo.type }}</label>
+            <label style="position: absolute; left: 458px"
+              >{{ todo.days }}{{ todo.idk }}{{ todo.hours }}{{ todo.idk }}{{ todo.minutes }}{{ todo.idk }}{{ todo.seconds }}</label
+            >
+            <label style="position: absolute; left: 458px"
+              >{{ todo.empty }}{{ todo.idk1 }}{{ todo.empty }}{{ todo.idk1 }}{{ todo.empty }}</label
+            >
+          </tr>
+        </body>
+      </table>
     </div>
   </body>
 </html>
