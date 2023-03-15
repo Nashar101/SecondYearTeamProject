@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UserService } from '../entities/user/user.service';
-import { AccountService } from '../core/auth/account.service';
-import { Subject } from 'rxjs';
+//import { UserService } from '../entities/user/user.service';
+//import { AccountService } from '../core/auth/account.service';
+//import { Subject } from 'rxjs';
 
 export class List {
   link: string;
@@ -37,7 +37,6 @@ export class AntiProcrastinationComponent implements OnInit {
   minutes: number;
   seconds: number;
   empty: string;
-  idk: string;
 
   saveTodo() {
     var element = <HTMLInputElement>document.getElementById('Permanent?');
