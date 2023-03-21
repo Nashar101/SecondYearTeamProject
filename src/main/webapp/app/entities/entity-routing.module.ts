@@ -29,6 +29,12 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'teamprojectApp.todolistItem.home.title' },
         loadChildren: () => import('./todolist-item/todolist-item.module').then(m => m.TodolistItemModule),
       },
+      {
+        path: 'anti-procrastination-list',
+        data: { pageTitle: 'teamprojectApp.antiProcrastinationList.home.title' },
+        loadChildren: () =>
+          import('./anti-procrastination-list/anti-procrastination-list.module').then(m => m.AntiProcrastinationListModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

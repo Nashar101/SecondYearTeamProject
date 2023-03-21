@@ -21,9 +21,23 @@ entity TodolistItem {
     completed Boolean required
 }
 
+entity AntiProcrastinationList{
+    link String
+    type String
+    days Integer
+    hours Integer
+    minutes Integer
+    seconds Integer
+    empty String
+    idk String
+    idk1 String
+    dueDate ZonedDateTime
+}
+
 relationship ManyToOne {
     Blog { user ( login ) } to User
     TodolistItem { user ( login ) } to User
+    AntiProcrastinationList { user ( login ) } to User
     Post { blog ( name ) } to Blog
 }
 

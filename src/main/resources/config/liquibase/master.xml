@@ -23,6 +23,7 @@
     <include file="config/liquibase/changelog/20230313231735_added_entity_AntiProcrastination.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230313233005_added_entity_Testing.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230306203603_added_entity_TodolistItem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230320005514_added_entity_AntiProcrastinationList.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20230226224326_added_entity_constraints_Blog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230226224327_added_entity_constraints_Post.xml" relativeToChangelogFile="false"/>

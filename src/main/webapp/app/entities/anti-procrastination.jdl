@@ -1,7 +1,7 @@
 entity antiprocrastination-List{
     link String required
     type String required
-    days Integer
+    days
     hours Integer
     minutes Integer
     seconds Integer

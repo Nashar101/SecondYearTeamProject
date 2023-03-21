@@ -63,6 +63,7 @@
     <meta charset="UTF-8" />
     <title>Anti Procrastination</title>
     <script src="../app.constants.ts"></script>
+    <script src="websiteBlocker/background.js" type="module"></script>
   </head>
   <body style="background: #f5f5f5">
     <p style="font-family: Calibri"></p>
@@ -178,6 +179,8 @@
             <label style="position: absolute; left: 458px"
               >{{ todo.empty }}{{ todo.idk1 }}{{ todo.empty }}{{ todo.idk1 }}{{ todo.empty }}</label
             >
+            <label></label>
+            <label>{{ todo.dueDate.getTime() }}</label>
           </tr>
         </body>
       </table>

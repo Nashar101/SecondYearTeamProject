@@ -55,7 +55,7 @@ export class TodoListComponent implements OnInit {
       this.selectedItem.description = description;
     }
   }
-
+  newItem: ITodolistItem | null = null;
   saveChanges(): void {
     if (this.selectedItem && this.originalItem) {
       if (this.selectedItem.id === -1) {

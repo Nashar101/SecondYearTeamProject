@@ -1,0 +1,151 @@
+<div>
+  <h2 id="page-heading" data-cy="AntiProcrastinationListHeading">
+    <span jhiTranslate="teamprojectApp.antiProcrastinationList.home.title">Anti Procrastination Lists</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="teamprojectApp.antiProcrastinationList.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-anti-procrastination-list"
+        [routerLink]="['/anti-procrastination-list/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="teamprojectApp.antiProcrastinationList.home.createLabel"> Create a new Anti Procrastination List </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="antiProcrastinationLists?.length === 0">
+    <span jhiTranslate="teamprojectApp.antiProcrastinationList.home.notFound">No Anti Procrastination Lists found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="antiProcrastinationLists && antiProcrastinationLists.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="link">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.antiProcrastinationList.link">Link</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="type">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.antiProcrastinationList.type">Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="days">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.antiProcrastinationList.days">Days</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="hours">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.antiProcrastinationList.hours">Hours</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="minutes">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.antiProcrastinationList.minutes">Minutes</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="seconds">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.antiProcrastinationList.seconds">Seconds</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="empty">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.antiProcrastinationList.empty">Empty</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="idk">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.antiProcrastinationList.idk">Idk</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="idk1">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.antiProcrastinationList.idk1">Idk 1</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dueDate">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.antiProcrastinationList.dueDate">Due Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let antiProcrastinationList of antiProcrastinationLists; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/anti-procrastination-list', antiProcrastinationList.id, 'view']">{{ antiProcrastinationList.id }}</a>
+          </td>
+          <td>{{ antiProcrastinationList.link }}</td>
+          <td>{{ antiProcrastinationList.type }}</td>
+          <td>{{ antiProcrastinationList.days }}</td>
+          <td>{{ antiProcrastinationList.hours }}</td>
+          <td>{{ antiProcrastinationList.minutes }}</td>
+          <td>{{ antiProcrastinationList.seconds }}</td>
+          <td>{{ antiProcrastinationList.empty }}</td>
+          <td>{{ antiProcrastinationList.idk }}</td>
+          <td>{{ antiProcrastinationList.idk1 }}</td>
+          <td>{{ antiProcrastinationList.dueDate | formatMediumDatetime }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/anti-procrastination-list', antiProcrastinationList.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/anti-procrastination-list', antiProcrastinationList.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(antiProcrastinationList)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

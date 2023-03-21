@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="antiProcrastinationList">
+      <h2 data-cy="antiProcrastinationListDetailsHeading">
+        <span jhiTranslate="teamprojectApp.antiProcrastinationList.detail.title">Anti Procrastination List</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ antiProcrastinationList.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.antiProcrastinationList.link">Link</span></dt>
+        <dd>
+          <span>{{ antiProcrastinationList.link }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.antiProcrastinationList.type">Type</span></dt>
+        <dd>
+          <span>{{ antiProcrastinationList.type }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.antiProcrastinationList.days">Days</span></dt>
+        <dd>
+          <span>{{ antiProcrastinationList.days }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.antiProcrastinationList.hours">Hours</span></dt>
+        <dd>
+          <span>{{ antiProcrastinationList.hours }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.antiProcrastinationList.minutes">Minutes</span></dt>
+        <dd>
+          <span>{{ antiProcrastinationList.minutes }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.antiProcrastinationList.seconds">Seconds</span></dt>
+        <dd>
+          <span>{{ antiProcrastinationList.seconds }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.antiProcrastinationList.empty">Empty</span></dt>
+        <dd>
+          <span>{{ antiProcrastinationList.empty }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.antiProcrastinationList.idk">Idk</span></dt>
+        <dd>
+          <span>{{ antiProcrastinationList.idk }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.antiProcrastinationList.idk1">Idk 1</span></dt>
+        <dd>
+          <span>{{ antiProcrastinationList.idk1 }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.antiProcrastinationList.dueDate">Due Date</span></dt>
+        <dd>
+          <span>{{ antiProcrastinationList.dueDate | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/anti-procrastination-list', antiProcrastinationList.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
