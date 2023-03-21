@@ -1,0 +1,43 @@
+{
+  "applications": "*",
+  "changelogDate": "20230321181113",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "alarm",
+  "fields": [
+    {
+      "fieldName": "alarmName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "hours",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "minutes",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "seconds",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Alarm",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "relationshipName": "user",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

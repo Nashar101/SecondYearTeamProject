@@ -1,0 +1,29 @@
+{
+  "teamprojectApp": {
+    "scheduleEvent": {
+      "home": {
+        "title": "Schedule Events",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Schedule Event",
+        "createOrEditLabel": "Create or edit a Schedule Event",
+        "notFound": "No Schedule Events found"
+      },
+      "created": "A new Schedule Event is created with identifier {{ param }}",
+      "updated": "A Schedule Event is updated with identifier {{ param }}",
+      "deleted": "A Schedule Event is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Schedule Event {{ id }}?"
+      },
+      "detail": {
+        "title": "Schedule Event"
+      },
+      "id": "ID",
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "heading": "Heading",
+      "date": "Date",
+      "details": "Details",
+      "user": "User"
+    }
+  }
+}

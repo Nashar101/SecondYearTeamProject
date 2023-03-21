@@ -10,6 +10,11 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access.service'
 import { AntiProcrastinationComponent } from './anti-procrastination/anti-procrastination.component';
 
 import { DPIAFormComponent } from './dpia-form/dpia-form.component';
+import { SchedulerComponent } from './scheduler/scheduler.component';
+import { HistoryComponent } from './history/history.component';
+import { DiaryComponent } from './diary/diary.component';
+import { NotificationComponent } from './notification/notification.component';
+import { AlarmComponent } from './alarm/alarm.component';
 
 @NgModule({
   imports: [
@@ -39,10 +44,29 @@ import { DPIAFormComponent } from './dpia-form/dpia-form.component';
           path: 'anti-procrastination',
           component: AntiProcrastinationComponent,
         },
-
+        {
+          path: 'scheduler',
+          component: SchedulerComponent,
+        },
         {
           path: 'to-do-list',
           component: TodoListComponent,
+        },
+        {
+          path: 'historypage',
+          component: HistoryComponent,
+        },
+        {
+          path: 'diarypage',
+          component: DiaryComponent,
+        },
+        {
+          path: 'notification',
+          component: NotificationComponent,
+        },
+        {
+          path: 'alarmpage',
+          component: AlarmComponent,
         },
         {
           path: 'GDPR-policy&DPIAForm',

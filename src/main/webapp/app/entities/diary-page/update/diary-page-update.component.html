@@ -1,0 +1,153 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-diary-page-heading" data-cy="DiaryPageCreateUpdateHeading" jhiTranslate="teamprojectApp.diaryPage.home.createOrEditLabel">
+        Create or edit a Diary Page
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="teamprojectApp.diaryPage.pageDate" for="field_pageDate">Page Date</label>
+          <div class="d-flex">
+            <input
+              id="field_pageDate"
+              data-cy="pageDate"
+              type="datetime-local"
+              class="form-control"
+              name="pageDate"
+              formControlName="pageDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('pageDate')!.invalid && (editForm.get('pageDate')!.dirty || editForm.get('pageDate')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('pageDate')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('pageDate')?.errors?.datetimelocal"
+              jhiTranslate="entity.validation.datetimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="teamprojectApp.diaryPage.pageDescription" for="field_pageDescription"
+            >Page Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="pageDescription"
+            id="field_pageDescription"
+            data-cy="pageDescription"
+            formControlName="pageDescription"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="teamprojectApp.diaryPage.creationTime" for="field_creationTime">Creation Time</label>
+          <div class="d-flex">
+            <input
+              id="field_creationTime"
+              data-cy="creationTime"
+              type="datetime-local"
+              class="form-control"
+              name="creationTime"
+              formControlName="creationTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div
+            *ngIf="editForm.get('creationTime')!.invalid && (editForm.get('creationTime')!.dirty || editForm.get('creationTime')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('creationTime')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('creationTime')?.errors?.datetimelocal"
+              jhiTranslate="entity.validation.datetimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="teamprojectApp.diaryPage.lastEditTime" for="field_lastEditTime">Last Edit Time</label>
+          <div class="d-flex">
+            <input
+              id="field_lastEditTime"
+              data-cy="lastEditTime"
+              type="datetime-local"
+              class="form-control"
+              name="lastEditTime"
+              formControlName="lastEditTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div
+            *ngIf="editForm.get('lastEditTime')!.invalid && (editForm.get('lastEditTime')!.dirty || editForm.get('lastEditTime')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('lastEditTime')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('lastEditTime')?.errors?.datetimelocal"
+              jhiTranslate="entity.validation.datetimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="teamprojectApp.diaryPage.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user" [compareWith]="compareUser">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="userOption" *ngFor="let userOption of usersSharedCollection">{{ userOption.login }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

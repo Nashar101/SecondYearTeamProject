@@ -1,0 +1,42 @@
+{
+  "applications": "*",
+  "changelogDate": "20230321181114",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "diary_page",
+  "fields": [
+    {
+      "fieldName": "pageDate",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "pageDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "creationTime",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lastEditTime",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "DiaryPage",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "relationshipName": "user",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

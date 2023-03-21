@@ -1,0 +1,130 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-to-do-item-heading" data-cy="ToDoItemCreateUpdateHeading" jhiTranslate="teamprojectApp.toDoItem.home.createOrEditLabel">
+        Create or edit a To Do Item
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="teamprojectApp.toDoItem.toDoItemHeading" for="field_toDoItemHeading"
+            >To Do Item Heading</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="toDoItemHeading"
+            id="field_toDoItemHeading"
+            data-cy="toDoItemHeading"
+            formControlName="toDoItemHeading"
+          />
+          <div
+            *ngIf="
+              editForm.get('toDoItemHeading')!.invalid &&
+              (editForm.get('toDoItemHeading')!.dirty || editForm.get('toDoItemHeading')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('toDoItemHeading')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="teamprojectApp.toDoItem.toDoItemDescription" for="field_toDoItemDescription"
+            >To Do Item Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="toDoItemDescription"
+            id="field_toDoItemDescription"
+            data-cy="toDoItemDescription"
+            formControlName="toDoItemDescription"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="teamprojectApp.toDoItem.toDoItemStatus" for="field_toDoItemStatus"
+            >To Do Item Status</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_toDoItemStatus"
+              data-cy="toDoItemStatus"
+              type="datetime-local"
+              class="form-control"
+              name="toDoItemStatus"
+              formControlName="toDoItemStatus"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div
+            *ngIf="
+              editForm.get('toDoItemStatus')!.invalid && (editForm.get('toDoItemStatus')!.dirty || editForm.get('toDoItemStatus')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('toDoItemStatus')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('toDoItemStatus')?.errors?.datetimelocal"
+              jhiTranslate="entity.validation.datetimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="teamprojectApp.toDoItem.diaryPage" for="field_diaryPage">Diary Page</label>
+          <select
+            class="form-control"
+            id="field_diaryPage"
+            data-cy="diaryPage"
+            name="diaryPage"
+            formControlName="diaryPage"
+            [compareWith]="compareDiaryPage"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="diaryPageOption" *ngFor="let diaryPageOption of diaryPagesSharedCollection">
+              {{ diaryPageOption.pageDate }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -24,10 +24,21 @@
     <include file="config/liquibase/changelog/20230313233005_added_entity_Testing.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230306203603_added_entity_TodolistItem.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230320005514_added_entity_AntiProcrastinationList.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230321181111_added_entity_ScheduleEvent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230321181112_added_entity_History.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230321181113_added_entity_Alarm.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230321181114_added_entity_DiaryPage.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230321181115_added_entity_ToDoItem.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20230226224326_added_entity_constraints_Blog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230226224327_added_entity_constraints_Post.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230306203603_added_entity_constraints_TodolistItem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230320005514_added_entity_constraints_AntiProcrastinationList.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230321181111_added_entity_constraints_ScheduleEvent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230321181112_added_entity_constraints_History.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230321181113_added_entity_constraints_Alarm.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230321181114_added_entity_constraints_DiaryPage.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230321181115_added_entity_constraints_ToDoItem.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

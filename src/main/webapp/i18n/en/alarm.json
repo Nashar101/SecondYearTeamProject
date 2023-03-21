@@ -1,0 +1,29 @@
+{
+  "teamprojectApp": {
+    "alarm": {
+      "home": {
+        "title": "Alarms",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Alarm",
+        "createOrEditLabel": "Create or edit a Alarm",
+        "notFound": "No Alarms found"
+      },
+      "created": "A new Alarm is created with identifier {{ param }}",
+      "updated": "A Alarm is updated with identifier {{ param }}",
+      "deleted": "A Alarm is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Alarm {{ id }}?"
+      },
+      "detail": {
+        "title": "Alarm"
+      },
+      "id": "ID",
+      "alarmName": "Alarm Name",
+      "type": "Type",
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "seconds": "Seconds",
+      "user": "User"
+    }
+  }
+}

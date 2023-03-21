@@ -30,6 +30,11 @@ import { AntiProcrastinationComponent } from './anti-procrastination/anti-procra
 
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { DPIAFormComponent } from './dpia-form/dpia-form.component';
+import { HistoryComponent } from './history/history.component';
+import { DiaryComponent } from './diary/diary.component';
+import { AlarmComponent } from './alarm/alarm.component';
+import { SchedulerComponent } from './scheduler/scheduler.component';
+import { NotificationComponent } from './notification/notification.component';
 
 @NgModule({
   imports: [
@@ -62,6 +67,11 @@ import { DPIAFormComponent } from './dpia-form/dpia-form.component';
 
     TodoListComponent,
     DPIAFormComponent,
+    HistoryComponent,
+    DiaryComponent,
+    AlarmComponent,
+    SchedulerComponent,
+    NotificationComponent,
   ],
   bootstrap: [MainComponent],
 })

@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="diaryPage">
+      <h2 data-cy="diaryPageDetailsHeading"><span jhiTranslate="teamprojectApp.diaryPage.detail.title">Diary Page</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ diaryPage.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.diaryPage.pageDate">Page Date</span></dt>
+        <dd>
+          <span>{{ diaryPage.pageDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.diaryPage.pageDescription">Page Description</span></dt>
+        <dd>
+          <span>{{ diaryPage.pageDescription }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.diaryPage.creationTime">Creation Time</span></dt>
+        <dd>
+          <span>{{ diaryPage.creationTime | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.diaryPage.lastEditTime">Last Edit Time</span></dt>
+        <dd>
+          <span>{{ diaryPage.lastEditTime | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.diaryPage.user">User</span></dt>
+        <dd>
+          <span>{{ diaryPage.user?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/diary-page', diaryPage.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

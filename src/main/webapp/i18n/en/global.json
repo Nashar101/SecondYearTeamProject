@@ -14,6 +14,11 @@
         "testing": "Testing",
         "todolistItem": "Todolist Item",
         "antiProcrastinationList": "Anti Procrastination List",
+        "scheduleEvent": "Schedule Event",
+        "history": "History",
+        "alarm": "Alarm",
+        "diaryPage": "Diary Page",
+        "toDoItem": "To Do Item",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

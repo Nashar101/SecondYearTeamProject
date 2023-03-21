@@ -29,16 +29,45 @@
         </li>
         <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
         <li *ngSwitchCase="true" ngbDropdown class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" routerLink="/scheduler" routerLinkActive="active" (click)="collapseNavbar()">
+            <fa-icon [icon]="'tasks'"></fa-icon>
+            <span>Scheduler</span>
+          </a>
+        </li>
+        <li *ngSwitchCase="true" ngbDropdown class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" routerLink="/to-do-list" routerLinkActive="active" (click)="collapseNavbar()">
+            <fa-icon [icon]="'tasks'"></fa-icon>
+            <span>To-do List</span>
+          </a>
+        </li>
+        <li *ngSwitchCase="true" ngbDropdown class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/anti-procrastination" routerLinkActive="active" (click)="collapseNavbar()">
             <fa-icon [icon]="'tasks'"></fa-icon>
             <span>Anti Procrastination</span>
           </a>
         </li>
-
         <li *ngSwitchCase="true" ngbDropdown class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-          <a class="nav-link" routerLink="/to-do-list" routerLinkActive="active" (click)="collapseNavbar()">
+          <a class="nav-link" routerLink="/alarmpage" routerLinkActive="active" (click)="collapseNavbar()">
             <fa-icon [icon]="'tasks'"></fa-icon>
-            <span>To-do List</span>
+            <span>Alarm</span>
+          </a>
+        </li>
+        <li *ngSwitchCase="true" ngbDropdown class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" routerLink="/diarypage" routerLinkActive="active" (click)="collapseNavbar()">
+            <fa-icon [icon]="'tasks'"></fa-icon>
+            <span>Diary</span>
+          </a>
+        </li>
+        <li *ngSwitchCase="true" ngbDropdown class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" routerLink="/notification" routerLinkActive="active" (click)="collapseNavbar()">
+            <fa-icon [icon]="'tasks'"></fa-icon>
+            <span>Notification</span>
+          </a>
+        </li>
+        <li *ngSwitchCase="true" ngbDropdown class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" routerLink="/historypage" routerLinkActive="active" (click)="collapseNavbar()">
+            <fa-icon [icon]="'tasks'"></fa-icon>
+            <span>History</span>
           </a>
         </li>
         <li
@@ -119,18 +148,6 @@
             <li>
               <a
                 class="dropdown-item"
-                routerLink="testing"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span jhiTranslate="global.menu.entities.testing">Testing</span>
-              </a>
-            </li>
-            <li>
-              <a
-                class="dropdown-item"
                 routerLink="anti-procrastination-list"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
@@ -138,6 +155,66 @@
               >
                 <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.entities.antiProcrastinationList">Anti Procrastination List</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="schedule-event"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="collapseNavbar()"
+              >
+                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="global.menu.entities.scheduleEvent">Schedule Event</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="history"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="collapseNavbar()"
+              >
+                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="global.menu.entities.history">History</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="alarm"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="collapseNavbar()"
+              >
+                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="global.menu.entities.alarm">Alarm</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="diary-page"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="collapseNavbar()"
+              >
+                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="global.menu.entities.diaryPage">Diary Page</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="to-do-item"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="collapseNavbar()"
+              >
+                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="global.menu.entities.toDoItem">To Do Item</span>
               </a>
             </li>
             <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->

@@ -1,0 +1,28 @@
+{
+  "teamprojectApp": {
+    "diaryPage": {
+      "home": {
+        "title": "Diary Pages",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Diary Page",
+        "createOrEditLabel": "Create or edit a Diary Page",
+        "notFound": "No Diary Pages found"
+      },
+      "created": "A new Diary Page is created with identifier {{ param }}",
+      "updated": "A Diary Page is updated with identifier {{ param }}",
+      "deleted": "A Diary Page is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Diary Page {{ id }}?"
+      },
+      "detail": {
+        "title": "Diary Page"
+      },
+      "id": "ID",
+      "pageDate": "Page Date",
+      "pageDescription": "Page Description",
+      "creationTime": "Creation Time",
+      "lastEditTime": "Last Edit Time",
+      "user": "User"
+    }
+  }
+}

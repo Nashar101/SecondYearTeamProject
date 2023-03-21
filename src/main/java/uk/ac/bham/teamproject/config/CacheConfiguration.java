@@ -57,6 +57,11 @@ public class CacheConfiguration {
             createCache(cm, uk.ac.bham.teamproject.domain.Testing.class.getName());
             createCache(cm, uk.ac.bham.teamproject.domain.TodolistItem.class.getName());
             createCache(cm, uk.ac.bham.teamproject.domain.AntiProcrastinationList.class.getName());
+            createCache(cm, uk.ac.bham.teamproject.domain.ScheduleEvent.class.getName());
+            createCache(cm, uk.ac.bham.teamproject.domain.History.class.getName());
+            createCache(cm, uk.ac.bham.teamproject.domain.Alarm.class.getName());
+            createCache(cm, uk.ac.bham.teamproject.domain.DiaryPage.class.getName());
+            createCache(cm, uk.ac.bham.teamproject.domain.ToDoItem.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -34,11 +34,56 @@ entity AntiProcrastinationList{
     dueDate ZonedDateTime
 }
 
+entity ScheduleEvent {
+  startTime Instant,
+  endTime Instant,
+  heading String,
+  date ZonedDateTime,
+  details String
+}
+
+entity History {
+    subject String,
+    subjectScore Integer,
+    subjectTarget Integer,
+    upcomingTest String,
+    upcomingTestTarget Integer
+}
+
+entity Alarm {
+    alarmName String
+    type String
+    hours Integer
+    minutes Integer
+    seconds Integer
+}
+
+entity DiaryPage {
+  pageDate ZonedDateTime required
+  pageDescription String
+  creationTime Instant required
+  lastEditTime Instant required
+}
+
+entity ToDoItem {
+  toDoItemHeading String required
+  toDoItemDescription String
+  toDoItemStatus Instant required
+}
+
 relationship ManyToOne {
     Blog { user ( login ) } to User
     TodolistItem { user ( login ) } to User
+    ScheduleEvent { user ( login ) } to User
+    Alarm { user ( login ) } to User
     AntiProcrastinationList { user ( login ) } to User
+    DiaryPage { user ( login ) } to User
+    ToDoItem{diaryPage(pageDate)} to DiaryPage
     Post { blog ( name ) } to Blog
+}
+
+relationship OneToOne{
+    History { user ( login ) } to User
 }
 
 relationship ManyToMany {

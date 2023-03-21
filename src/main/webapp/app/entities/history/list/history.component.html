@@ -1,0 +1,125 @@
+<div>
+  <h2 id="page-heading" data-cy="HistoryHeading">
+    <span jhiTranslate="teamprojectApp.history.home.title">Histories</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="teamprojectApp.history.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-history"
+        [routerLink]="['/history/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="teamprojectApp.history.home.createLabel"> Create a new History </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="histories?.length === 0">
+    <span jhiTranslate="teamprojectApp.history.home.notFound">No Histories found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="histories && histories.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="subject">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.history.subject">Subject</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="subjectScore">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.history.subjectScore">Subject Score</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="subjectTarget">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.history.subjectTarget">Subject Target</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="upcomingTest">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.history.upcomingTest">Upcoming Test</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="upcomingTestTarget">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.history.upcomingTestTarget">Upcoming Test Target</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="user.login">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.history.user">User</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let history of histories; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/history', history.id, 'view']">{{ history.id }}</a>
+          </td>
+          <td>{{ history.subject }}</td>
+          <td>{{ history.subjectScore }}</td>
+          <td>{{ history.subjectTarget }}</td>
+          <td>{{ history.upcomingTest }}</td>
+          <td>{{ history.upcomingTestTarget }}</td>
+          <td>
+            {{ history.user?.login }}
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/history', history.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/history', history.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(history)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

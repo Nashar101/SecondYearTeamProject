@@ -35,6 +35,31 @@ import { RouterModule } from '@angular/router';
         loadChildren: () =>
           import('./anti-procrastination-list/anti-procrastination-list.module').then(m => m.AntiProcrastinationListModule),
       },
+      {
+        path: 'schedule-event',
+        data: { pageTitle: 'teamprojectApp.scheduleEvent.home.title' },
+        loadChildren: () => import('./schedule-event/schedule-event.module').then(m => m.ScheduleEventModule),
+      },
+      {
+        path: 'history',
+        data: { pageTitle: 'teamprojectApp.history.home.title' },
+        loadChildren: () => import('./history/history.module').then(m => m.HistoryModule),
+      },
+      {
+        path: 'alarm',
+        data: { pageTitle: 'teamprojectApp.alarm.home.title' },
+        loadChildren: () => import('./alarm/alarm.module').then(m => m.AlarmModule),
+      },
+      {
+        path: 'diary-page',
+        data: { pageTitle: 'teamprojectApp.diaryPage.home.title' },
+        loadChildren: () => import('./diary-page/diary-page.module').then(m => m.DiaryPageModule),
+      },
+      {
+        path: 'to-do-item',
+        data: { pageTitle: 'teamprojectApp.toDoItem.home.title' },
+        loadChildren: () => import('./to-do-item/to-do-item.module').then(m => m.ToDoItemModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="alarm">
+      <h2 data-cy="alarmDetailsHeading"><span jhiTranslate="teamprojectApp.alarm.detail.title">Alarm</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ alarm.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.alarm.alarmName">Alarm Name</span></dt>
+        <dd>
+          <span>{{ alarm.alarmName }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.alarm.type">Type</span></dt>
+        <dd>
+          <span>{{ alarm.type }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.alarm.hours">Hours</span></dt>
+        <dd>
+          <span>{{ alarm.hours }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.alarm.minutes">Minutes</span></dt>
+        <dd>
+          <span>{{ alarm.minutes }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.alarm.seconds">Seconds</span></dt>
+        <dd>
+          <span>{{ alarm.seconds }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.alarm.user">User</span></dt>
+        <dd>
+          <span>{{ alarm.user?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/alarm', alarm.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
