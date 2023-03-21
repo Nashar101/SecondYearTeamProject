@@ -1,0 +1,56 @@
+{
+  "applications": "*",
+  "changelogDate": "20230320005514",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "anti_procrastination_list",
+  "fields": [
+    {
+      "fieldName": "link",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "days",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "hours",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "minutes",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "seconds",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "empty",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "idk",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "idk1",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dueDate",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "AntiProcrastinationList",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}
