@@ -1,4 +1,3 @@
-A; //const { blockedSites } = require('./background')
 let blockedsites = [];
 const generateHTML = pageName => {
   return (
@@ -40,9 +39,7 @@ function main() {
   for (let i = 0; i < blockedsites.length; i++) {
     if (window.location.hostname == blockedsites[i].toString() || window.location.href == blockedsites[i].toString()) {
       document.body.innerHTML = generateHTML('site is blocked');
-      alert('site has been blocked bro');
       break;
     }
   }
-  //http://192.168.226.1:8080/
 }

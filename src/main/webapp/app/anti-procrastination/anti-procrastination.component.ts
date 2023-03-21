@@ -43,7 +43,7 @@ export class AntiProcrastinationComponent implements OnInit {
         //@ts-ignore
         site.id = this.listItems[i].id;
         //@ts-ignore
-        site.link = this.trim(this.listItems[i].link);
+        site.link = this.listItems[i].link;
         //@ts-ignore
         site.type = this.listItems[i].type;
         //@ts-ignore
@@ -64,6 +64,7 @@ export class AntiProcrastinationComponent implements OnInit {
         site.dueDate = new Date(this.listItems[i].dueDate);
         console.log(site.link);
         this.todos.push(site);
+        this.add(site.link);
         console.log(this.todos.length);
         this.startTimer2(this.todos.length - 1);
         site = new List();
@@ -166,7 +167,12 @@ export class AntiProcrastinationComponent implements OnInit {
         this.todos[number1].hours = 24;
         this.todos[number1].days--;
       }
-      if (this.todos[number1].seconds <= 0) {
+      if (
+        this.todos[number1].days == 0 &&
+        this.todos[number1].hours == 0 &&
+        this.todos[number1].minutes == 0 &&
+        this.todos[number1].seconds <= 0
+      ) {
         this.delete(this.todos[number1].id);
         this.todos.splice(number1, 1);
       }
@@ -188,6 +194,7 @@ export class AntiProcrastinationComponent implements OnInit {
     const newItem: NewAntiProcrastinationList = {
       link: link,
       days: day,
+      type: type,
       hours: hours,
       minutes: minutes,
       seconds: seconds,
@@ -215,48 +222,48 @@ export class AntiProcrastinationComponent implements OnInit {
         this.selectedItem.link = link
       }
   }
-  setDays(days: number){
+   setDays(days: number){
     if(this.selectedItem){
         this.selectedItem.days = days
     }
   }
 
-  setHours(hours: number){
+   setHours(hours: number){
     if(this.selectedItem){
         this.selectedItem.hours = hours
     }
   }
 
-  setMinutes(minutes: number){
+   setMinutes(minutes: number){
     if(this.selectedItem){
         this.selectedItem.minutes = minutes
     }
   }
 
-  setSeconds(seconds: number){
+   setSeconds(seconds: number){
     if(this.selectedItem){
       this.selectedItem.seconds = seconds
     }
   }
-  setidk(idk: string){
+   setidk(idk: string){
     if(this.selectedItem){
       this.selectedItem.idk = idk
     }
   }
 
-  setidk1(idk1: string){
+   setidk1(idk1: string){
     if(this.selectedItem){
       this.selectedItem.idk1 = idk1
     }
   }
 
-  setEmpty(empty: string){
+   setEmpty(empty: string){
     if(this.selectedItem){
       this.selectedItem.empty = empty
     }
   }
 
-  setDate(Date: Date){
+   setDate(Date: Date){
     if(this.selectedItem){
       //@ts-ignore
       this.selectedItem.dueDate = dayjs(Date);
