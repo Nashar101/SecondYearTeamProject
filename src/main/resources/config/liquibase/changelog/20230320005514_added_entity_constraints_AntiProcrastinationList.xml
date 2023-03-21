@@ -6,12 +6,4 @@
     <!--
         Added the constraints for entity AntiProcrastinationList.
     -->
-    <changeSet id="20230320005514-2" author="jhipster">
-
-        <addForeignKeyConstraint baseColumnNames="user_id"
-                                 baseTableName="anti_procrastination_list"
-                                 constraintName="fk_anti_procrastination_list__user_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="jhi_user"/>
-    </changeSet>
 </databaseChangeLog>
