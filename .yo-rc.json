@@ -21,7 +21,7 @@
     "enableHibernateCache": true,
     "enableSwaggerCodegen": false,
     "enableTranslation": true,
-    "entities": ["AntiProcrastinationList"],
+    "entities": ["Blog", "Post", "Tag", "TodolistItem", "AntiProcrastinationList"],
     "entitySuffix": "",
     "jhiPrefix": "jhi",
     "jhipsterVersion": "7.9.3",
