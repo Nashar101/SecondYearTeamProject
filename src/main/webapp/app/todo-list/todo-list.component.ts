@@ -55,19 +55,13 @@ export class TodoListComponent implements OnInit {
       this.selectedItem.description = description;
     }
   }
-  newItem: ITodolistItem | null = null;
+
   saveChanges(): void {
     if (this.selectedItem && this.originalItem) {
-      if (this.selectedItem.id === -1) {
-        this.todolistItemService.create(this.selectedItem).subscribe(() => {
-          this.loadAll();
-        });
-      } else {
-        this.selectedItem.lastEditTime = dayjs() as any;
-        this.todolistItemService.update(this.selectedItem).subscribe(() => {
-          this.loadAll();
-        });
-      }
+      this.selectedItem.lastEditTime = dayjs() as any;
+      this.todolistItemService.update(this.selectedItem).subscribe(() => {
+        this.loadAll();
+      });
       this.originalItem = null;
       this.selectedItem = null;
     }
@@ -79,28 +73,21 @@ export class TodoListComponent implements OnInit {
   }
 
   createNewItem(): void {
-    this.originalItem = null;
-    this.selectedItem = null;
-    this.accountService.identity().subscribe(account => {
-      if (account) {
-        this.userService.find(account.login).subscribe(userResponse => {
-          const user = userResponse.body;
-          if (user) {
-            const newItem: ITodolistItem = {
-              id: -1,
-              heading: 'New Heading!',
-              description: 'Nothing here',
-              creationTime: dayjs() as any,
-              lastEditTime: dayjs() as any,
-              completed: false,
-              user: { id: user.id, login: user.login },
-            };
-            this.todoItems.push(newItem);
-            this.showDetails(newItem);
-            this.changeDetectorRef.detectChanges();
-          }
-        });
+    const newItem: ITodolistItem = {
+      id: null,
+      heading: 'New Heading!',
+      description: 'Nothing here',
+      creationTime: dayjs() as any,
+      lastEditTime: dayjs() as any,
+      completed: false,
+    };
+    this.todolistItemService.create(newItem).subscribe(response => {
+      this.selectedItem = response.body;
+      this.originalItem = response.body;
+      if (this.selectedItem) {
+        this.showDetails(this.selectedItem);
       }
+      this.loadAll();
     });
   }
 
