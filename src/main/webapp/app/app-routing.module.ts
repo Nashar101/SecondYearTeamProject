@@ -15,6 +15,7 @@ import { HistoryComponent } from './history/history.component';
 import { DiaryComponent } from './diary/diary.component';
 import { NotificationComponent } from './notification/notification.component';
 import { AlarmComponent } from './alarm/alarm.component';
+import { InboxComponent } from './inbox/inbox.component';
 
 @NgModule({
   imports: [
@@ -61,8 +62,12 @@ import { AlarmComponent } from './alarm/alarm.component';
           component: DiaryComponent,
         },
         {
-          path: 'notification',
+          path: 'notificationpage',
           component: NotificationComponent,
+        },
+        {
+          path: 'inbox',
+          component: InboxComponent,
         },
         {
           path: 'alarmpage',

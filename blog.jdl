@@ -71,6 +71,26 @@ entity ToDoItem {
   toDoItemStatus Instant required
 }
 
+entity Email{
+    subject String,
+    content String,
+    receivedDate ZonedDateTime,
+    deadline ZonedDateTime,
+    status String,
+    recipient String,
+    read Boolean,
+}
+
+
+entity Notification{
+    feature String,
+    subject String,
+    content String,
+    receivedDate ZonedDateTime,
+    status Boolean,
+    read Boolean,
+}
+
 relationship ManyToOne {
     Blog { user ( login ) } to User
     TodolistItem { user ( login ) } to User
@@ -78,6 +98,8 @@ relationship ManyToOne {
     Alarm { user ( login ) } to User
     AntiProcrastinationList { user ( login ) } to User
     DiaryPage { user ( login ) } to User
+    Email { user ( login ) } to User
+    Notification { user ( login ) } to User
     ToDoItem{diaryPage(pageDate)} to DiaryPage
     Post { blog ( name ) } to Blog
 }

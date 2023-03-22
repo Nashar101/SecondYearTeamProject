@@ -35,6 +35,7 @@ import { DiaryComponent } from './diary/diary.component';
 import { AlarmComponent } from './alarm/alarm.component';
 import { SchedulerComponent } from './scheduler/scheduler.component';
 import { NotificationComponent } from './notification/notification.component';
+import { InboxComponent } from './inbox/inbox.component';
 
 @NgModule({
   imports: [
@@ -72,6 +73,7 @@ import { NotificationComponent } from './notification/notification.component';
     AlarmComponent,
     SchedulerComponent,
     NotificationComponent,
+    InboxComponent,
   ],
   bootstrap: [MainComponent],
 })

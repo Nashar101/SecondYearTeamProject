@@ -60,6 +60,16 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'teamprojectApp.toDoItem.home.title' },
         loadChildren: () => import('./to-do-item/to-do-item.module').then(m => m.ToDoItemModule),
       },
+      {
+        path: 'email',
+        data: { pageTitle: 'teamprojectApp.email.home.title' },
+        loadChildren: () => import('./email/email.module').then(m => m.EmailModule),
+      },
+      {
+        path: 'notification',
+        data: { pageTitle: 'teamprojectApp.notification.home.title' },
+        loadChildren: () => import('./notification/notification.module').then(m => m.NotificationModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

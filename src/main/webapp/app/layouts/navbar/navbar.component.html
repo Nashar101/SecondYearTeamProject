@@ -59,9 +59,15 @@
           </a>
         </li>
         <li *ngSwitchCase="true" ngbDropdown class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-          <a class="nav-link" routerLink="/notification" routerLinkActive="active" (click)="collapseNavbar()">
+          <a class="nav-link" routerLink="/notificationpage" routerLinkActive="active" (click)="collapseNavbar()">
             <fa-icon [icon]="'tasks'"></fa-icon>
             <span>Notification</span>
+          </a>
+        </li>
+        <li *ngSwitchCase="true" ngbDropdown class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" routerLink="/inbox" routerLinkActive="active" (click)="collapseNavbar()">
+            <fa-icon [icon]="'tasks'"></fa-icon>
+            <span>Inbox</span>
           </a>
         </li>
         <li *ngSwitchCase="true" ngbDropdown class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
@@ -203,6 +209,30 @@
               >
                 <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.entities.toDoItem">To Do Item</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="email"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="collapseNavbar()"
+              >
+                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="global.menu.entities.email">Email</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="notification"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="collapseNavbar()"
+              >
+                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="global.menu.entities.notification">Notification</span>
               </a>
             </li>
             <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
