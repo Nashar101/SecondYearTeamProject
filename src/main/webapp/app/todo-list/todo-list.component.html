@@ -14,7 +14,9 @@
           <ul class="list" id="todo-list">
             <li class="item" *ngFor="let item of todoItems">
               <input type="checkbox" (click)="moveItem($event, item)" />
-              <span (click)="showDetails(item)">{{ item.heading }} </span>
+              <span (click)="showDetails(item)" [ngClass]="{ selected: selectedItem === item }">
+                {{ item.heading }}
+              </span>
             </li>
           </ul>
         </div>
@@ -25,7 +27,9 @@
           <ul class="list" id="done-list">
             <li class="item" *ngFor="let item of doneItems">
               <input type="checkbox" (click)="moveItem($event, item)" [checked]="item.completed" />
-              <span (click)="showDetails(item)">{{ item.heading }} </span>
+              <span (click)="showDetails(item)" [ngClass]="{ selected: selectedItem === item }">
+                {{ item.heading }}
+              </span>
             </li>
           </ul>
         </div>

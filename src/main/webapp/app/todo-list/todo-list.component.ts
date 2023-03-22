@@ -61,15 +61,16 @@ export class TodoListComponent implements OnInit {
       this.selectedItem.lastEditTime = dayjs() as any;
       this.todolistItemService.update(this.selectedItem).subscribe(() => {
         this.loadAll();
+        this.originalItem = null;
+        this.selectedItem = null;
       });
-      this.originalItem = null;
-      this.selectedItem = null;
     }
   }
 
   cancelChanges(): void {
     this.originalItem = null;
     this.selectedItem = null;
+    this.loadAll();
   }
 
   createNewItem(): void {

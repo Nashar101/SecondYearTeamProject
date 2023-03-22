@@ -1,7 +1,14 @@
+/*The todo list page */
 .todo-list {
   position: relative;
 }
 
+.title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/*todo-items and done-items*/
 .todo-items {
   position: relative;
   top: 10px;
@@ -16,23 +23,6 @@
   left: 1.25vw;
   width: 45vw;
   height: 35vh;
-}
-
-.Detail-Window {
-  padding: 2%;
-  position: absolute;
-  top: 10px;
-  right: 1.25vw;
-  height: auto;
-  width: 45vw;
-  background-color: white;
-  border-radius: 25px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-.title {
-  font-size: 18px;
-  font-weight: bold;
 }
 
 .window {
@@ -58,6 +48,54 @@
   border-radius: 25px;
   margin-bottom: 20px;
   background: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.item input[type='checkbox'] {
+  margin-right: 10px;
+  height: 20px;
+  width: 20px;
+  position: relative;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  bottom: 0px;
+  border-radius: 50%;
+  border: 1px solid rgba(17, 17, 17, 0.68);
+  outline: none;
+  cursor: pointer;
+}
+
+.item span {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80%;
+}
+
+.item input[type='checkbox']:checked {
+  background-color: #2196f3;
+  border-color: #2196f3;
+}
+
+.selected {
+  color: gray;
+}
+
+/* Detail window*/
+.Detail-Window {
+  padding: 2%;
+  position: absolute;
+  top: 10px;
+  right: 1.25vw;
+  height: auto;
+  width: 45vw;
+  background-color: white;
+  border-radius: 25px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .Detail-Heading,
@@ -69,6 +107,7 @@
   width: 100%;
 }
 
+/*Add and delete*/
 .add-button {
   position: fixed;
   bottom: 20px;
@@ -110,23 +149,4 @@
   height: 30px;
   text-align: center;
   cursor: pointer;
-}
-
-input[type='checkbox'] {
-  position: relative;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  width: 20px;
-  height: 20px;
-  bottom: -5px;
-  border-radius: 50%;
-  border: 1px solid rgba(17, 17, 17, 0.68);
-  outline: none;
-  cursor: pointer;
-}
-
-input[type='checkbox']:checked {
-  background-color: #2196f3;
-  border-color: #2196f3;
 }
