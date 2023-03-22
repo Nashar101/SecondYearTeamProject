@@ -19,6 +19,8 @@
         "alarm": "Alarm",
         "diaryPage": "Diary Page",
         "toDoItem": "To Do Item",
+        "email": "Email",
+        "notification": "Notification",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

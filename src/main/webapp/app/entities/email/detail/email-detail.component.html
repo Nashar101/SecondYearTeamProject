@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="email">
+      <h2 data-cy="emailDetailsHeading"><span jhiTranslate="teamprojectApp.email.detail.title">Email</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ email.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.email.subject">Subject</span></dt>
+        <dd>
+          <span>{{ email.subject }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.email.content">Content</span></dt>
+        <dd>
+          <span>{{ email.content }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.email.receivedDate">Received Date</span></dt>
+        <dd>
+          <span>{{ email.receivedDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.email.deadline">Deadline</span></dt>
+        <dd>
+          <span>{{ email.deadline | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.email.status">Status</span></dt>
+        <dd>
+          <span>{{ email.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.email.recipient">Recipient</span></dt>
+        <dd>
+          <span>{{ email.recipient }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.email.read">Read</span></dt>
+        <dd>
+          <span>{{ email.read }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.email.user">User</span></dt>
+        <dd>
+          <span>{{ email.user?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/email', email.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
