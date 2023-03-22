@@ -82,13 +82,23 @@ export class TodoListComponent implements OnInit {
       completed: false,
     };
     this.todolistItemService.create(newItem).subscribe(response => {
+      this.loadAll();
       this.selectedItem = response.body;
       this.originalItem = response.body;
       if (this.selectedItem) {
         this.showDetails(this.selectedItem);
       }
-      this.loadAll();
     });
+  }
+
+  deleteItem(): void {
+    if (this.selectedItem) {
+      this.todolistItemService.delete(this.selectedItem.id!).subscribe(() => {
+        this.loadAll();
+        this.selectedItem = null;
+        this.originalItem = null;
+      });
+    }
   }
 
   ngOnInit(): void {

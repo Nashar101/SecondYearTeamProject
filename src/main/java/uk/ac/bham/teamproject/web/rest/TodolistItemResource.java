@@ -174,8 +174,8 @@ public class TodolistItemResource {
     @GetMapping("/todolist-items")
     public List<TodolistItem> getAllTodolistItems(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all TodolistItems");
-        //return todolistItemRepository.findByUserIsCurrentUser();
-        return todolistItemRepository.findAll();
+        return todolistItemRepository.findByUserIsCurrentUser();
+        //return todolistItemRepository.findAll();
     }
 
     /**
