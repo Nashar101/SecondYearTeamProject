@@ -81,13 +81,11 @@ export class TodoListComponent implements OnInit {
       lastEditTime: dayjs() as any,
       completed: false,
     };
-    this.todolistItemService.create(newItem).subscribe(response => {
+    this.todolistItemService.create(newItem).subscribe(() => {
       this.loadAll();
-      this.selectedItem = response.body;
-      this.originalItem = response.body;
-      if (this.selectedItem) {
-        this.showDetails(this.selectedItem);
-      }
+      setTimeout(() => {
+        this.showDetails(this.todoItems[this.todoItems.length - 1]);
+      }, 100);
     });
   }
 
