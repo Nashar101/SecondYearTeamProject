@@ -4,7 +4,9 @@ import {
   NewAntiProcrastinationList,
 } from '../entities/anti-procrastination-list/anti-procrastination-list.model';
 import { AntiProcrastinationListService } from '../entities/anti-procrastination-list/service/anti-procrastination-list.service';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import dayjs from 'dayjs';
+
 export class List {
   id!: number;
   link!: string;
@@ -64,9 +66,11 @@ export class AntiProcrastinationComponent implements OnInit {
         site.dueDate = new Date(this.listItems[i].dueDate);
         console.log(site.link);
         this.todos.push(site);
-        this.add(site.link);
         console.log(this.todos.length);
-        this.startTimer2(this.todos.length - 1);
+        if (site.type == 'Timed') {
+          this.refreshTimer(i);
+          this.startTimer2(this.todos.length - 1);
+        }
         site = new List();
       }
       console.log(this.todos[0].dueDate.toDateString());
@@ -85,12 +89,19 @@ export class AntiProcrastinationComponent implements OnInit {
   empty: string = '';
   start: number = 0;
   end: number = 0;
+  extensionID: string = '';
+  extensionID2: string = '';
+  working: string = '';
 
   newItem: IAntiProcrastinationList | null = null;
 
   saveTodo() {
     var element = <HTMLInputElement>document.getElementById('Permanent?');
     var isChecked = element.checked;
+    if (this.extensionID2 == '') {
+      alert('you are currently not connected to the extension');
+      return;
+    }
     if (this.days == 0 && this.hours == 0 && this.minutes == 0 && this.seconds == 0 && !isChecked) {
       alert('All timer values cannot be zero');
     } else if (!this.isValidURL(this.newTodo)) {
@@ -98,22 +109,6 @@ export class AntiProcrastinationComponent implements OnInit {
       this.newTodo = '';
     } else if (this.newTodo) {
       let todo = new List();
-
-      /**for(let k = 0; k < this.newTodo.length; k++){
-        if(this.newTodo[k] == '/'){
-          this.amount++;
-          if(this.amount == 2){
-            this.start = k+1;
-          }
-          if(this.amount == 3){
-            this.end =k;
-            break;
-          }
-        }
-        if (k == this.newTodo.length-1){
-          this.end = k;
-        }
-      }**/
       todo.link = this.trim3(this.newTodo);
       if (isChecked) {
         todo.type = 'Permanent';
@@ -168,17 +163,34 @@ export class AntiProcrastinationComponent implements OnInit {
         this.todos[number1].days--;
       }
       if (
-        this.todos[number1].days == 0 &&
-        this.todos[number1].hours == 0 &&
-        this.todos[number1].minutes == 0 &&
+        this.todos[number1].days <= 0 &&
+        this.todos[number1].hours <= 0 &&
+        this.todos[number1].minutes <= 0 &&
         this.todos[number1].seconds <= 0
       ) {
         this.delete(this.todos[number1].id);
         this.todos.splice(number1, 1);
+        return;
       }
     }, 1000);
   }
-
+  refreshTimer(link: number): void {
+    let currentDate = new Date().getTime();
+    let savedDate = this.todos[link].dueDate.getTime();
+    let timeRemaining = (savedDate - currentDate) / 1000;
+    if (timeRemaining <= 0) {
+      this.delete(this.todos[link].id);
+    } else {
+      let Days = Math.floor(timeRemaining / 86400);
+      let Hours = Math.floor((timeRemaining - Days * 24 * 60 * 60) / 3600);
+      let Minutes = Math.floor((timeRemaining - Days * 24 * 60 * 60 - Hours * 60 * 60) / 60);
+      let Seconds = Math.floor((timeRemaining - Days * 24 * 60 * 60 - Hours * 60 * 60 - Minutes * 60) / 1);
+      this.todos[link].days = Days;
+      this.todos[link].hours = Hours;
+      this.todos[link].minutes = Minutes;
+      this.todos[link].seconds = Seconds;
+    }
+  }
   setAll(
     link: string,
     type: string,
@@ -216,63 +228,52 @@ export class AntiProcrastinationComponent implements OnInit {
   delete(id: number) {
     this.antiProcrastinationListService.delete(id).subscribe();
   }
+  remove(id: number) {
+    const response = confirm('Are you sure you want to do that?');
 
-  /**setLink(link: string){
-      if(this.selectedItem){
-        this.selectedItem.link = link
+    if (response) {
+      this.delete(this.todos[id].id);
+      this.todos = this.todos.filter((v, i) => i !== id);
+      alert('The Block has been removed');
+    } else {
+      alert('The action was cancelled');
+    }
+  }
+
+  setExtensionID() {
+    if (this.extensionID.length != 32) {
+      alert('invalid ID code');
+      this.extensionID = '';
+      return;
+    }
+    if (this.extensionID2 == '') {
+      this.working = 'Extension ID has been added';
+      this.extensionID2 = this.extensionID;
+      this.extensionID = '';
+      for (let i = 0; i < this.todos.length; i++) {
+        this.add(this.todos[i].link);
       }
-  }
-   setDays(days: number){
-    if(this.selectedItem){
-        this.selectedItem.days = days
+    } else {
+      this.extensionID2 = this.extensionID;
+      this.extensionID = '';
+      this.working = 'Extension has been changed';
     }
-  }
-
-   setHours(hours: number){
-    if(this.selectedItem){
-        this.selectedItem.hours = hours
-    }
+    this.clear10();
   }
 
-   setMinutes(minutes: number){
-    if(this.selectedItem){
-        this.selectedItem.minutes = minutes
-    }
+  clear10() {
+    let j = 3;
+    setInterval(() => {
+      j--;
+      if (j == 0) {
+        this.working = '';
+        return;
+      }
+    }, 1000);
   }
-
-   setSeconds(seconds: number){
-    if(this.selectedItem){
-      this.selectedItem.seconds = seconds
-    }
-  }
-   setidk(idk: string){
-    if(this.selectedItem){
-      this.selectedItem.idk = idk
-    }
-  }
-
-   setidk1(idk1: string){
-    if(this.selectedItem){
-      this.selectedItem.idk1 = idk1
-    }
-  }
-
-   setEmpty(empty: string){
-    if(this.selectedItem){
-      this.selectedItem.empty = empty
-    }
-  }
-
-   setDate(Date: Date){
-    if(this.selectedItem){
-      //@ts-ignore
-      this.selectedItem.dueDate = dayjs(Date);
-    }
-  }**/
 
   add(URL: string) {
-    let editorExtensionId = 'hfelemebfjbhhpnfbpngfpgnbfepakbp';
-    chrome.runtime.sendMessage(editorExtensionId, { openUrlInEditor: URL }, function (response) {
+    chrome.runtime.sendMessage(this.extensionID2, { openUrlInEditor: URL }, function (response) {
       if (!response.success) console.log('an error occurred');
       console.log('this should work');
     });

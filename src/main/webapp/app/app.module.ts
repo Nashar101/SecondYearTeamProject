@@ -7,7 +7,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import dayjs from 'dayjs/esm';
-import { NgbDateAdapter, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateAdapter, NgbDatepickerConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import './config/dayjs';
@@ -36,6 +36,7 @@ import { AlarmComponent } from './alarm/alarm.component';
 import { SchedulerComponent } from './scheduler/scheduler.component';
 import { NotificationComponent } from './notification/notification.component';
 import { InboxComponent } from './inbox/inbox.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -49,6 +50,8 @@ import { InboxComponent } from './inbox/inbox.component';
     HttpClientModule,
     NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-', caseSensitive: true }),
     TranslationModule,
+    FormsModule,
+    NgbModule,
   ],
   providers: [
     Title,

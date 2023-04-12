@@ -1,9 +1,11 @@
-<nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-dark">
-  <div class="container-fluid">
+<nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-light" style="height: 1000px">
+  <div class="sidebar">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
-      <span class="logo-img"></span>
-      <span jhiTranslate="global.title" class="navbar-title">Time Management</span>
-      <span class="navbar-version">{{ version }}</span>
+      <div style="margin-top: -340px">
+        <span class="logo-img1"></span>
+        <span jhiTranslate="global.title" class="navbar-title">Procrast</span>
+        <span class="navbar-version">{{ version }}</span>
+      </div>
     </a>
     <a
       class="navbar-toggler d-lg-none"
@@ -18,61 +20,70 @@
       <fa-icon icon="bars"></fa-icon>
     </a>
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="account !== null">
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto" style="display: block; font-size: 20px">
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
             <span>
-              <fa-icon icon="home"></fa-icon>
+              <fa-icon icon="home" style="margin-right: 6px"></fa-icon>
               <span jhiTranslate="global.menu.home">Home</span>
             </span>
           </a>
         </li>
         <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
+
         <li *ngSwitchCase="true" ngbDropdown class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/scheduler" routerLinkActive="active" (click)="collapseNavbar()">
-            <fa-icon [icon]="'tasks'"></fa-icon>
+            <!--<fa-icon [icon]="'tasks'"></fa-icon> -->
+            <span class="dot" style="background-color: #ffa573"></span>
             <span>Scheduler</span>
           </a>
         </li>
         <li *ngSwitchCase="true" ngbDropdown class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/to-do-list" routerLinkActive="active" (click)="collapseNavbar()">
-            <fa-icon [icon]="'tasks'"></fa-icon>
+            <!--<fa-icon [icon]="'tasks'"></fa-icon> -->
+            <span class="dot" style="background-color: #b73838"></span>
             <span>To-do List</span>
           </a>
         </li>
         <li *ngSwitchCase="true" ngbDropdown class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/anti-procrastination" routerLinkActive="active" (click)="collapseNavbar()">
-            <fa-icon [icon]="'tasks'"></fa-icon>
+            <!--<fa-icon [icon]="'tasks'"></fa-icon>   this line puts the icon before feature name, its fucking useless -->
+            <span class="dot" style="background-color: #48d456"></span>
             <span>Anti Procrastination</span>
           </a>
         </li>
         <li *ngSwitchCase="true" ngbDropdown class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/alarmpage" routerLinkActive="active" (click)="collapseNavbar()">
-            <fa-icon [icon]="'tasks'"></fa-icon>
+            <!--<fa-icon [icon]="'tasks'"></fa-icon> -->
+            <span class="dot" style="background-color: #2d33b9"></span>
             <span>Alarm</span>
           </a>
         </li>
         <li *ngSwitchCase="true" ngbDropdown class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/diarypage" routerLinkActive="active" (click)="collapseNavbar()">
-            <fa-icon [icon]="'tasks'"></fa-icon>
+            <!--<fa-icon [icon]="'tasks'"></fa-icon> -->
+            <span class="dot" style="background-color: #572424"></span>
             <span>Diary</span>
           </a>
         </li>
         <li *ngSwitchCase="true" ngbDropdown class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/notificationpage" routerLinkActive="active" (click)="collapseNavbar()">
-            <fa-icon [icon]="'tasks'"></fa-icon>
+            <!--<fa-icon [icon]="'tasks'"></fa-icon> -->
+            <span class="dot" style="background-color: #29f4e7"></span>
             <span>Notification</span>
           </a>
         </li>
         <li *ngSwitchCase="true" ngbDropdown class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/inbox" routerLinkActive="active" (click)="collapseNavbar()">
-            <fa-icon [icon]="'tasks'"></fa-icon>
+            <!--<fa-icon [icon]="'tasks'"></fa-icon> -->
+            <span class="dot"></span>
             <span>Inbox</span>
           </a>
         </li>
         <li *ngSwitchCase="true" ngbDropdown class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/historypage" routerLinkActive="active" (click)="collapseNavbar()">
-            <fa-icon [icon]="'tasks'"></fa-icon>
+            <!--<fa-icon [icon]="'tasks'"></fa-icon> -->
+            <span class="dot" style="background-color: #ff3e83"></span>
             <span>History</span>
           </a>
         </li>
@@ -86,7 +97,8 @@
         >
           <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu" data-cy="entity">
             <span>
-              <fa-icon icon="th-list"></fa-icon>
+              <!--<fa-icon [icon]="'tasks'"></fa-icon> -->
+              <span class="dot"></span>
               <span jhiTranslate="global.menu.entities.main">Entities</span>
             </span>
           </a>

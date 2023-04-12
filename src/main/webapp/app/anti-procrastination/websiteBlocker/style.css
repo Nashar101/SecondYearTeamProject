@@ -1,0 +1,46 @@
+@keyframes myAnim {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+
+  25%,
+  75% {
+    opacity: 0;
+  }
+}
+
+body {
+  font-family: Calibri;
+  font-size: 22px;
+  background: #ccc;
+}
+
+#runner {
+  background: url('https://i.ibb.co/TKbSVNH/finalstick.png');
+  width: 181.28px;
+  height: 200px;
+  animation: walk 0.5s steps(7) infinite, forward 15s linear infinite;
+}
+
+#road {
+  border-bottom: 7px dashed black;
+}
+
+@keyframes walk {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: 1133px;
+  }
+}
+@keyframes forward {
+  0% {
+    transform: translateX(-170px);
+  }
+  100% {
+    transform: translateX(3000px);
+  }
+}
