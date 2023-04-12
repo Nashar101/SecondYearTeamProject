@@ -233,6 +233,7 @@ export class AntiProcrastinationComponent implements OnInit {
 
     if (response) {
       this.delete(this.todos[id].id);
+      this.Listdelete(this.todos[id].link);
       this.todos = this.todos.filter((v, i) => i !== id);
       alert('The Block has been removed');
     } else {
@@ -274,6 +275,12 @@ export class AntiProcrastinationComponent implements OnInit {
 
   add(URL: string) {
     chrome.runtime.sendMessage(this.extensionID2, { openUrlInEditor: URL }, function (response) {
+      if (!response.success) console.log('an error occurred');
+      console.log('this should work');
+    });
+  }
+  Listdelete(URL: string) {
+    chrome.runtime.sendMessage(this.extensionID2, { delete: URL }, function (response) {
       if (!response.success) console.log('an error occurred');
       console.log('this should work');
     });

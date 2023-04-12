@@ -1,5 +1,5 @@
 let i = 0;
-const blockedSites = [];
+let blockedSites = [];
 let extensionID1 = chrome.runtime.id;
 let testing = 100;
 console.log(extensionID1);
@@ -16,8 +16,13 @@ chrome.runtime.onMessageExternal.addListener(function (request, sender, sendResp
     chrome.storage.local.set({ foo: blockedSites }, function () {
       console.log('Settings saved');
     });
-  } else if (request.command == 'openModal') {
-    alert('i am working (showing ID)');
+  } else if (request.delete) {
+    alert('message recieved for delete' + request.delete);
+    blockedSites = blockedSites.filter(link => link != request.delete);
+    localStorage.setItem('LIST', JSON.stringify(blockedSites));
+    chrome.storage.local.set({ foo: blockedSites }, function () {
+      console.log('Settings saved');
+    });
     return true;
   }
 });
