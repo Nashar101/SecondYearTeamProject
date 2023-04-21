@@ -1,0 +1,27 @@
+{
+  "applications": "*",
+  "changelogDate": "20230421155048",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "extension_id",
+  "fields": [
+    {
+      "fieldName": "extensionID",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ExtensionID",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "relationshipName": "user",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

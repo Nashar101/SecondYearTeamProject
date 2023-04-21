@@ -21,6 +21,8 @@
         "toDoItem": "To Do Item",
         "email": "Email",
         "notification": "Notification",
+        "antiprocrastinationListTwo": "Antiprocrastination List Two",
+        "extensionId": "Extension ID",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

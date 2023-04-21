@@ -1,0 +1,106 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-antiprocrastination-list-two-heading"
+        data-cy="AntiprocrastinationListTwoCreateUpdateHeading"
+        jhiTranslate="teamprojectApp.antiprocrastinationListTwo.home.createOrEditLabel"
+      >
+        Create or edit a Antiprocrastination List Two
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="teamprojectApp.antiprocrastinationListTwo.link" for="field_link">Link</label>
+          <input type="text" class="form-control" name="link" id="field_link" data-cy="link" formControlName="link" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="teamprojectApp.antiprocrastinationListTwo.type" for="field_type">Type</label>
+          <input type="text" class="form-control" name="type" id="field_type" data-cy="type" formControlName="type" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="teamprojectApp.antiprocrastinationListTwo.days" for="field_days">Days</label>
+          <input type="number" class="form-control" name="days" id="field_days" data-cy="days" formControlName="days" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="teamprojectApp.antiprocrastinationListTwo.hours" for="field_hours">Hours</label>
+          <input type="number" class="form-control" name="hours" id="field_hours" data-cy="hours" formControlName="hours" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="teamprojectApp.antiprocrastinationListTwo.minutes" for="field_minutes">Minutes</label>
+          <input type="number" class="form-control" name="minutes" id="field_minutes" data-cy="minutes" formControlName="minutes" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="teamprojectApp.antiprocrastinationListTwo.seconds" for="field_seconds">Seconds</label>
+          <input type="number" class="form-control" name="seconds" id="field_seconds" data-cy="seconds" formControlName="seconds" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="teamprojectApp.antiprocrastinationListTwo.empty" for="field_empty">Empty</label>
+          <input type="text" class="form-control" name="empty" id="field_empty" data-cy="empty" formControlName="empty" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="teamprojectApp.antiprocrastinationListTwo.idk" for="field_idk">Idk</label>
+          <input type="text" class="form-control" name="idk" id="field_idk" data-cy="idk" formControlName="idk" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="teamprojectApp.antiprocrastinationListTwo.idk1" for="field_idk1">Idk 1</label>
+          <input type="text" class="form-control" name="idk1" id="field_idk1" data-cy="idk1" formControlName="idk1" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="teamprojectApp.antiprocrastinationListTwo.dueDate" for="field_dueDate">Due Date</label>
+          <div class="d-flex">
+            <input
+              id="field_dueDate"
+              data-cy="dueDate"
+              type="datetime-local"
+              class="form-control"
+              name="dueDate"
+              formControlName="dueDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="teamprojectApp.antiprocrastinationListTwo.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user" [compareWith]="compareUser">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="userOption" *ngFor="let userOption of usersSharedCollection">{{ userOption.login }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

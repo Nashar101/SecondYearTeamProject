@@ -31,6 +31,8 @@
     <include file="config/liquibase/changelog/20230321181115_added_entity_ToDoItem.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230322112855_added_entity_Email.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230322112856_added_entity_Notification.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230418031003_added_entity_AntiprocrastinationListTwo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230421155048_added_entity_ExtensionID.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20230226224326_added_entity_constraints_Blog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230226224327_added_entity_constraints_Post.xml" relativeToChangelogFile="false"/>
@@ -43,6 +45,8 @@
     <include file="config/liquibase/changelog/20230321181115_added_entity_constraints_ToDoItem.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230322112855_added_entity_constraints_Email.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230322112856_added_entity_constraints_Notification.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230418031003_added_entity_constraints_AntiprocrastinationListTwo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230421155048_added_entity_constraints_ExtensionID.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

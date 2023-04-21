@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="extensionID">
+      <h2 data-cy="extensionIDDetailsHeading"><span jhiTranslate="teamprojectApp.extensionID.detail.title">Extension ID</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ extensionID.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.extensionID.extensionID">Extension ID</span></dt>
+        <dd>
+          <span>{{ extensionID.extensionID }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.extensionID.user">User</span></dt>
+        <dd>
+          <span>{{ extensionID.user?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/extension-id', extensionID.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
