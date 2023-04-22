@@ -41,6 +41,7 @@ export class TodoListComponent implements OnInit {
 
   showDetails(item: ITodolistItem): void {
     this.selectedItem = item;
+    this.originalItem = { ...item };
     if (!this.detailsVisible) {
       this.toggleDetails();
     }
@@ -63,6 +64,7 @@ export class TodoListComponent implements OnInit {
       this.selectedItem.lastEditTime = dayjs() as any;
       this.todolistItemService.update(this.selectedItem).subscribe(() => {
         this.loadAll();
+        this.closeDetailWindow();
         this.originalItem = null;
         this.selectedItem = null;
       });
@@ -73,6 +75,7 @@ export class TodoListComponent implements OnInit {
     this.originalItem = null;
     this.selectedItem = null;
     this.loadAll();
+    this.closeDetailWindow();
   }
 
   createNewItem(): void {
