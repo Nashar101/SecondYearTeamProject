@@ -9,20 +9,27 @@
 }
 
 /*todo-items and done-items*/
-.todo-items {
-  position: relative;
-  top: 10px;
-  left: 1.25vw;
-  width: 45vw;
-  height: 35vh;
-}
-
+.todo-items,
 .done-items {
   position: relative;
   top: 10px;
   left: 1.25vw;
-  width: 45vw;
+  bottom: 10px;
+  width: 90vw;
   height: 35vh;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #f5f5f5;
+  padding: 20px;
+  transition: width 0.5s;
+}
+
+.half-width {
+  width: 45vw !important;
+}
+
+.empty-space {
+  height: 5vh;
 }
 
 .window {
@@ -51,6 +58,7 @@
   font-weight: bold;
   display: flex;
   align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .item input[type='checkbox'] {
@@ -91,11 +99,12 @@
   position: absolute;
   top: 10px;
   right: 1.25vw;
-  height: auto;
+  height: 75vh;
   width: 45vw;
   background-color: white;
   border-radius: 25px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: width 0.5s;
 }
 
 .Detail-Heading,
@@ -105,6 +114,21 @@
   left: auto;
   height: auto;
   width: 100%;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  color: black;
+  font-weight: bold;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  cursor: pointer;
 }
 
 /*Add and delete*/
@@ -137,16 +161,64 @@
 }
 
 .delete-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: red;
-  border: none;
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
+  background-color: red;
   color: white;
-  font-weight: bold;
-  width: 30px;
-  height: 30px;
+  font-size: 32px;
+  line-height: 60px;
   text-align: center;
+  border: none;
+  outline: none;
   cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+  background-color: #c62828;
+}
+
+.delete-button-icon {
+  position: relative;
+  top: -4px;
+}
+
+textarea.Detail-Heading,
+textarea.Detail-Description {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+button[type='save'],
+button[type='cancel'] {
+  background-color: #4caf50;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+button[type='cancel'] {
+  background-color: #f44336;
+}
+
+button[type='save']:hover,
+button[type='cancel']:hover {
+  opacity: 0.8;
 }

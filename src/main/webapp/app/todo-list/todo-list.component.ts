@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, HostBinding } from '@angular/core';
 import { ITodolistItem } from '../entities/todolist-item/todolist-item.model';
 import { AccountService } from 'app/core/auth/account.service';
 import { UserService } from 'app/entities/user/user.service';
@@ -40,8 +40,10 @@ export class TodoListComponent implements OnInit {
   originalItem: ITodolistItem | null = null;
 
   showDetails(item: ITodolistItem): void {
-    this.originalItem = { ...item };
     this.selectedItem = item;
+    if (!this.detailsVisible) {
+      this.toggleDetails();
+    }
   }
 
   updateHeading(heading: string) {
@@ -97,6 +99,28 @@ export class TodoListComponent implements OnInit {
         this.selectedItem = null;
         this.originalItem = null;
       });
+    }
+  }
+
+  closeDetailWindow(): void {
+    this.selectedItem = null;
+    if (this.detailsVisible) {
+      this.toggleDetails();
+    }
+  }
+
+  detailsVisible = false;
+
+  toggleDetails() {
+    this.detailsVisible = !this.detailsVisible;
+    if (this.detailsVisible) {
+      setTimeout(() => {
+        (document.querySelector('.todo-items') as HTMLElement).classList.add('half-width');
+        (document.querySelector('.done-items') as HTMLElement).classList.add('half-width');
+      }, 100);
+    } else {
+      (document.querySelector('.todo-items') as HTMLElement).classList.remove('half-width');
+      (document.querySelector('.done-items') as HTMLElement).classList.remove('half-width');
     }
   }
 
