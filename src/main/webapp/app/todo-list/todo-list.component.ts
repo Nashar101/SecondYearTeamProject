@@ -98,6 +98,7 @@ export class TodoListComponent implements OnInit {
         this.loadAll();
         this.selectedItem = null;
         this.originalItem = null;
+        this.closeDetailWindow();
       });
     }
   }
@@ -113,14 +114,17 @@ export class TodoListComponent implements OnInit {
 
   toggleDetails() {
     this.detailsVisible = !this.detailsVisible;
+
     if (this.detailsVisible) {
       setTimeout(() => {
         (document.querySelector('.todo-items') as HTMLElement).classList.add('half-width');
         (document.querySelector('.done-items') as HTMLElement).classList.add('half-width');
+        (document.querySelector('.Detail-Window') as HTMLElement).classList.add('not-hidden');
       }, 100);
     } else {
       (document.querySelector('.todo-items') as HTMLElement).classList.remove('half-width');
       (document.querySelector('.done-items') as HTMLElement).classList.remove('half-width');
+      (document.querySelector('.Detail-Window') as HTMLElement).classList.remove('not-hidden');
     }
   }
 

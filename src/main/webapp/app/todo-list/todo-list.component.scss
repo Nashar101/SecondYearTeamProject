@@ -21,7 +21,7 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background-color: #f5f5f5;
   padding: 20px;
-  transition: width 0.5s;
+  transition: width 0.2s;
 }
 
 .half-width {
@@ -104,7 +104,14 @@
   background-color: white;
   border-radius: 25px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  transition: width 0.5s;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.not-hidden {
+  transform: scale(1);
+  opacity: 1 !important;
 }
 
 .Detail-Heading,
