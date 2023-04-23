@@ -9,11 +9,11 @@ import { AccountService } from 'app/core/auth/account.service';
 @Component({
   selector: 'jhi-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./style.css'],
+  styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
   private renderer: Renderer2;
-
+  isNavbarOpen = false;
   constructor(
     private accountService: AccountService,
     private titleService: Title,
@@ -22,40 +22,6 @@ export class MainComponent implements OnInit {
     rootRenderer: RendererFactory2
   ) {
     this.renderer = rootRenderer.createRenderer(document.querySelector('html'), null);
-  }
-
-  openSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    const sidebarClose = document.getElementById('sidebar-close');
-    const main = document.getElementById('sidebar1');
-    const dot = document.getElementById('dot');
-    //@ts-ignore
-    sidebar.classList.toggle('open');
-    //@ts-ignore
-    dot.classList.toggle('open');
-    //@ts-ignore
-    main.classList.toggle('open');
-    /**@ts-ignore
-    sidebarToggle.addEventListener('click', () => {
-      //@ts-ignore
-      sidebar.classList.toggle('open');
-    });
-    //@ts-ignore
-    sidebarClose.addEventListener('click', () => {
-      //@ts-ignore
-      sidebar.classList.remove('open');
-    });**/
-    //@ts-ignore
-
-    //@ts-ignore
-    sidebarClose.addEventListener('click', () => {
-      //@ts-ignore
-      sidebar.classList.remove('open');
-      //@ts-ignore
-      dot.classList.remove('open');
-      //@ts-ignore
-      main.classList.toggle('open');
-    });
   }
 
   ngOnInit(): void {
@@ -89,5 +55,9 @@ export class MainComponent implements OnInit {
       pageTitle = 'global.title';
     }
     this.translateService.get(pageTitle).subscribe(title => this.titleService.setTitle(title));
+  }
+
+  toggleNavbar(): void {
+    this.isNavbarOpen = !this.isNavbarOpen;
   }
 }

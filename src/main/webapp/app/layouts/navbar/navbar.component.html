@@ -1,7 +1,7 @@
-<nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-light" style="height: 85vh margin">
-  <div class="sidebar" style="margin-top: 435px">
+<nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-light">
+  <div class="navbar-list">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
-      <div style="margin-top: -340px">
+      <div>
         <span class="logo-img1"></span>
         <span jhiTranslate="global.title" class="navbar-title">Procrast</span>
         <span class="navbar-version">{{ version }}</span>
@@ -26,11 +26,11 @@
       [ngSwitch]="account !== null"
       style="height: 100%"
     >
-      <ul class="" style="display: block; font-size: 1.5vw; margin-top: 0vh">
+      <ul style="display: block; list-style: none; padding-left: 0">
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
             <span>
-              <fa-icon icon="home" style="margin-right: 6px"></fa-icon>
+              <fa-icon icon="home"></fa-icon>
               <span jhiTranslate="global.menu.home">Home</span>
             </span>
           </a>
