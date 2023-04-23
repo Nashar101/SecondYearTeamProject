@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, HostBinding } from '@angular/core';
 import { ITodolistItem } from '../entities/todolist-item/todolist-item.model';
 import { AccountService } from 'app/core/auth/account.service';
 import { UserService } from 'app/entities/user/user.service';
@@ -40,8 +40,11 @@ export class TodoListComponent implements OnInit {
   originalItem: ITodolistItem | null = null;
 
   showDetails(item: ITodolistItem): void {
-    this.originalItem = { ...item };
     this.selectedItem = item;
+    this.originalItem = { ...item };
+    if (!this.detailsVisible) {
+      this.toggleDetails();
+    }
   }
 
   updateHeading(heading: string) {
@@ -55,53 +58,77 @@ export class TodoListComponent implements OnInit {
       this.selectedItem.description = description;
     }
   }
-  newItem: ITodolistItem | null = null;
+
   saveChanges(): void {
     if (this.selectedItem && this.originalItem) {
-      if (this.selectedItem.id === -1) {
-        this.todolistItemService.create(this.selectedItem).subscribe(() => {
-          this.loadAll();
-        });
-      } else {
-        this.selectedItem.lastEditTime = dayjs() as any;
-        this.todolistItemService.update(this.selectedItem).subscribe(() => {
-          this.loadAll();
-        });
-      }
-      this.originalItem = null;
-      this.selectedItem = null;
+      this.selectedItem.lastEditTime = dayjs() as any;
+      this.todolistItemService.update(this.selectedItem).subscribe(() => {
+        this.loadAll();
+        this.closeDetailWindow();
+        this.originalItem = null;
+        this.selectedItem = null;
+      });
     }
   }
 
   cancelChanges(): void {
     this.originalItem = null;
     this.selectedItem = null;
+    this.loadAll();
+    this.closeDetailWindow();
   }
 
   createNewItem(): void {
-    this.originalItem = null;
-    this.selectedItem = null;
-    this.accountService.identity().subscribe(account => {
-      if (account) {
-        this.userService.find(account.login).subscribe(userResponse => {
-          const user = userResponse.body;
-          if (user) {
-            const newItem: ITodolistItem = {
-              id: -1,
-              heading: 'New Heading!',
-              description: 'Nothing here',
-              creationTime: dayjs() as any,
-              lastEditTime: dayjs() as any,
-              completed: false,
-              user: { id: user.id, login: user.login },
-            };
-            this.todoItems.push(newItem);
-            this.showDetails(newItem);
-            this.changeDetectorRef.detectChanges();
-          }
-        });
-      }
+    const newItem: ITodolistItem = {
+      id: null,
+      heading: 'New Heading!',
+      description: 'Nothing here',
+      creationTime: dayjs() as any,
+      lastEditTime: dayjs() as any,
+      completed: false,
+    };
+    this.todolistItemService.create(newItem).subscribe(() => {
+      this.loadAll();
+      setTimeout(() => {
+        this.showDetails(this.todoItems[this.todoItems.length - 1]);
+      }, 100);
     });
+  }
+
+  deleteItem(): void {
+    if (this.selectedItem) {
+      this.todolistItemService.delete(this.selectedItem.id!).subscribe(() => {
+        this.loadAll();
+        this.selectedItem = null;
+        this.originalItem = null;
+        this.closeDetailWindow();
+      });
+    }
+  }
+
+  closeDetailWindow(): void {
+    this.selectedItem = null;
+    if (this.detailsVisible) {
+      this.toggleDetails();
+    }
+  }
+
+  detailsVisible = false;
+
+  toggleDetails() {
+    this.detailsVisible = !this.detailsVisible;
+
+    if (this.detailsVisible) {
+      setTimeout(() => {
+        (document.querySelector('.todo-items') as HTMLElement).classList.add('half-width');
+        (document.querySelector('.done-items') as HTMLElement).classList.add('half-width');
+        (document.querySelector('.Detail-Window') as HTMLElement).classList.add('not-hidden');
+      }, 100);
+    } else {
+      (document.querySelector('.todo-items') as HTMLElement).classList.remove('half-width');
+      (document.querySelector('.done-items') as HTMLElement).classList.remove('half-width');
+      (document.querySelector('.Detail-Window') as HTMLElement).classList.remove('not-hidden');
+    }
   }
 
   ngOnInit(): void {

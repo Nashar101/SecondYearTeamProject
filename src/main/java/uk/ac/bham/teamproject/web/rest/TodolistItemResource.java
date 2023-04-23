@@ -5,18 +5,25 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 import uk.ac.bham.teamproject.domain.TodolistItem;
+import uk.ac.bham.teamproject.domain.User;
 import uk.ac.bham.teamproject.repository.TodolistItemRepository;
+import uk.ac.bham.teamproject.repository.UserRepository;
 import uk.ac.bham.teamproject.web.rest.errors.BadRequestAlertException;
 
 /**
@@ -36,6 +43,9 @@ public class TodolistItemResource {
 
     private final TodolistItemRepository todolistItemRepository;
 
+    @Autowired
+    private UserRepository UserRepository;
+
     public TodolistItemResource(TodolistItemRepository todolistItemRepository) {
         this.todolistItemRepository = todolistItemRepository;
     }
@@ -53,6 +63,10 @@ public class TodolistItemResource {
         if (todolistItem.getId() != null) {
             throw new BadRequestAlertException("A new todolistItem cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        User user = UserRepository.findOneByLogin(getCurrentUserLogin()).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        todolistItem.setUser(user);
+
         TodolistItem result = todolistItemRepository.save(todolistItem);
         return ResponseEntity
             .created(new URI("/api/todolist-items/" + result.getId()))
@@ -161,6 +175,7 @@ public class TodolistItemResource {
     public List<TodolistItem> getAllTodolistItems(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all TodolistItems");
         return todolistItemRepository.findByUserIsCurrentUser();
+        //return todolistItemRepository.findAll();
     }
 
     /**
@@ -190,5 +205,16 @@ public class TodolistItemResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    public String getCurrentUserLogin() {
+        org.springframework.security.core.context.SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        String login = null;
+        if (authentication != null) if (authentication.getPrincipal() instanceof UserDetails) login =
+            ((UserDetails) authentication.getPrincipal()).getUsername(); else if (authentication.getPrincipal() instanceof String) login =
+            (String) authentication.getPrincipal();
+
+        return login;
     }
 }
