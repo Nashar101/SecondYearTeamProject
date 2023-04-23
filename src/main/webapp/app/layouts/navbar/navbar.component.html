@@ -1,5 +1,5 @@
-<nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-light" style="height: 1000px">
-  <div class="sidebar">
+<nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-light" style="height: 85vh margin">
+  <div class="sidebar" style="margin-top: 435px">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
       <div style="margin-top: -340px">
         <span class="logo-img1"></span>
@@ -19,8 +19,14 @@
     >
       <fa-icon icon="bars"></fa-icon>
     </a>
-    <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="account !== null">
-      <ul class="navbar-nav ms-auto" style="display: block; font-size: 20px">
+    <div
+      class="navbar-collapse collapse"
+      id="navbarResponsive"
+      [ngbCollapse]="isNavbarCollapsed"
+      [ngSwitch]="account !== null"
+      style="height: 100%"
+    >
+      <ul class="" style="display: block; font-size: 1.5vw; margin-top: 0vh">
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
             <span>

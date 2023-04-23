@@ -1,95 +1,25 @@
 <html lang="en" style="">
-  <style>
-    h1 {
-      font-family: Calibri;
-    }
-
-    p {
-      font-family: Calibri;
-    }
-
-    label {
-      font-family: Calibri;
-    }
-
-    textarea {
-      font-family: Calibri;
-      font-size: 16px;
-    }
-
-    .larger {
-      width: 25px;
-      height: 25px;
-      margin: 0 auto;
-      padding: ;
-    }
-
-    .size {
-      height: 40px;
-      width: 65px;
-      border-radius: 10%;
-    }
-
-    Button {
-      margin: 0px 50px;
-    }
-
-    .flt_rght {
-      float: right;
-      height: 28px;
-    }
-
-    .rgtDiv {
-      font-family: Calibri;
-      display: flex;
-      font-size: 17px;
-      position: relative;
-      overflow: hidden;
-      min-height: 25px;
-      width: 500px;
-
-      border: 1px #737373;
-      background: #ebebeb;
-
-      padding: 0;
-      border-radius: 4px;
-    }
-
-    [contentEditable='true']:empty:not(:focus):before {
-      content: attr(data-text);
-    }
-  </style>
   <head>
-    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height intial-scale=1.0" charset="UTF-8" />
     <title>Anti Procrastination</title>
     <script src="../app.constants.ts"></script>
     <script src="websiteBlocker/background.js" type="module"></script>
   </head>
 
-  <p style="font-family: Calibri"></p>
   <h1 style="color: #545454; font-weight: bold">Blocked Site</h1>
-
   <div style="display: flex">
-    <div class="rgtDiv" style="display: flex">
-      <div contenteditable="true" class="rgtDiv" style="color: #9c9c9c; display: flex">
-        <input
-          type="text"
-          placeholder="Enter a website URL"
-          style="width: 595px; height: 30px; background: #ebebeb; border: none; outline: none"
-          [(ngModel)]="newTodo"
-        />
-      </div>
-      <div></div>
-    </div>
-    <div style="display: flex">
-      <input
-        type="text"
-        placeholder="Enter extension ID here"
-        style="width: 450px; height: 30px; background: #ebebeb; margin-left: 100px; border: none; outline: none"
-        [(ngModel)]="extensionID"
-      />
-      <button type="button" (click)="setExtensionID()">+</button>
-    </div>
+    <textarea
+      placeholder="Enter a website URL"
+      style="height: 30px; width: 20vw; background: #ebebeb; border: none; outline: none"
+      [(ngModel)]="newTodo"
+    ></textarea>
+    <textarea
+      placeholder="Enter extension ID here"
+      style="height: 30px; background: #ebebeb; margin-left: 100px; border: none; outline: none"
+      [(ngModel)]="extensionID"
+    ></textarea>
+    <button type="button" (click)="setExtensionID()">+</button>
+    <div style="display: flex"></div>
   </div>
 
   <div style="display: flex">
@@ -172,7 +102,7 @@
       margin-top: 20px;
       min-width: 650px;
       width: 90%;
-      height: 600px;
+      height: 45vh;
       box-shadow: 0px 0px 4px 3px #969696;
       border-radius: 0.8%;
     "
