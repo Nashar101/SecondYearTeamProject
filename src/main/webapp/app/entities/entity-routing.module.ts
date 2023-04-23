@@ -70,6 +70,17 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'teamprojectApp.notification.home.title' },
         loadChildren: () => import('./notification/notification.module').then(m => m.NotificationModule),
       },
+      {
+        path: 'antiprocrastination-list-two',
+        data: { pageTitle: 'teamprojectApp.antiprocrastinationListTwo.home.title' },
+        loadChildren: () =>
+          import('./antiprocrastination-list-two/antiprocrastination-list-two.module').then(m => m.AntiprocrastinationListTwoModule),
+      },
+      {
+        path: 'extension-id',
+        data: { pageTitle: 'teamprojectApp.extensionID.home.title' },
+        loadChildren: () => import('./extension-id/extension-id.module').then(m => m.ExtensionIDModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

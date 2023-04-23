@@ -1,0 +1,10 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+.todo-items {
+  position: relative;
+  top: 10px;
+  left: 1.25vw;
+  width: 45vw;
+  height: 35vh;
+}

@@ -1,13 +1,32 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
 <jhi-page-ribbon></jhi-page-ribbon>
-
-<div>
-  <router-outlet name="navbar"></router-outlet>
+<!--<div style="display: flex; background: #f4f4f5; height: 95vw">-->
+<!--
+   -->
+<button id="dot" (click)="openSidebar()"></button>
+<div style="display: flex">
+  <div id="sidebar">
+    <div>
+      <router-outlet name="navbar"></router-outlet>
+    </div>
+  </div>
 </div>
-
-<div class="container-fluid">
-  <div class="card jh-card">
+<div id="sidebar1" style="margin-top: -15px">
+  <div class="card jh-card" style="background: #f4f4f5">
     <router-outlet></router-outlet>
   </div>
-
-  <jhi-footer></jhi-footer>
 </div>
+
+<!--</div>-->
+<div style="margin-top: 95vh"><jhi-footer style="height: 10%"></jhi-footer></div>
+
+<!--
+  <div class="home" id="main-right"></div>-->
+<!--<div  id="sidebar1"  style="margin-top: -15px; height: 85vw">
+  <div class="card jh-card" style="background: #f4f4f5">
+    <router-outlet></router-outlet>
+  </div>
+</div>-->

@@ -1,0 +1,16 @@
+entity AntiprocrastinationListTwo{
+    link String 
+    type String
+    days Integer
+    hours Integer
+    minutes Integer
+    seconds Integer
+    empty String
+    idk String
+    idk1 String
+    dueDate ZonedDateTime
+}
+
+relationship ManyToOne {
+	AntiprocrastinationListTwo{user (login)} to User
+}
