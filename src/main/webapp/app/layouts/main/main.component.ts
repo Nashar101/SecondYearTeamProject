@@ -1,4 +1,4 @@
-import { Component, OnInit, RendererFactory2, Renderer2 } from '@angular/core';
+import { Component, OnInit, RendererFactory2, Renderer2, ElementRef } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -19,6 +19,7 @@ export class MainComponent implements OnInit {
     private titleService: Title,
     private router: Router,
     private translateService: TranslateService,
+    private elementRef: ElementRef,
     rootRenderer: RendererFactory2
   ) {
     this.renderer = rootRenderer.createRenderer(document.querySelector('html'), null);
@@ -59,5 +60,12 @@ export class MainComponent implements OnInit {
 
   toggleNavbar(): void {
     this.isNavbarOpen = !this.isNavbarOpen;
+  }
+
+  handleOutsideClick(event: MouseEvent): void {
+    const clickedInsideNavbar = this.elementRef.nativeElement.querySelector('.navbar-container').contains(event.target);
+    if (!clickedInsideNavbar) {
+      this.isNavbarOpen = false;
+    }
   }
 }
