@@ -1,0 +1,74 @@
+.alarmAddButton {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #615ed9;
+  color: white;
+  font-size: 16px;
+  line-height: 30px;
+  text-align: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  transition: background-color 0.3s;
+}
+.alarmDeleteButton {
+  width: 32px;
+  height: 32px;
+  position: center;
+  border-radius: 50%;
+  background-color: red;
+  alignment: center;
+  color: white;
+  font-size: 20px;
+  border: none;
+}
+
+.alarmPlayPause {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  alignment: center;
+  background: url(PlayPause4.png) center;
+  border: none;
+  padding-bottom: 11px;
+}
+.alarmClearButton {
+  width: 60px;
+  height: 30px;
+  border-radius: 30%;
+  background-color: red;
+  color: white;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.buttonField {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.alarmNameField {
+  font-size: 16px;
+  padding-top: 20px;
+  padding-left: 20px;
+  width: 150px;
+  padding-bottom: 20px;
+}
+.typeField {
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+}
+.timeField {
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+}
+.tableAlarms {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}

@@ -1,1 +1,75 @@
-<p>alarm works!</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alarm</title>
+  </head>
+  <body>
+    <h1 style="padding: 40px">Alarm</h1>
+    <div style="padding-top: 0.8rem; padding-left: 2rem; display: flex; horiz-align: center">
+      <input placeholder="Insert alarm name" type="text" minlength="1" maxlength="24" [(ngModel)]="alarmName" />
+      <div style="padding-left: 2px; display: flex">
+        <select id="typeBox" [(ngModel)]="type">
+          <option value="alarm">Alarm</option>
+          <option value="timer">Timer</option>
+        </select>
+        <input
+          placeholder="0"
+          type="number"
+          min="0"
+          max="24"
+          style="text-align: center; background: #ebebeb; outline: none; border: none"
+          [(ngModel)]="hours"
+        />
+        <b style="font-size: 30px; margin-top: -6px; color: #424242">:</b>
+        <input
+          placeholder="00"
+          type="number"
+          min="0"
+          max="60"
+          style="text-align: center; background: #ebebeb; outline: none; border: none"
+          [(ngModel)]="minutes"
+        />
+        <b style="font-size: 30px; margin-top: -6px; color: #424242">:</b>
+        <input
+          placeholder="00"
+          type="number"
+          min="0"
+          max="60"
+          style="text-align: center; background: #ebebeb; outline: none; border: none"
+          [(ngModel)]="seconds"
+        />
+      </div>
+      <div>
+        <button class="alarmAddButton" (click)="saveAlarm()">+</button>
+        <button class="alarmClearButton" (click)="clearAlarms()">Clear</button>
+      </div>
+    </div>
+    <div style="padding: 40px">
+      <table class="tableAlarms">
+        <tr *ngFor="let alarm of alarms; let i = index" style="background: white">
+          <td>
+            <label>{{ alarm.id }}</label>
+          </td>
+          <td class="alarmNameField">
+            <label
+              ><b>{{ alarm.alarmName }}</b></label
+            >
+          </td>
+
+          <td class="typeField">
+            <label>{{ alarm.type }}</label>
+          </td>
+          <td class="timeField">
+            <label> {{ alarm.hours }}:{{ alarm.minutes }}:{{ alarm.seconds }} </label>
+          </td>
+          <td class="buttonField">
+            <button class="alarmPlayPause" (click)="this.alarm.ticking = togglePlay(this.alarm.ticking, this.alarm.id)"></button>
+          </td>
+          <td class="buttonField"><button class="alarmDeleteButton" (click)="deleteAlarm(this.alarm.id)">X</button></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
