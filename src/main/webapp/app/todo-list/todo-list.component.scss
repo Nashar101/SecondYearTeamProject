@@ -14,7 +14,7 @@
   position: relative;
   top: 10px;
   left: 1.25vw;
-  width: 90vw;
+  width: 92vw;
   height: 35vh;
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -147,7 +147,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: #4caf50;
+  background-color: #008cba;
   color: white;
   font-size: 32px;
   line-height: 60px;
@@ -160,7 +160,7 @@
 }
 
 .add-button:hover {
-  background-color: #3f9a40;
+  background-color: #29b6f6;
 }
 
 .add-button-icon {
@@ -175,7 +175,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: red;
+  background-color: #d32f2f;
   color: white;
   font-size: 32px;
   line-height: 60px;
@@ -208,7 +208,7 @@ textarea.Detail-Description {
 
 button[type='save'],
 button[type='cancel'] {
-  background-color: #4caf50;
+  background-color: #388e3c;
   border: none;
   border-radius: 5px;
   color: white;
@@ -223,7 +223,7 @@ button[type='cancel'] {
 }
 
 button[type='cancel'] {
-  background-color: #f44336;
+  background-color: #d32f2f;
 }
 
 button[type='save']:hover,

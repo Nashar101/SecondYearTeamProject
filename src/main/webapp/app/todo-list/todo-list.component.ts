@@ -32,8 +32,26 @@ export class TodoListComponent implements OnInit {
   moveItem(event: MouseEvent, item: ITodolistItem): void {
     item.completed = !item.completed;
     this.todolistItemService.update(item).subscribe(() => {
-      this.loadAll();
+      this.moveItemLocally(item);
     });
+    if (this.selectedItem) {
+      const selectedItem = this.todoItems.concat(this.doneItems).find(item => item.id === this.selectedItem!.id);
+      if (selectedItem) {
+        this.selectedItem = selectedItem;
+      } else {
+        this.selectedItem = null;
+      }
+    }
+  }
+
+  moveItemLocally(item: ITodolistItem): void {
+    if (item.completed) {
+      this.todoItems = this.todoItems.filter(todoItem => todoItem.id !== item.id);
+      this.doneItems.push(item);
+    } else {
+      this.doneItems = this.doneItems.filter(doneItem => doneItem.id !== item.id);
+      this.todoItems.push(item);
+    }
   }
 
   selectedItem: ITodolistItem | null = null;
