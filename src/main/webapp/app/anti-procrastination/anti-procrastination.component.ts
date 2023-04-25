@@ -42,21 +42,16 @@ export class AntiProcrastinationComponent implements OnInit {
     console.log(this.extensionID2);
     this.loadAll();
   }
-
   // List used to display data on the website
   todos: List[] = [];
-
   //link extension ID
   exID: number = 0;
-
   //chrome extensionID
   extensionID: string = '';
   extensionID2: string = '';
-
   //use these lists below to store the data obtained from the link and Chrome extension ID database
   listItems?: IAntiprocrastinationListTwo[];
   idlist?: IExtensionID[];
-
   //get data from database
   getExtensionID() {
     this.http.get<any>('/api/account').subscribe(account => {
@@ -71,7 +66,6 @@ export class AntiProcrastinationComponent implements OnInit {
       });
     });
   }
-
   //get data from database
   loadAll(): void {
     this.http.get<any>('/api/account').subscribe(account => {
@@ -128,7 +122,6 @@ export class AntiProcrastinationComponent implements OnInit {
       });
     });
   }
-
   //use these to display the List item values in the HTML website
   newTodo: string = '';
   type: string = '';
@@ -141,7 +134,6 @@ export class AntiProcrastinationComponent implements OnInit {
   end: number = 0;
 
   working: string = '';
-
   //add new Anti Procrastination list item
   saveTodo() {
     var element = <HTMLInputElement>document.getElementById('Permanent?');
@@ -194,7 +186,6 @@ export class AntiProcrastinationComponent implements OnInit {
   }
 
   interval1: number = 0;
-
   //timer used to decrease the time left values of each item
   startTimer2(number1: number) {
     this.interval1 = setInterval(() => {
@@ -289,12 +280,10 @@ export class AntiProcrastinationComponent implements OnInit {
       }
     });
   }
-
   //remove link from database after timer hits 0
   delete(id: number) {
     this.antiProcrastinationListService2.delete(id).subscribe();
   }
-
   //remove data from database on request
   remove(id: number) {
     const response = confirm('Are you sure you want to do that?');
@@ -308,7 +297,6 @@ export class AntiProcrastinationComponent implements OnInit {
       alert('The action was cancelled');
     }
   }
-
   //set Chrome extension ID on startup
   setExtensionID() {
     let previous = this.extensionID2;
