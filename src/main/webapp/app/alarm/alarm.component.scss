@@ -1,28 +1,29 @@
 .alarmAddButton {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background-color: #615ed9;
   color: white;
-  font-size: 16px;
-  line-height: 30px;
+  font-size: 20px;
+  font-weight: bold;
   text-align: center;
   border: none;
   outline: none;
   cursor: pointer;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  transition: background-color 0.3s;
 }
 .alarmDeleteButton {
   width: 32px;
   height: 32px;
   position: center;
+  text-align: center;
+  font-weight: bold;
   border-radius: 50%;
   background-color: red;
   alignment: center;
   color: white;
   font-size: 20px;
   border: none;
+  line-height: 0px;
 }
 
 .alarmPlayPause {
@@ -30,20 +31,19 @@
   height: 32px;
   border-radius: 50%;
   alignment: center;
-  background: url(PlayPause4.png) center;
+  background: url(PlayPause5.png) center;
   border: none;
   padding-bottom: 11px;
 }
 .alarmClearButton {
-  width: 60px;
-  height: 30px;
-  border-radius: 30%;
+  width: 50px;
+  height: 32px;
+  border-radius: 40%;
   background-color: red;
   color: white;
   border: none;
   outline: none;
   font-size: 16px;
-  line-height: 20px;
   text-align: center;
   cursor: pointer;
 }
@@ -53,22 +53,40 @@
   padding-right: 20px;
 }
 .alarmNameField {
-  font-size: 16px;
-  padding-top: 20px;
   padding-left: 20px;
-  width: 150px;
-  padding-bottom: 20px;
+  font-size: 16px;
+  width: 250px;
+  font-weight: bold;
 }
 .typeField {
-  padding-top: 20px;
-  padding-left: 20px;
-  padding-bottom: 20px;
+  width: 50px;
 }
 .timeField {
-  padding-top: 20px;
-  padding-left: 20px;
-  padding-bottom: 20px;
+  width: 100px;
+  padding: 20px;
 }
-.tableAlarms {
+.optionsTab {
+  padding-top: 30px;
+  padding-left: 40px;
+  padding-bottom: 30px;
+  display: flex;
+  background-color: white;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+.rowStyle {
+  background: white;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.tableAlarms {
+  display: inline-block;
+  border-collapse: separate;
+  border-spacing: 0 15px;
+}
+.tableFinishedAlarms {
+  float: right;
+  color: red;
+  border-collapse: separate;
+  border-spacing: 0 15px;
+  padding-right: 250px;
 }

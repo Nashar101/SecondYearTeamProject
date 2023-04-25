@@ -1,63 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Alarm</title>
   </head>
-  <body>
+  <body style="min-height: 600px">
     <h1 style="padding: 40px">Alarm</h1>
-    <div style="padding-top: 0.8rem; padding-left: 2rem; display: flex; horiz-align: center">
-      <input placeholder="Insert alarm name" type="text" minlength="1" maxlength="24" [(ngModel)]="alarmName" />
-      <div style="padding-left: 2px; display: flex">
-        <select id="typeBox" [(ngModel)]="type">
-          <option value="alarm">Alarm</option>
-          <option value="timer">Timer</option>
-        </select>
-        <input
-          placeholder="0"
-          type="number"
-          min="0"
-          max="24"
-          style="text-align: center; background: #ebebeb; outline: none; border: none"
-          [(ngModel)]="hours"
-        />
-        <b style="font-size: 30px; margin-top: -6px; color: #424242">:</b>
-        <input
-          placeholder="00"
-          type="number"
-          min="0"
-          max="60"
-          style="text-align: center; background: #ebebeb; outline: none; border: none"
-          [(ngModel)]="minutes"
-        />
-        <b style="font-size: 30px; margin-top: -6px; color: #424242">:</b>
-        <input
-          placeholder="00"
-          type="number"
-          min="0"
-          max="60"
-          style="text-align: center; background: #ebebeb; outline: none; border: none"
-          [(ngModel)]="seconds"
-        />
-      </div>
-      <div>
-        <button class="alarmAddButton" (click)="saveAlarm()">+</button>
-        <button class="alarmClearButton" (click)="clearAlarms()">Clear</button>
+    <div style="padding-left: 40px; width: 1000px">
+      <div class="optionsTab">
+        <div style="position: relative; left: 325px; bottom: 30px">
+          <label style="padding-right: 20px">Hours</label><label>Mins</label><label style="padding-left: 25px">Secs</label>
+        </div>
+        <div style="position: relative; right: 100px; display: flex">
+          <input placeholder="Insert alarm name" type="text" minlength="1" maxlength="24" [(ngModel)]="alarmName" />
+          <select id="typeBox" [(ngModel)]="type">
+            <option value="alarm">Alarm</option>
+            <option value="timer">Timer</option>
+          </select>
+          <div style="display: flex; padding-left: 20px">
+            <input
+              placeholder="0"
+              type="number"
+              min="0"
+              max="24"
+              style="text-align: right; background: #ebebeb; outline: none; border: none; width: 50px"
+              [(ngModel)]="hours"
+            />
+            <b style="font-size: 30px; margin-top: -6px; color: #424242">:</b>
+            <input
+              placeholder="00"
+              type="number"
+              min="0"
+              max="60"
+              style="text-align: right; background: #ebebeb; outline: none; border: none; width: 50px"
+              [(ngModel)]="minutes"
+            />
+            <b style="font-size: 30px; margin-top: -6px; color: #424242">:</b>
+            <input
+              placeholder="00"
+              type="number"
+              min="0"
+              max="60"
+              style="text-align: right; background: #ebebeb; outline: none; border: none; width: 50px"
+              [(ngModel)]="seconds"
+            />
+          </div>
+          <div style="padding-left: 20px">
+            <button class="alarmAddButton" (click)="saveAlarm()">+</button>
+            <button class="alarmClearButton" (click)="clearAlarms()">Clear</button>
+          </div>
+        </div>
       </div>
     </div>
-    <div style="padding: 40px">
+    <div>
+      <h4 style="display: inline-block; padding-left: 40px; padding-top: 20px">Active Alarms:</h4>
+      <h4 style="float: right; padding-top: 20px; padding-right: 590px">Finished Alarms:</h4>
+    </div>
+    <div style="padding-left: 40px">
       <table class="tableAlarms">
-        <tr *ngFor="let alarm of alarms; let i = index" style="background: white">
+        <tr *ngFor="let alarm of alarms; let i = index" class="rowStyle">
           <td>
             <label>{{ alarm.id }}</label>
           </td>
           <td class="alarmNameField">
-            <label
-              ><b>{{ alarm.alarmName }}</b></label
-            >
+            <label>{{ alarm.alarmName }}</label>
           </td>
-
           <td class="typeField">
             <label>{{ alarm.type }}</label>
           </td>
@@ -68,6 +76,24 @@
             <button class="alarmPlayPause" (click)="this.alarm.ticking = togglePlay(this.alarm.ticking, this.alarm.id)"></button>
           </td>
           <td class="buttonField"><button class="alarmDeleteButton" (click)="deleteAlarm(this.alarm.id)">X</button></td>
+        </tr>
+      </table>
+      <table class="tableFinishedAlarms">
+        <tr *ngFor="let alarm of finishedAlarms; let i = index" class="rowStyle">
+          <td>
+            <label>{{ alarm.id }}</label>
+          </td>
+          <td class="alarmNameField">
+            <label>{{ alarm.alarmName }}</label>
+          </td>
+
+          <td class="typeField">
+            <label>{{ alarm.type }}</label>
+          </td>
+          <td class="timeField">
+            <label> {{ alarm.hours }}:{{ alarm.minutes }}:{{ alarm.seconds }} </label>
+          </td>
+          <td class="buttonField"><button class="alarmDeleteButton" (click)="finishedAlarmDelete(this.alarm.id)">X</button></td>
         </tr>
       </table>
     </div>

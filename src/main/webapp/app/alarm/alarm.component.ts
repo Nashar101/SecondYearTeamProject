@@ -19,6 +19,13 @@ export class alarmsList {
 
   ticking!: Boolean;
 }
+export class finishedAlarmsList {
+  alarmName!: string;
+  type!: string;
+  hours!: number;
+  minutes!: number;
+  seconds!: number;
+}
 @Component({
   selector: 'jhi-alarm',
   templateUrl: './alarm.component.html',
@@ -32,9 +39,29 @@ export class AlarmComponent implements OnInit {
   }
   alarms: alarmsList[] = [];
 
+  finishedAlarms: any[] = [];
+
   interval1: number = 0;
 
   interval: number = 0;
+
+  alarmUpdate(index: number) {
+    this.alarmService.update(this.alarms[index]).subscribe();
+  }
+  alarmEnd(index: number) {
+    this.finishedAlarms.push(this.alarms[index]);
+    this.alarmService.delete(this.alarms[index].id).subscribe();
+    this.alarms.splice(index, 1);
+  }
+
+  finishedAlarmDelete(id: number) {
+    for (let i = 0; i < this.finishedAlarms.length; i++) {
+      if (this.finishedAlarms[i].id == id) {
+        this.finishedAlarms.splice(i, 1);
+        break;
+      }
+    }
+  }
 
   timeTick(aId: number, ticking: Boolean) {
     var alarmIndex = -1;
@@ -49,22 +76,35 @@ export class AlarmComponent implements OnInit {
       }
       ticking = this.alarms[alarmIndex].ticking;
       if (ticking == true && this.alarms[alarmIndex].id == aId) {
-        if (this.alarms[alarmIndex].seconds > -1) {
-          this.alarms[alarmIndex].seconds--;
-        }
-        if (this.alarms[alarmIndex].seconds == -1 && this.alarms[alarmIndex].minutes >= 0) {
-          this.alarms[alarmIndex].seconds = 59;
-          this.alarms[alarmIndex].minutes--;
-        }
-        if (this.alarms[alarmIndex].minutes == -1 && this.alarms[alarmIndex].hours >= 0) {
-          this.alarms[alarmIndex].minutes = 59;
-          this.alarms[alarmIndex].hours--;
-        }
-        if (this.alarms[alarmIndex].hours <= 0 && this.alarms[alarmIndex].minutes <= 0 && this.alarms[alarmIndex].seconds <= 0) {
-          this.alarms.splice(alarmIndex, 1);
-          return;
+        if (this.alarms[alarmIndex].type == 'alarm') {
+          if (this.alarms[alarmIndex].seconds > -1) {
+            this.alarms[alarmIndex].seconds--;
+          }
+          if (this.alarms[alarmIndex].seconds == -1 && this.alarms[alarmIndex].minutes >= 0) {
+            this.alarms[alarmIndex].seconds = 59;
+            this.alarms[alarmIndex].minutes--;
+          }
+          if (this.alarms[alarmIndex].minutes == -1 && this.alarms[alarmIndex].hours >= 0) {
+            this.alarms[alarmIndex].minutes = 59;
+            this.alarms[alarmIndex].hours--;
+          }
+          if (this.alarms[alarmIndex].hours <= 0 && this.alarms[alarmIndex].minutes <= 0 && this.alarms[alarmIndex].seconds <= 0) {
+            this.alarmEnd(alarmIndex);
+            return;
+          }
+        } else {
+          this.alarms[alarmIndex].seconds++;
+          if (this.alarms[alarmIndex].seconds == 60) {
+            this.alarms[alarmIndex].seconds = 0;
+            this.alarms[alarmIndex].minutes++;
+          }
+          if (this.alarms[alarmIndex].minutes == 60) {
+            this.alarms[alarmIndex].minutes = 0;
+            this.alarms[alarmIndex].hours++;
+          }
         }
       }
+      this.alarmUpdate(alarmIndex);
     }, 1000);
   }
 
@@ -81,27 +121,41 @@ export class AlarmComponent implements OnInit {
       }
       ticking = this.alarms[alarmIndex].ticking;
       if (ticking == true) {
-        if (this.alarms[alarmIndex].seconds > -1) {
-          this.alarms[alarmIndex].seconds--;
-        }
-        if (this.alarms[alarmIndex].seconds == -1 && this.alarms[alarmIndex].minutes >= 0) {
-          this.alarms[alarmIndex].seconds = 59;
-          this.alarms[alarmIndex].minutes--;
-        }
-        if (this.alarms[alarmIndex].minutes == -1 && this.alarms[alarmIndex].hours >= 0) {
-          this.alarms[alarmIndex].minutes = 59;
-          this.alarms[alarmIndex].hours--;
-        }
-        if (this.alarms[alarmIndex].hours <= 0 && this.alarms[alarmIndex].minutes <= 0 && this.alarms[alarmIndex].seconds <= 0) {
-          this.alarms.splice(alarmIndex, 1);
-          return;
+        if (this.alarms[alarmIndex].type == 'alarm') {
+          if (this.alarms[alarmIndex].seconds > -1) {
+            this.alarms[alarmIndex].seconds--;
+          }
+          if (this.alarms[alarmIndex].seconds == -1 && this.alarms[alarmIndex].minutes >= 0) {
+            this.alarms[alarmIndex].seconds = 59;
+            this.alarms[alarmIndex].minutes--;
+          }
+          if (this.alarms[alarmIndex].minutes == -1 && this.alarms[alarmIndex].hours >= 0) {
+            this.alarms[alarmIndex].minutes = 59;
+            this.alarms[alarmIndex].hours--;
+          }
+          if (this.alarms[alarmIndex].hours <= 0 && this.alarms[alarmIndex].minutes <= 0 && this.alarms[alarmIndex].seconds <= 0) {
+            this.alarmEnd(alarmIndex);
+            return;
+          }
+        } else {
+          this.alarms[alarmIndex].seconds++;
+          if (this.alarms[alarmIndex].seconds == 60) {
+            this.alarms[alarmIndex].seconds = 0;
+            this.alarms[alarmIndex].minutes++;
+          }
+          if (this.alarms[alarmIndex].minutes == 60) {
+            this.alarms[alarmIndex].minutes = 0;
+            this.alarms[alarmIndex].hours++;
+          }
         }
       }
+      this.alarmUpdate(alarmIndex);
     }, 1000);
   }
 
   loadAll(): void {
     this.alarms = [];
+    this.finishedAlarms = [];
     this.alarmService.query().subscribe(response => {
       const items = response.body || [];
       this.listItems = items;
@@ -178,35 +232,11 @@ export class AlarmComponent implements OnInit {
       alert('Pick a unique alarm name');
     }
   }
-  /*setAll(aName:string,aType:string,aHours:number,aMins:number,aSecs:number,aTicking:Boolean):void{
-    var aId = 0;
-    this.alarmService.query().subscribe(response => {
-      const items = response.body || [];
-      if (items.length>0){
-        aId = items[items.length-1].id + 1;
-      }
-      else {
-        aId = 0;
-      }
-      }
-    );
-    // @ts-ignore
-    alert(aId);
-    // @ts-ignore
-    const newAlarm : NewAlarm = {id:aId,alarmName:aName,type:aType,hours:aHours,minutes:aMins,seconds:aSecs,ticking:false};
-    this.alarmService.create(newAlarm).subscribe();
 
-  }*/
   setAll(aName: string, aType: string, aHours: number, aMins: number, aSecs: number): void {
     // @ts-ignore
     const newAlarm: NewAlarm = { alarmName: aName, type: aType, hours: aHours, minutes: aMins, seconds: aSecs };
     this.alarmService.create(newAlarm).subscribe();
-    /*this.alarmService.query().subscribe(response => {
-      const items = response.body || [];
-      this.alarms[items.length - 1].id = items[items.length - 1].id;
-    });
-    this.timeTick(this.alarms[this.alarms.length - 1].id,false);
-*/
   }
 
   clearAlarms() {
