@@ -32,9 +32,20 @@ Navbar
 }
 
 .nav-item {
-  font-size: 1.5em;
+  font-size: 1.7em;
 }
 
+.nav-item:hover {
+  color: #797979;
+}
+
+li.clicked {
+  color: #797979;
+}
+
+li.init {
+  color: red;
+}
 /* ==========================================================================
 Logo styles
 ========================================================================== */
@@ -46,6 +57,7 @@ Logo styles
   background: url('../../../content/images/logo-jhipster.png') no-repeat center center;
   background-size: contain;
 }
+
 .logo-img1 {
   height: 45px;
   width: 45px;
