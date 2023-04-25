@@ -1,9 +1,9 @@
 {
   "applications": "*",
-  "changelogDate": "20230320005514",
+  "changelogDate": "20230418031003",
   "dto": "no",
   "embedded": false,
-  "entityTableName": "anti_procrastination_list",
+  "entityTableName": "antiprocrastination_list_two",
   "fields": [
     {
       "fieldName": "link",
@@ -48,7 +48,7 @@
   ],
   "fluentMethods": true,
   "jpaMetamodelFiltering": false,
-  "name": "AntiProcrastinationList",
+  "name": "AntiprocrastinationListTwo",
   "pagination": "no",
   "readOnly": false,
   "relationships": [

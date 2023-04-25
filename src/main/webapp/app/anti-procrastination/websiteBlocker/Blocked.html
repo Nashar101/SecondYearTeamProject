@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Blocked</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body style="git align-items: center; justify-content: center; width: 100%">
+    <div style="border-bottom: 7px solid black"></div>
+    <div id="runner"></div>
+    <div id="road"></div>
+    <div style="border-bottom: 7px solid black; height: 200px"></div>
+    <div style="width: 100%; height: 0px"></div>
+    <div style="animation: myAnim 2s ease 0s 1 normal forwards; text-align: center; position: center">
+      Sorry this website has been blocked, please wait until the duration expires or disable it
+    </div>
+    <div [(ngModel)]="blockedSite"></div>
+    <div style="text-align: center; animation: myAnim 2s ease 0s 1 normal forwards">Remaining Time</div>
+    <div class="cloud"></div>
+  </body>
+</html>

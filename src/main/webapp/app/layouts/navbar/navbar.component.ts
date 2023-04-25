@@ -48,8 +48,40 @@ export class NavbarComponent implements OnInit {
     this.accountService.getAuthenticationState().subscribe(account => {
       this.account = account;
     });
+    this.listInit();
   }
 
+  check: number = 0;
+  listInit() {
+    const liItems = document.querySelectorAll('li');
+    liItems.forEach(li => {
+      li.addEventListener('DOMContentLoaded', () => {
+        liItems.forEach(item => {});
+      });
+      li.classList.add('clicked');
+    });
+  }
+  highlight() {
+    const liItems = document.querySelectorAll('li');
+    liItems.forEach(li => {
+      li.addEventListener('load', () => {
+        console.log('testing');
+      });
+    });
+    this.check++;
+
+    liItems.forEach(li => {
+      li.addEventListener('click', () => {
+        liItems.forEach(item => {
+          item.classList.remove('clicked');
+          li.classList.remove('init');
+        });
+        li.classList.add('clicked');
+      });
+    });
+    console.log(this.check);
+    console.log('I work');
+  }
   changeLanguage(languageKey: string): void {
     this.sessionStorageService.store('locale', languageKey);
     this.translateService.use(languageKey);

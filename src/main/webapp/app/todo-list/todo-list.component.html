@@ -14,29 +14,36 @@
           <ul class="list" id="todo-list">
             <li class="item" *ngFor="let item of todoItems">
               <input type="checkbox" (click)="moveItem($event, item)" />
-              <span (click)="showDetails(item)">{{ item.heading }} </span>
+              <span (click)="showDetails(item)" [ngClass]="{ selected: selectedItem === item }">
+                {{ item.heading }}
+              </span>
             </li>
           </ul>
         </div>
       </div>
+      <div class="empty-space"></div>
       <div class="done-items">
         <span class="title">dones</span>
         <div class="window">
           <ul class="list" id="done-list">
             <li class="item" *ngFor="let item of doneItems">
               <input type="checkbox" (click)="moveItem($event, item)" [checked]="item.completed" />
-              <span (click)="showDetails(item)">{{ item.heading }} </span>
+              <span (click)="showDetails(item)" [ngClass]="{ selected: selectedItem === item }">
+                {{ item.heading }}
+              </span>
             </li>
           </ul>
         </div>
       </div>
-      <div class="Detail-Window">
+      <div class="empty-space"></div>
+      <div class="Detail-Window" *ngIf="selectedItem">
+        <button class="close-button" (click)="closeDetailWindow()">&times;</button>
         <div>
           <h3>Heading</h3>
           <textarea
             class="Detail-Heading"
             placeholder="Heading"
-            [ngModel]="selectedItem?.heading"
+            [ngModel]="selectedItem.heading"
             (ngModelChange)="updateHeading($event)"
           ></textarea>
         </div>
@@ -46,20 +53,24 @@
             class="Detail-Description"
             rows="6"
             placeholder="Description"
-            [ngModel]="selectedItem?.description"
+            [ngModel]="selectedItem.description"
             (ngModelChange)="updateDescription($event)"
           ></textarea>
         </div>
         <div>
-          <p>Created: {{ selectedItem?.creationTime }}</p>
-          <p>Last Edited: {{ selectedItem?.lastEditTime }}</p>
+          <p>Created: {{ selectedItem.creationTime }}</p>
+          <p>Last Edited: {{ selectedItem.lastEditTime }}</p>
         </div>
         <button (click)="saveChanges()" type="save">Save</button>
         <button (click)="cancelChanges()" type="cancel">Cancel</button>
       </div>
     </div>
+    <button class="delete-button" (click)="deleteItem()">
+      <span class="delete-button-icon">-</span>
+    </button>
     <button class="add-button" (click)="createNewItem()">
       <span class="add-button-icon">+</span>
     </button>
+    <div class="empty-space"></div>
   </body>
 </html>

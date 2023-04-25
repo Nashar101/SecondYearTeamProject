@@ -1,0 +1,45 @@
+.navbar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: 1030;
+}
+
+.navbar-toggler {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1040;
+  cursor: pointer;
+}
+
+.navbar-toggler-icon {
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  font-size: 2em;
+  vertical-align: middle;
+  content: '';
+  background: no-repeat center center;
+  background-size: 100% 100%;
+  border: none;
+}
+
+.navbar-wrapper {
+  height: 100%;
+  width: 0;
+  overflow-y: auto;
+  background-color: #f8f9fa;
+  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+  transform: translateX(-100%);
+}
+
+.navbar-open {
+  transform: translateX(0);
+  width: 20em;
+}
+
+.container-fluid {
+  padding-left: calc(100% - 100vw);
+}

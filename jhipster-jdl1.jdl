@@ -1,0 +1,6 @@
+entity ExtensionID{
+	extensionID String
+}
+relationship ManyToOne {
+    ExtensionID{user (login)} to User
+}
