@@ -1,19 +1,23 @@
 <div (click)="handleOutsideClick($event)">
   <jhi-page-ribbon></jhi-page-ribbon>
 
-  <div class="navbar-container">
-    <button class="navbar-toggler" (click)="toggleNavbar()">
-      <span class="navbar-toggler-icon">&#9776;</span>
-    </button>
-    <div class="navbar-wrapper" [ngClass]="{ 'navbar-open': isNavbarOpen }">
-      <router-outlet name="navbar"></router-outlet>
+  <div class="page-container">
+    <div class="navbar-container">
+      <button class="navbar-toggler" (click)="toggleNavbar()">
+        <span class="navbar-toggler-icon">&#9776;</span>
+      </button>
+      <div class="navbar-wrapper" [ngClass]="{ 'navbar-open': isNavbarOpen }">
+        <router-outlet name="navbar"></router-outlet>
+      </div>
     </div>
-  </div>
 
-  <div class="container-fluid">
-    <div class="card jh-card">
-      <router-outlet></router-outlet>
+    <div class="content-container">
+      <div class="container-fluid">
+        <div class="card jh-card">
+          <router-outlet></router-outlet>
+        </div>
+        <jhi-footer></jhi-footer>
+      </div>
     </div>
-    <jhi-footer></jhi-footer>
   </div>
 </div>

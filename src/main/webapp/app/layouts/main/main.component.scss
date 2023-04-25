@@ -1,13 +1,10 @@
 .navbar-container {
-  position: fixed;
-  top: 0;
-  left: 0;
   height: 100%;
   z-index: 1030;
 }
 
 .navbar-toggler {
-  position: fixed;
+  position: absolute;
   top: 10px;
   left: 10px;
   z-index: 1040;
@@ -40,6 +37,16 @@
   width: 20em;
 }
 
+.page-container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  height: 100%;
+}
+
 .container-fluid {
   padding-left: calc(100% - 100vw);
+}
+
+.content-container {
+  overflow-x: hidden;
 }
