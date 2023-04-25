@@ -29,7 +29,7 @@
   overflow-y: auto;
   background-color: #f8f9fa;
   transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
-  transform: translateX(-100%);
+  z-index: 1040;
 }
 
 .navbar-open {
@@ -49,4 +49,5 @@
 
 .content-container {
   overflow-x: hidden;
+  margin-left: 2vh;
 }

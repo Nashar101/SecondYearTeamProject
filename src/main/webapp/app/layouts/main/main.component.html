@@ -3,9 +3,9 @@
 
   <div class="page-container">
     <div class="navbar-container">
-      <button class="navbar-toggler" (click)="toggleNavbar()">
-        <span class="navbar-toggler-icon">&#9776;</span>
-      </button>
+      <a class="navbar-toggler" href="javascript:void(0);" (click)="toggleNavbar()">
+        <fa-icon icon="bars"></fa-icon>
+      </a>
       <div class="navbar-wrapper" [ngClass]="{ 'navbar-open': isNavbarOpen }">
         <router-outlet name="navbar"></router-outlet>
       </div>
