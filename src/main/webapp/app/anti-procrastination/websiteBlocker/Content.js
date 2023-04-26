@@ -1,4 +1,6 @@
 let blockedsites = [];
+let timeRemaining = [];
+
 const generateHTML = pageName => {
   return (
     '<!DOCTYPE html>\n' +
@@ -65,16 +67,60 @@ function updateList() {
       alert('this is empty');
     }**/
     blockedsites = result.foo;
-    /**for (let j = 0; j < blockedsites.length; j++) {
-      alert("List item" + (j + 1) + " " + blockedsites[j])
-    }**/
-    main();
+    console.log(blockedsites[0]);
+    chrome.storage.local.get(['foo1'], result => {
+      timeRemaining = result.foo1;
+      startCountDown();
+    });
   });
 }
 
+class List {
+  days = 0;
+  hours = 0;
+  minutes = 0;
+  seconds = 0;
+}
+function startCountDown() {
+  for (let i = 0; i < timeRemaining.length; i++) {
+    //refreshTimer(i)
+
+    setInterval(() => {
+      let refresh = new List();
+      let currentDate = new Date().getTime();
+
+      const savedDate = new Date(timeRemaining[i]).getTime();
+      let time = (savedDate - currentDate) / 1000;
+
+      if (time <= 0 || isNaN(time)) {
+        timeRemaining.splice(i, 1);
+        blockedsites.splice(i, 1);
+        localStorage.setItem('LIST', JSON.stringify(blockedsites));
+        chrome.storage.local.set({ foo: blockedsites }, function () {
+          console.log('Settings saved');
+        });
+        localStorage.setItem('LIST1', JSON.stringify(timeRemaining));
+        chrome.storage.local.set({ foo1: timeRemaining }, function () {
+          console.log('Settings saved');
+        });
+        return;
+      } else {
+        refresh.days = Math.floor(time / 86400);
+        refresh.hours = Math.floor((time - refresh.days * 24 * 60 * 60) / 3600);
+        refresh.minutes = Math.floor((time - refresh.days * 24 * 60 * 60 - refresh.hours * 60 * 60) / 60);
+        refresh.seconds = Math.floor((time - refresh.days * 24 * 60 * 60 - refresh.hours * 60 * 60 - refresh.minutes * 60) / 1);
+      }
+    }, 1000);
+  }
+  main();
+}
+
 let blockedSite = '';
+
 function main() {
   for (let i = 0; i < blockedsites.length; i++) {
+    alert(blockedsites[i].toString());
+    console.log('test' + i);
     if (window.location.hostname == blockedsites[i].toString() || window.location.href == blockedsites[i].toString()) {
       document.body.innerHTML = generateHTML('site is blocked');
       blockedSite = blockedsites[i].toString();

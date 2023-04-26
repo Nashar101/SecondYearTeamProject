@@ -1,6 +1,8 @@
 /*The todo list page */
 .todo-list {
   position: relative;
+  height: 100%;
+  width: 100%;
 }
 
 .title {
@@ -13,18 +15,18 @@
 .done-items {
   position: relative;
   top: 10px;
-  left: 1.25vw;
-  width: 92vw;
+  left: 2%;
+  width: 92%;
   height: 35vh;
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background-color: #f5f5f5;
-  padding: 5px 20px 5px 20px;
+  padding: 5px 2% 5px 2%;
   transition: width 0.2s;
 }
 
 .half-width {
-  width: 45vw !important;
+  width: 45% !important;
 }
 
 .empty-space {
@@ -61,7 +63,7 @@
 }
 
 .item input[type='checkbox'] {
-  margin-right: 10px;
+  margin-right: 1%;
   height: 20px;
   width: 20px;
   position: relative;
@@ -97,9 +99,9 @@
   padding: 2%;
   position: absolute;
   top: 10px;
-  right: 1.25vw;
+  right: 2%;
   height: 75vh;
-  width: 45vw;
+  width: 45%;
   background-color: white;
   border-radius: 25px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -127,7 +129,7 @@
 .close-button {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 1%;
   background-color: transparent;
   border: none;
   font-size: 24px;
@@ -143,7 +145,7 @@
 .add-button {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  right: 2%;
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -171,7 +173,7 @@
 .delete-button {
   position: fixed;
   bottom: 90px;
-  right: 20px;
+  right: 2%;
   width: 60px;
   height: 60px;
   border-radius: 50%;

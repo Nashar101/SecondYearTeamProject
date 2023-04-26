@@ -79,3 +79,11 @@ Logo styles
 span {
   color: #797979;
 }
+
+@media (max-width: 991.98px) {
+  .navbar-collapse.collapse {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+}

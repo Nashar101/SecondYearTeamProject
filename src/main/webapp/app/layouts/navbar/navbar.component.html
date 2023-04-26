@@ -8,7 +8,7 @@
       </div>
     </a>
     <a
-      class="navbar-toggler d-lg-none"
+      class="navbar-toggler"
       href="javascript:void(0);"
       data-toggle="collapse"
       data-target="#navbarResponsive"
@@ -19,13 +19,7 @@
     >
       <fa-icon icon="bars"></fa-icon>
     </a>
-    <div
-      class="navbar-collapse collapse"
-      id="navbarResponsive"
-      [ngbCollapse]="isNavbarCollapsed"
-      [ngSwitch]="account !== null"
-      style="height: 100%"
-    >
+    <div class="navbar-collapse collapse" id="navbarResponsive" [ngSwitch]="account !== null" style="height: 100%">
       <ul style="display: block; list-style: none; padding-left: 0">
         <li
           *ngSwitchCase="true"

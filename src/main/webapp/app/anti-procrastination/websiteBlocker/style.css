@@ -44,3 +44,6 @@ body {
     transform: translateX(3000px);
   }
 }
+#timerList {
+  list-style-type: none;
+}

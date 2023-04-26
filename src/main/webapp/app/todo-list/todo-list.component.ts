@@ -21,41 +21,33 @@ export class TodoListComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef
   ) {}
 
-  loadAll(): void {
-    this.todolistItemService.query().subscribe(response => {
-      const items = response.body || [];
-      this.todoItems = items.filter(item => !item.completed);
-      this.doneItems = items.filter(item => item.completed);
-    });
-  }
-
-  moveItem(event: MouseEvent, item: ITodolistItem): void {
-    item.completed = !item.completed;
-    this.todolistItemService.update(item).subscribe(() => {
-      this.moveItemLocally(item);
-    });
-    if (this.selectedItem) {
-      const selectedItem = this.todoItems.concat(this.doneItems).find(item => item.id === this.selectedItem!.id);
-      if (selectedItem) {
-        this.selectedItem = selectedItem;
-      } else {
-        this.selectedItem = null;
-      }
-    }
-  }
-
-  moveItemLocally(item: ITodolistItem): void {
-    if (item.completed) {
-      this.todoItems = this.todoItems.filter(todoItem => todoItem.id !== item.id);
-      this.doneItems.push(item);
-    } else {
-      this.doneItems = this.doneItems.filter(doneItem => doneItem.id !== item.id);
-      this.todoItems.push(item);
-    }
-  }
-
   selectedItem: ITodolistItem | null = null;
   originalItem: ITodolistItem | null = null;
+
+  closeDetailWindow(): void {
+    this.selectedItem = null;
+    if (this.detailsVisible) {
+      this.toggleDetails();
+    }
+  }
+
+  detailsVisible = false;
+
+  toggleDetails() {
+    this.detailsVisible = !this.detailsVisible;
+
+    if (this.detailsVisible) {
+      setTimeout(() => {
+        (document.querySelector('.todo-items') as HTMLElement).classList.add('half-width');
+        (document.querySelector('.done-items') as HTMLElement).classList.add('half-width');
+        (document.querySelector('.Detail-Window') as HTMLElement).classList.add('not-hidden');
+      }, 100);
+    } else {
+      (document.querySelector('.todo-items') as HTMLElement).classList.remove('half-width');
+      (document.querySelector('.done-items') as HTMLElement).classList.remove('half-width');
+      (document.querySelector('.Detail-Window') as HTMLElement).classList.remove('not-hidden');
+    }
+  }
 
   showDetails(item: ITodolistItem): void {
     this.selectedItem = item;
@@ -96,6 +88,31 @@ export class TodoListComponent implements OnInit {
     this.closeDetailWindow();
   }
 
+  moveItem(event: MouseEvent, item: ITodolistItem): void {
+    item.completed = !item.completed;
+    this.todolistItemService.update(item).subscribe(() => {
+      this.moveItemLocally(item);
+    });
+    if (this.selectedItem) {
+      const selectedItem = this.todoItems.concat(this.doneItems).find(item => item.id === this.selectedItem!.id);
+      if (selectedItem) {
+        this.selectedItem = selectedItem;
+      } else {
+        this.selectedItem = null;
+      }
+    }
+  }
+
+  moveItemLocally(item: ITodolistItem): void {
+    if (item.completed) {
+      this.todoItems = this.todoItems.filter(todoItem => todoItem.id !== item.id);
+      this.doneItems.push(item);
+    } else {
+      this.doneItems = this.doneItems.filter(doneItem => doneItem.id !== item.id);
+      this.todoItems.push(item);
+    }
+  }
+
   createNewItem(): void {
     const newItem: ITodolistItem = {
       id: null,
@@ -124,29 +141,12 @@ export class TodoListComponent implements OnInit {
     }
   }
 
-  closeDetailWindow(): void {
-    this.selectedItem = null;
-    if (this.detailsVisible) {
-      this.toggleDetails();
-    }
-  }
-
-  detailsVisible = false;
-
-  toggleDetails() {
-    this.detailsVisible = !this.detailsVisible;
-
-    if (this.detailsVisible) {
-      setTimeout(() => {
-        (document.querySelector('.todo-items') as HTMLElement).classList.add('half-width');
-        (document.querySelector('.done-items') as HTMLElement).classList.add('half-width');
-        (document.querySelector('.Detail-Window') as HTMLElement).classList.add('not-hidden');
-      }, 100);
-    } else {
-      (document.querySelector('.todo-items') as HTMLElement).classList.remove('half-width');
-      (document.querySelector('.done-items') as HTMLElement).classList.remove('half-width');
-      (document.querySelector('.Detail-Window') as HTMLElement).classList.remove('not-hidden');
-    }
+  loadAll(): void {
+    this.todolistItemService.query().subscribe(response => {
+      const items = response.body || [];
+      this.todoItems = items.filter(item => !item.completed);
+      this.doneItems = items.filter(item => item.completed);
+    });
   }
 
   ngOnInit(): void {
