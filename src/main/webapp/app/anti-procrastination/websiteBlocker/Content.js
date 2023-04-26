@@ -23,10 +23,11 @@ const generateHTML = pageName => {
     '</div>\n' +
     '<div style="animation: myAnim 2s ease 0s 1 normal forwards; text-align: center; position: center">Sorry this website has been blocked</div>\n' +
     '<div>\n' +
-    '<script type="text/javascript" src="Content.js"> blockedSite.toString()\n' +
+    '<script type="text/javascript" src="Content.js">' +
     '</script>\n' +
+    '<div id="site" style="text-align: center; animation: myAnim 2s ease 0s 1 normal forwards;">\n' +
     '</div>\n' +
-    '<div style="text-align: center; animation: myAnim 2s ease 0s 1 normal forwards;">Remaining Time </div>\n' +
+    '</div>\n' +
     '<div class="cloud">\n' +
     '</div>\n' +
     '</body>\n' +
@@ -119,10 +120,10 @@ let blockedSite = '';
 
 function main() {
   for (let i = 0; i < blockedsites.length; i++) {
-    alert(blockedsites[i].toString());
-    console.log('test' + i);
     if (window.location.hostname == blockedsites[i].toString() || window.location.href == blockedsites[i].toString()) {
       document.body.innerHTML = generateHTML('site is blocked');
+      const displaySite = document.getElementById('site');
+      displaySite.textContent = blockedsites[i].toString();
       blockedSite = blockedsites[i].toString();
       break;
     }

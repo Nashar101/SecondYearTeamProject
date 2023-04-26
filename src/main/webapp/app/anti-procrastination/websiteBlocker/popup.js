@@ -61,7 +61,9 @@ function displayitems() {
         refresh.hours = Math.floor((time - refresh.days * 24 * 60 * 60) / 3600);
         refresh.minutes = Math.floor((time - refresh.days * 24 * 60 * 60 - refresh.hours * 60 * 60) / 60);
         refresh.seconds = Math.floor((time - refresh.days * 24 * 60 * 60 - refresh.hours * 60 * 60 - refresh.minutes * 60) / 1);
-        listItem.textContent = `${displaylink[i]}  ${refresh.days} : ${refresh.hours} : ${refresh.minutes} : ${refresh.seconds}`;
+        let space = ' ';
+        listItem.style.marginLeft = '-40px';
+        listItem.textContent = `${displaylink[i]} ${refresh.days} : ${refresh.hours} : ${refresh.minutes} : ${refresh.seconds}`;
       }
     }, 1000);
 

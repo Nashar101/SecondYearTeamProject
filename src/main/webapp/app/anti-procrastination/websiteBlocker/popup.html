@@ -3,7 +3,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
-  <body>
+  <body style="font-size: 16px">
     <div style="width: 300px">
       <div>
         <h1>Extension ID</h1>
@@ -11,7 +11,11 @@
         <p id="ExtensionID"></p>
       </div>
     </div>
-    <div id="timerList" class="myList"></div>
+    <div style="display: flex">
+      <label style="display: flex; margin-right: 135px">Site</label>
+      <label>Time Remaining</label>
+    </div>
+    <div id="timerList" class="myList" style="text-align: left"></div>
     <script src="popup.js"></script>
   </body>
 </html>
