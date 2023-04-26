@@ -68,4 +68,9 @@ export class MainComponent implements OnInit {
       this.isNavbarOpen = false;
     }
   }
+
+  // Add this method inside the MainComponent class
+  getWindowWidth(): number {
+    return window.innerWidth;
+  }
 }

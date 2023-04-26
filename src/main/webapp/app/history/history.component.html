@@ -1,1 +1,61 @@
-<p>history works!</p>
+<html lang="en">
+  <link rel="stylesheet" href="history.component.scss" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Raleway:wght@600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Raleway:wght@600;700&display=swap" rel="stylesheet" />
+
+  <body>
+    <div class="container">
+      <div class="yourProgress">
+        <h1>Your Progress</h1>
+        <div class="divChart">
+          <canvas id="myChart"></canvas>
+        </div>
+      </div>
+
+      <div class="addSubject">
+        <div class="addTest">
+          <h2>Add Subject</h2>
+        </div>
+        <div class="upcomingOrCompleted">
+          <h3>Upcoming or Completed</h3>
+          <form>
+            <select>
+              <option value="Upcoming">Upcoming</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </form>
+        </div>
+        <span class="whatSubject">
+          <h3>Subject</h3>
+          <input id="subjectValue" name="subjectValue" />
+        </span>
+        <div class="target&date">
+          <div class="target">
+            <h3>Target</h3>
+            <input id="targetValue" name="targetValue" />
+          </div>
+          <div class="date">
+            <h3>Date</h3>
+            <input />
+          </div>
+        </div>
+      </div>
+
+      <div class="upcomingTest">
+        <h1>Upcoming Test</h1>
+        <div class="upcomingTestDisplay">
+          <div class="upcomingTestCards">
+            <ul>
+              <li class="upcomingTest-Date">17/01</li>
+              <li class="upcomingTest-Subject">Maths</li>
+              <li class="upcomingTest-Target">Target</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

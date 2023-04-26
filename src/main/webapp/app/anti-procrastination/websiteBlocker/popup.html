@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head> </head>
-  <body>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body style="font-size: 16px">
     <div style="width: 300px">
       <div>
         <h1>Extension ID</h1>
         <p>Please copy the extension ID into the website to start blocking sites <strong></strong></p>
         <p id="ExtensionID"></p>
-        <label></label>
       </div>
     </div>
+    <div style="display: flex">
+      <label style="display: flex; margin-right: 135px">Site</label>
+      <label>Time Remaining</label>
+    </div>
+    <div id="timerList" class="myList" style="text-align: left"></div>
     <script src="popup.js"></script>
   </body>
 </html>

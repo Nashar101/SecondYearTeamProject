@@ -9,6 +9,8 @@ import { AccountService } from '../core/auth/account.service';
 import { HttpClient } from '@angular/common/http';
 import dayjs from 'dayjs';
 import { IExtensionID } from '../entities/extension-id/extension-id.model';
+import { DiaryPageService } from '../entities/diary-page/service/diary-page.service';
+import { IDiaryPage, NewDiaryPage } from '../entities/diary-page/diary-page.model';
 
 export class List {
   id!: number;
@@ -42,20 +44,17 @@ export class AntiProcrastinationComponent implements OnInit {
     console.log(this.extensionID2);
     this.loadAll();
   }
-
   // List used to display data on the website
   todos: List[] = [];
-
   //link extension ID
   exID: number = 0;
-
   //chrome extensionID
   extensionID: string = '';
   extensionID2: string = '';
-
   //use these lists below to store the data obtained from the link and Chrome extension ID database
   listItems?: IAntiprocrastinationListTwo[];
   idlist?: IExtensionID[];
+  diaryPage?: IDiaryPage[];
 
   //get data from database
   getExtensionID() {
@@ -71,7 +70,6 @@ export class AntiProcrastinationComponent implements OnInit {
       });
     });
   }
-
   //get data from database
   loadAll(): void {
     this.http.get<any>('/api/account').subscribe(account => {
@@ -118,9 +116,8 @@ export class AntiProcrastinationComponent implements OnInit {
           if (site.type == 'Timed') {
             console.log('this is current refresh' + site.link);
             this.refreshTimer(i);
-            this.startTimer2(this.todos.length - 1);
           }
-          this.add(site.link);
+
           site = new List();
         }
         console.log(this.todos[0].dueDate.toDateString());
@@ -128,7 +125,6 @@ export class AntiProcrastinationComponent implements OnInit {
       });
     });
   }
-
   //use these to display the List item values in the HTML website
   newTodo: string = '';
   type: string = '';
@@ -141,7 +137,6 @@ export class AntiProcrastinationComponent implements OnInit {
   end: number = 0;
 
   working: string = '';
-
   //add new Anti Procrastination list item
   saveTodo() {
     var element = <HTMLInputElement>document.getElementById('Permanent?');
@@ -187,14 +182,13 @@ export class AntiProcrastinationComponent implements OnInit {
       this.minutes = 0;
       this.seconds = 0;
       this.startTimer2(this.todos.length - 1);
-      this.add(todo.link);
+      this.add(todo.link, todo.dueDate);
     } else {
       alert('Please enter a List item');
     }
   }
 
   interval1: number = 0;
-
   //timer used to decrease the time left values of each item
   startTimer2(number1: number) {
     this.interval1 = setInterval(() => {
@@ -220,7 +214,7 @@ export class AntiProcrastinationComponent implements OnInit {
         this.todos[number1].seconds <= 0
       ) {
         this.delete(this.todos[number1].id);
-        this.Listdelete(this.todos[number1].link);
+        this.Listdelete(this.todos[number1].link, number1);
         this.todos.splice(number1, 1);
         return;
       }
@@ -236,6 +230,7 @@ export class AntiProcrastinationComponent implements OnInit {
     console.log(timeRemaining);
     if (timeRemaining <= 0) {
       this.delete(this.todos[link].id);
+      this.todos.pop();
     } else {
       let Days = Math.floor(timeRemaining / 86400);
       let Hours = Math.floor((timeRemaining - Days * 24 * 60 * 60) / 3600);
@@ -245,6 +240,8 @@ export class AntiProcrastinationComponent implements OnInit {
       this.todos[link].hours = Hours;
       this.todos[link].minutes = Minutes;
       this.todos[link].seconds = Seconds;
+      this.add(this.todos[link].link, this.todos[link].dueDate);
+      this.startTimer2(this.todos.length - 1);
     }
   }
 
@@ -283,32 +280,29 @@ export class AntiProcrastinationComponent implements OnInit {
           this.antiProcrastinationListService2.query().subscribe(response => {
             const items = response.body || [];
             this.listItems = items;
-            this.todos[this.listItems.length - 1].id = this.listItems[this.listItems.length - 1].id;
+            this.todos[this.todos.length - 1].id = this.listItems[this.listItems.length - 1].id;
           });
         });
       }
     });
   }
-
   //remove link from database after timer hits 0
   delete(id: number) {
     this.antiProcrastinationListService2.delete(id).subscribe();
   }
-
   //remove data from database on request
   remove(id: number) {
     const response = confirm('Are you sure you want to do that?');
 
     if (response) {
       this.delete(this.todos[id].id);
-      this.Listdelete(this.todos[id].link);
+      this.Listdelete(this.todos[id].link, id);
       this.todos = this.todos.filter((v, i) => i !== id);
       alert('The Block has been removed');
     } else {
       alert('The action was cancelled');
     }
   }
-
   //set Chrome extension ID on startup
   setExtensionID() {
     let previous = this.extensionID2;
@@ -321,9 +315,6 @@ export class AntiProcrastinationComponent implements OnInit {
       this.working = 'Extension ID has been added';
       this.extensionID2 = this.extensionID;
       this.extensionID = '';
-      for (let i = 0; i < this.todos.length; i++) {
-        this.add(this.todos[i].link);
-      }
     } else {
       this.extensionID2 = this.extensionID;
       this.extensionID = '';
@@ -355,15 +346,15 @@ export class AntiProcrastinationComponent implements OnInit {
     }, 1000);
   }
 
-  add(URL: string) {
-    chrome.runtime.sendMessage(this.extensionID2, { openUrlInEditor: URL }, function (response) {
+  add(URL: string, Time: Date) {
+    chrome.runtime.sendMessage(this.extensionID2, { openUrlInEditor: URL, displayTimeRemaining: Time }, function (response) {
       if (!response.success) console.log('an error occurred');
       console.log('this should work');
     });
   }
 
-  Listdelete(URL: string) {
-    chrome.runtime.sendMessage(this.extensionID2, { delete: URL }, function (response) {
+  Listdelete(URL: string, position: number) {
+    chrome.runtime.sendMessage(this.extensionID2, { delete: URL, remove: position }, function (response) {
       if (!response.success) console.log('an error occurred');
       console.log('this should work');
     });
