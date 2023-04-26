@@ -1,1 +1,53 @@
-<p>diary works!</p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Main Style Sheet -->
+
+    <!-- <link href="CP-Diary.css" rel="stylesheet" /> -->
+
+    <title>My Diary App</title>
+    <style>
+      #list {
+        list-style: none;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header><h1>Diary</h1></header>
+    <div id="formdiv">
+      <div id="dommylabeldiv2">
+        <div id="formtextarea">
+          <label for="input" class="labeldes">Title</label>
+
+          <textarea class="input" [(ngModel)]="name" id="titlearea"> </textarea>
+
+          <label for="input" class="labeldes">Content</label>
+          <textarea id="textarea" name="tdItem1" placeholder="annotate.." class="input" [(ngModel)]="content"> </textarea>
+        </div>
+        <div id="dommylabeldiv">
+          <label for="input" style="font-weight: bold">Title</label>
+          <label for="input">bible study reflections</label>
+          <label for="input" style="font-weight: bold">last edited</label>
+          <label for="input">26/04/23</label>
+        </div>
+      </div>
+      <div class="formbuttons">
+        <button type="submit" (click)="diaryAdd()">Add</button>
+        <button type="submit">Edit</button>
+        <button type="submit">Delete</button>
+      </div>
+    </div>
+
+    <div id="pagessection">
+      <label for="date" class="labeldes">pages</label>
+      <div id="pagesdiv">
+        <tr *ngFor="let item of store; let i = index">
+          <label style="margin-left: 100px; font-weight: bold" (click)="display(i)">{{ item.name }}</label>
+        </tr>
+      </div>
+    </div>
+  </body>
+</html>
