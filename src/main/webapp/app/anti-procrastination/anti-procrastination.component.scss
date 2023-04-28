@@ -1,5 +1,6 @@
 h1 {
   font-family: Calibri;
+  padding: 1rem;
 }
 
 p {
@@ -41,7 +42,7 @@ Button {
   width: 500px;
 
   border: 1px #737373;
-  background: #ebebeb;
+  background: #e0e4e7;
 
   padding: 0;
   border-radius: 4px;
@@ -49,4 +50,98 @@ Button {
 
 [contentEditable='true']:empty:not(:focus):before {
   content: attr(data-text);
+}
+
+.History {
+  background-color: #e0e4e7;
+}
+
+.addWebsite__Field {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  padding: 1rem;
+}
+textarea {
+  background: #ebebeb;
+  border-radius: 13px;
+  outline: none;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  padding: 5px 0 0 10px;
+  height: 42px;
+}
+::placeholder {
+  color: #c1c1c1;
+}
+
+.addWebsite__URL {
+  width: 500px;
+}
+
+.addWebsite__ID {
+  width: 250px;
+}
+
+.urlButton {
+  font-size: 50px;
+  background-color: #e0e4e7;
+  outline: none;
+  border: none;
+  padding-bottom: 10px;
+}
+
+.addBlock__Field {
+  padding: 1rem;
+}
+.addBlock__Field-labels p {
+  font-size: 22px;
+  collapse: #716d6d;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+}
+
+.addBlock__Field-labels label {
+  font-size: 19px;
+}
+
+.daysMinHrSec label {
+  font-family: 'Poppins', sans-serif;
+}
+
+.blockedSites__Field {
+  min-width: 650px;
+  width: 90%;
+  height: 45vh;
+  padding: 1rem;
+  padding-top: 0;
+}
+
+hr {
+  color: #d0d4d7;
+  background-color: #d0d4d7;
+  width: 100%;
+  height: 2px;
+  opacity: 100%;
+}
+
+.blockedSites__rowField {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.blockedSites__rows {
+  width: 100%;
+  background: #e0e4e7;
+  box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
+  padding-bottom: 10px;
+}
+
+.blockedSites__Delete {
+  position: absolute;
+  left: 800px;
+  background-color: #e0e4e7;
+  outline: none;
+  border: none;
 }
