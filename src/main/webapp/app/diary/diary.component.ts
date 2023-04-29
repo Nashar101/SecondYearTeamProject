@@ -30,7 +30,9 @@ export class DiaryComponent implements OnInit {
   name: string = '';
   //@ts-ignore
   content: string = '';
+
   diaryitems?: IDiaryPage[];
+
   init() {
     this.http.get<any>('/api/account').subscribe(account => {
       const userID = account.id;
@@ -50,9 +52,13 @@ export class DiaryComponent implements OnInit {
           site.id = this.diaryitems[i].id;
           console.log(site.id);
           //@ts-ignore
-          site.name = this.diaryitems[i].pageDescription;
+          let title = '';
           //@ts-ignore
-          site.content = this.diaryitems[i].pageDescription;
+          title = this.diaryitems[i].pageDescription;
+          const splitedcontent = title.split(' : ', 2);
+          site.name = splitedcontent[0];
+          //@ts-ignore
+          site.content = title.substring(site.name.length + 3, title.length);
           //@ts-ignore
           site.created = new Date(this.diaryitems[i].creationTime);
           //@ts-ignore
@@ -65,24 +71,32 @@ export class DiaryComponent implements OnInit {
       });
     });
   }
+
   //this stores all diary items
   store: dList[] = [];
 
   ngOnInit(): void {
     this.init();
   }
+
   diaryAdd() {
+    if (this.name === '' || this.content === '') {
+      alert('please fill in the required fields');
+      return;
+    }
     let tempstorage = new dList();
     tempstorage.name = this.name;
     tempstorage.content = this.content;
     this.store.push(tempstorage);
-
+    tempstorage.name = this.name + ' : ' + this.content;
     this.name = '';
     this.content = '';
     this.add(this.store.length - 1);
   }
 
   add(number: number) {
+    this.takeid = 0;
+
     this.accountService.identity().subscribe(account => {
       if (account) {
         console.log(account.login);
@@ -99,18 +113,54 @@ export class DiaryComponent implements OnInit {
             user: { id: userId, login: account.login },
           };
           this.diaryPage.create(newItem).subscribe();
-          this.diaryPage.query().subscribe(response => {
-            const items = response.body || [];
-            this.diaryitems = items.filter(v => v.user?.id === userId);
-            this.store[this.store.length - 1].id = this.diaryitems[this.diaryitems.length - 1].id;
+          this.http.get<any>('/api/account').subscribe(account => {
+            const userID = account.id;
+            this.diaryPage.query().subscribe(response => {
+              const items = response.body || [];
+              this.diaryitems = items;
+              this.store[this.store.length - 1].id = this.diaryitems[this.diaryitems.length - 1].id;
+            });
           });
         });
       }
     });
   }
+
   //when you click on a list item, display its contents
   display(clicked: number) {
+    //let title = this.store[clicked].name;
+    //const splitedcontent = title.split(" : ", 2)
     this.name = this.store[clicked].name;
+
     this.content = this.store[clicked].content;
+    this.takeid = this.store[clicked].id;
+    console.log(this.takeid);
+  }
+
+  takeid: number = 0;
+
+  delete() {
+    this.diaryPage.delete(this.takeid).subscribe();
+    this.store = [];
+    this.init();
+    console.log('this is the takeid i deleted' + this.takeid);
+    this.name = '';
+    this.content = '';
+    this.takeid = 0;
+  }
+
+  modify() {
+    if (this.name === '' || this.content === '') {
+      alert('please fill in the required fields');
+      return;
+    }
+    /*
+    this.diaryPage.update(this.content).subscribe(() => {
+    });
+    *
+     */
+    this.name = '';
+    this.content = '';
+    this.takeid = 0;
   }
 }

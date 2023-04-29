@@ -13,31 +13,59 @@ body {
 
 h1 {
   text-align: center;
-  color: #000000;
-  font-family: 'Arial Black';
+  color: #545454;
+  font-family: Calibri;
+  font-weight: bold;
+  font-size: large;
+  font-size: 39px;
 }
 
 button {
+  width: 110px;
+  margin: 10px;
   position: relative;
   display: block;
   font-size: 1.2rem;
   padding: 0.5em 1em;
   border: none;
-  background-color: rgb(0, 0, 0);
+  background-color: #716d6d;
   color: #ffffff;
   font-family: 'Space Mono', monospace;
   border-radius: 6px;
   cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  text-transform: uppercase;
+}
+/*
+#editbtn{
+     background-color: #000000;
+  }
+#deletebtn{
+     background-color:#008cba
+  }
+
+ #addbtn{
+     background-color:#d32f2f
+   }
+
+ */
+#editbtn:hover {
+  background-color: rgb(47, 47, 47);
+}
+#deletebtn:hover {
+  background-color: #4d90b4;
 }
 
-/* textarea styling */
+#addbtn:hover {
+  background-color: #d56464;
+}
 
 input,
 textarea {
   resize: none;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: Calibri;
   font-size: large;
-  font-size: 1rem;
+  font-size: 20px;
 }
 
 .input {
@@ -49,8 +77,10 @@ textarea {
 }
 
 .labeldes {
-  color: #000000;
-  font-family: 'Space Mono', monospace;
+  color: #716d6d;
+  font-family: Calibri;
+  font-weight: bold;
+  font-size: 23px;
 }
 
 .form {
@@ -72,12 +102,13 @@ textarea {
 #textarea {
   height: 437px;
   width: 800px;
-  color: #2d33b9;
 }
 
 #titlearea {
   height: 40px;
   width: 300px;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 #formdiv {
@@ -96,19 +127,40 @@ textarea {
 }
 
 #pagesdiv {
-}
-#dommylabeldiv2 {
-  display: flex;
-  flex-direction: row;
-}
-#dommylabeldiv {
   display: flex;
   flex-direction: column;
-  //: #ff0200;
-  width: 300px;
-  align-items: center;
+  //background: #0046ff;
+  padding: 10px;
+}
+
+#pagesdiv2 {
+  display: flex;
+  flex-direction: column;
+  //background: #ff0200;
+  padding: 10px;
+}
+
+#pagessection {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
   border-radius: 12px;
-  height: 100px;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  margin: 15px;
+  height: max-content;
+}
+
+#pagedivider {
+  display: flex;
+  flex-direction: row;
+  //flex-wrap: wrap;
+  //background-color: #716d6d;
+  width: max-content;
+}
+label.tslabel {
+  font-size: 18px;
 }
 /*
     position: relative;
@@ -117,12 +169,102 @@ textarea {
     margin-right: auto;
 */
 
-/*
-@media only screen and (min-width: 760px) {
-
+@media (width >= 1500px) {
+  #textarea {
+    height: 537px;
+    width: 1000px;
+  }
+  #pagedivider {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    //background-color: #716d6d;
+  }
+  label.tslabel {
+    font-size: 22px;
+  }
 }
 
-@media only screen and (min-width: 1000px) {
-
+@media (width <= 1200px) {
+  #textarea {
+    height: 537px;
+    width: 1000px;
+  }
+  #pagedivider {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    //background-color: #716d6d;
+  }
+  label.tslabel {
+    font-size: 22px;
+  }
 }
-*/
+
+@media (width <= 1100px) {
+  #textarea {
+    height: 437px;
+    width: 900px;
+  }
+  #pagedivider {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    //background-color: #716d6d;
+  }
+}
+@media (width <= 1000px) {
+  #textarea {
+    height: 437px;
+    width: 800px;
+  }
+  #pagedivider {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    //background-color: #716d6d;
+  }
+}
+
+@media (width <= 950px) {
+  #textarea {
+    height: 437px;
+    width: 750px;
+  }
+  #pagedivider {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    //background-color: #716d6d;
+  }
+}
+
+@media (width <= 800px) {
+  #textarea {
+    height: 437px;
+    width: 550px;
+  }
+  #pagedivider {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    //background-color: #716d6d;
+  }
+}
+
+@media (width <= 600px) {
+  #textarea {
+    height: 437px;
+    width: 450px;
+  }
+  #pagedivider {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    //background-color: #716d6d;
+
+    label.tslabel {
+      font-size: 18px;
+    }
+  }
+}
