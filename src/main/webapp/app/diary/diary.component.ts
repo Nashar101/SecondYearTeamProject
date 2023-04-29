@@ -32,7 +32,6 @@ export class DiaryComponent implements OnInit {
   content: string = '';
 
   diaryitems?: IDiaryPage[];
-
   init() {
     this.http.get<any>('/api/account').subscribe(account => {
       const userID = account.id;
@@ -154,13 +153,35 @@ export class DiaryComponent implements OnInit {
       alert('please fill in the required fields');
       return;
     }
+    //this function takes the user specific diary items from the database, we will need this to edit Diary item.
+    this.http.get<any>('/api/account').subscribe(account => {
+      const userID = account.id;
+      console.log(userID);
+      this.diaryPage.query().subscribe(response => {
+        const items = response.body || [];
+        console.log(userID);
+        this.diaryitems = items;
+        this.diaryitems = this.diaryitems.filter(list => list.user?.id === userID);
+        this.diaryitems = this.diaryitems.filter(list => list.id === this.takeid);
+        console.log('hello this is takeid' + this.takeid);
+        console.log('THIS IS THE TEXT WE WANT TO MODIFY' + this.diaryitems[0].pageDescription);
+        this.takeid = 0;
+        this.diaryitems[0].pageDescription = this.name + ' : ' + this.content;
+        //@ts-ignore
+        this.diaryitems[0].lastEditTime = new Date();
+
+        this.diaryPage.update(this.diaryitems[0]).subscribe();
+        this.store = [];
+        this.init();
+
+        this.name = '';
+        this.content = '';
+      });
+    });
     /*
     this.diaryPage.update(this.content).subscribe(() => {
     });
     *
      */
-    this.name = '';
-    this.content = '';
-    this.takeid = 0;
   }
 }
