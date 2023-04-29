@@ -9,8 +9,6 @@ import { AccountService } from '../core/auth/account.service';
 import { HttpClient } from '@angular/common/http';
 import dayjs from 'dayjs';
 import { IExtensionID } from '../entities/extension-id/extension-id.model';
-import { DiaryPageService } from '../entities/diary-page/service/diary-page.service';
-import { IDiaryPage, NewDiaryPage } from '../entities/diary-page/diary-page.model';
 
 export class List {
   id!: number;
@@ -35,6 +33,7 @@ export class AntiProcrastinationComponent implements OnInit {
   constructor(
     protected antiProcrastinationListService2: AntiprocrastinationListTwoService,
     protected extensionIDService: ExtensionIDService,
+
     private accountService: AccountService,
     private http: HttpClient
   ) {}
@@ -54,7 +53,6 @@ export class AntiProcrastinationComponent implements OnInit {
   //use these lists below to store the data obtained from the link and Chrome extension ID database
   listItems?: IAntiprocrastinationListTwo[];
   idlist?: IExtensionID[];
-  diaryPage?: IDiaryPage[];
 
   //get data from database
   getExtensionID() {
@@ -70,6 +68,7 @@ export class AntiProcrastinationComponent implements OnInit {
       });
     });
   }
+
   //get data from database
   loadAll(): void {
     this.http.get<any>('/api/account').subscribe(account => {
@@ -77,9 +76,7 @@ export class AntiProcrastinationComponent implements OnInit {
       console.log(userID);
       this.antiProcrastinationListService2.query().subscribe(response => {
         const items = response.body || [];
-        console.log(userID);
         this.listItems = items;
-        //this.listItems = items
         this.listItems = this.listItems.filter(list => list.user?.id === userID);
         //@ts-ignore
         this.getExtensionID();
@@ -94,34 +91,46 @@ export class AntiProcrastinationComponent implements OnInit {
           //@ts-ignore
           site.type = this.listItems[i].type;
           //@ts-ignore
-          site.days = this.listItems[i].days;
-          //@ts-ignore
-          site.hours = this.listItems[i].hours;
-          //@ts-ignore
-          site.minutes = this.listItems[i].minutes;
-          //@ts-ignore
-          site.seconds = this.listItems[i].seconds;
-          //@ts-ignore
-          site.idk = this.listItems[i].idk;
-          //@ts-ignore
-          site.idk1 = this.listItems[i].idk1;
-          //@ts-ignore
-          site.empty = this.listItems[i].empty;
-          //@ts-ignore
           site.dueDate = new Date(this.listItems[i].dueDate);
-          console.log(site.link);
-          console.log(site.dueDate);
-          this.todos.push(site);
-          console.log(this.todos.length);
-          if (site.type == 'Timed') {
-            console.log('this is current refresh' + site.link);
-            this.refreshTimer(i);
-          }
+          if (site.type === 'Timed') {
+            const currentDate = new Date().getTime();
 
+            const savedDate = new Date(site.dueDate).getTime();
+            const time = (savedDate - currentDate) / 1000;
+            if (time <= 0) {
+              this.delete(site.id);
+            } else {
+              site.days = Math.floor(time / 86400);
+              site.hours = Math.floor((time - site.days * 24 * 60 * 60) / 3600);
+              site.minutes = Math.floor((time - site.days * 24 * 60 * 60 - site.hours * 60 * 60) / 60);
+              site.seconds = Math.floor((time - site.days * 24 * 60 * 60 - site.hours * 60 * 60 - site.minutes * 60) / 1);
+              //@ts-ignore
+              site.idk = this.listItems[i].idk;
+              //@ts-ignore
+              site.idk1 = this.listItems[i].idk1;
+              //@ts-ignore
+              site.empty = this.listItems[i].empty;
+              this.todos.push(site);
+              this.startTimer2(i);
+              this.add(site.link, site.dueDate);
+            }
+          } else {
+            //@ts-ignore
+            site.idk = this.listItems[i].idk;
+            //@ts-ignore
+            site.idk1 = this.listItems[i].idk1;
+            //@ts-ignore
+            site.empty = this.listItems[i].empty;
+            console.log(site.link);
+            console.log(site.dueDate);
+            this.todos.push(site);
+            //this.add(site.link, site.dueDate);
+            console.log(this.todos.length);
+            console.log('this is permanent else');
+            this.permaAdd(site.link);
+          }
           site = new List();
         }
-        console.log(this.todos[0].dueDate.toDateString());
-        console.log(this.todos[1].link);
       });
     });
   }
@@ -214,35 +223,15 @@ export class AntiProcrastinationComponent implements OnInit {
         this.todos[number1].seconds <= 0
       ) {
         this.delete(this.todos[number1].id);
-        this.Listdelete(this.todos[number1].link, number1);
+        chrome.runtime.sendMessage(this.extensionID2, { delete: this.todos[number1].link, remove: number1 }, function (response) {
+          if (!response.success) console.log('an error occurred');
+          console.log('this should work');
+        });
+        //this.Listdelete(this.todos[number1].link, number1);
         this.todos.splice(number1, 1);
         return;
       }
     }, 1000);
-  }
-
-  refreshTimer(link: number): void {
-    let currentDate = new Date().getTime();
-    console.log(currentDate);
-    const savedDate = this.todos[link].dueDate.getTime();
-    console.log(savedDate);
-    let timeRemaining = (savedDate - currentDate) / 1000;
-    console.log(timeRemaining);
-    if (timeRemaining <= 0) {
-      this.delete(this.todos[link].id);
-      this.todos.pop();
-    } else {
-      let Days = Math.floor(timeRemaining / 86400);
-      let Hours = Math.floor((timeRemaining - Days * 24 * 60 * 60) / 3600);
-      let Minutes = Math.floor((timeRemaining - Days * 24 * 60 * 60 - Hours * 60 * 60) / 60);
-      let Seconds = Math.floor((timeRemaining - Days * 24 * 60 * 60 - Hours * 60 * 60 - Minutes * 60) / 1);
-      this.todos[link].days = Days;
-      this.todos[link].hours = Hours;
-      this.todos[link].minutes = Minutes;
-      this.todos[link].seconds = Seconds;
-      this.add(this.todos[link].link, this.todos[link].dueDate);
-      this.startTimer2(this.todos.length - 1);
-    }
   }
 
   setAll(
@@ -296,7 +285,18 @@ export class AntiProcrastinationComponent implements OnInit {
 
     if (response) {
       this.delete(this.todos[id].id);
-      this.Listdelete(this.todos[id].link, id);
+      if (this.todos[id].type == 'Timed') {
+        chrome.runtime.sendMessage(this.extensionID2, { delete: this.todos[id].link, remove: id }, function (answer) {
+          if (!answer.success) console.log('an error occurred');
+          console.log('this should work');
+        });
+      } else {
+        chrome.runtime.sendMessage(this.extensionID2, { Permdelete: this.todos[id].link, remove: id }, function (answer) {
+          if (!answer.success) console.log('an error occurred');
+          console.log('this should work');
+        });
+      }
+      //this.Listdelete(this.todos[id].link, id);
       this.todos = this.todos.filter((v, i) => i !== id);
       alert('The Block has been removed');
     } else {
@@ -353,12 +353,19 @@ export class AntiProcrastinationComponent implements OnInit {
     });
   }
 
-  Listdelete(URL: string, position: number) {
-    chrome.runtime.sendMessage(this.extensionID2, { delete: URL, remove: position }, function (response) {
+  permaAdd(URL: string) {
+    chrome.runtime.sendMessage(this.extensionID2, { addPermanent: URL }, function (response) {
       if (!response.success) console.log('an error occurred');
       console.log('this should work');
     });
   }
+
+  /**Listdelete(URL: string, position: number) {
+    chrome.runtime.sendMessage(this.extensionID2, { delete: URL, remove: position }, function (response) {
+      if (!response.success) console.log('an error occurred');
+      console.log('this should work');
+    });
+  }**/
 
   isValidURL(URL: string) {
     var inputElement = document.createElement('input');

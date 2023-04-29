@@ -1,5 +1,6 @@
 let i = 0;
 let blockedSites = [];
+let permaBlocked = [];
 let timeRemaining = [];
 let extensionID1 = chrome.runtime.id;
 let testing = 100;
@@ -23,6 +24,13 @@ chrome.runtime.onMessageExternal.addListener(function (request, sender, sendResp
     chrome.storage.local.set({ foo1: timeRemaining }, function () {
       console.log('Settings saved');
     });
+  } else if (request.addPermanent) {
+    permaBlocked.push(request.addPermanent);
+    alert('message received ' + request.addPermanent);
+    localStorage.setItem('LIST2', JSON.stringify(permaBlocked));
+    chrome.storage.local.set({ foo2: permaBlocked }, function () {
+      console.log('Settings saved');
+    });
   } else if (request.delete) {
     alert('message recieved for delete' + request.delete);
     blockedSites = blockedSites.filter(link => link != request.delete);
@@ -35,6 +43,15 @@ chrome.runtime.onMessageExternal.addListener(function (request, sender, sendResp
     chrome.storage.local.set({ foo1: timeRemaining }, function () {
       console.log('Settings saved');
     });
+    return true;
+  } else if (request.Permdelete) {
+    alert('message recieved for delete' + request.Permdelete);
+    permaBlocked = permaBlocked.filter(link => link != request.Permdelete);
+    localStorage.setItem('LIST2', JSON.stringify(permaBlocked));
+    chrome.storage.local.set({ foo2: permaBlocked }, function () {
+      console.log('Settings saved');
+    });
+
     return true;
   }
 });

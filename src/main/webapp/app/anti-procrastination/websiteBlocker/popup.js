@@ -1,6 +1,7 @@
 console.log('<----- Extension script started running ----->');
 timeRemaining = [];
 displaylink = [];
+permaBlocked = [];
 function refreshTimer(x) {
   let refresh = new List();
   let currentDate = new Date().getTime();
@@ -30,10 +31,15 @@ function displayitems() {
   const myListContainer = document.getElementById('timerList');
   const myList = document.createElement('ul');
   myList.id = 'timerList';
+  for (let i = 0; i < permaBlocked.length; i++) {
+    const listItem = document.createElement('li');
+    listItem.style.marginLeft = '-40px';
+    listItem.textContent = `${permaBlocked[i]} --:--:--`;
+    myList.appendChild(listItem);
+  }
 
   for (let i = 0; i < timeRemaining.length; i++) {
     const listItem = document.createElement('li');
-    //refreshTimer(i)
 
     setInterval(() => {
       let refresh = new List();
@@ -78,6 +84,9 @@ chrome.storage.local.get(['foo1'], result => {
   timeRemaining = result.foo1;
   chrome.storage.local.get(['foo'], result => {
     displaylink = result.foo;
+  });
+  chrome.storage.local.get(['foo2'], result => {
+    permaBlocked = result.foo;
   });
   displayitems();
 });
