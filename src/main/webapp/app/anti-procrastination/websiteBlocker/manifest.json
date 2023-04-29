@@ -3,6 +3,7 @@
   "name": "Anti-Procrastination",
   "version": "0.0.1",
   "type": "module",
+  "description": "Website blocker extension for team project",
   "background": {
     "scripts": ["background.js"]
   },
