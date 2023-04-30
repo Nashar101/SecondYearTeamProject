@@ -1,6 +1,6 @@
 let blockedsites = [];
 let timeRemaining = [];
-
+let blockedsites1 = [];
 const generateHTML = pageName => {
   return (
     '<!DOCTYPE html>\n' +
@@ -58,7 +58,6 @@ function boot() {
       response(domInfo);
     }
   });
-
   updateList();
 }
 
@@ -68,11 +67,13 @@ function updateList() {
       alert('this is empty');
     }**/
     blockedsites = result.foo;
-    console.log(blockedsites[0]);
     chrome.storage.local.get(['foo1'], result => {
       timeRemaining = result.foo1;
       startCountDown();
     });
+  });
+  chrome.storage.local.get(['foo2'], result => {
+    blockedsites1 = result.foo2;
   });
 }
 
@@ -97,13 +98,9 @@ function startCountDown() {
         timeRemaining.splice(i, 1);
         blockedsites.splice(i, 1);
         localStorage.setItem('LIST', JSON.stringify(blockedsites));
-        chrome.storage.local.set({ foo: blockedsites }, function () {
-          console.log('Settings saved');
-        });
+        chrome.storage.local.set({ foo: blockedsites }, function () {});
         localStorage.setItem('LIST1', JSON.stringify(timeRemaining));
-        chrome.storage.local.set({ foo1: timeRemaining }, function () {
-          console.log('Settings saved');
-        });
+        chrome.storage.local.set({ foo1: timeRemaining }, function () {});
         return;
       } else {
         refresh.days = Math.floor(time / 86400);
@@ -125,6 +122,15 @@ function main() {
       const displaySite = document.getElementById('site');
       displaySite.textContent = blockedsites[i].toString();
       blockedSite = blockedsites[i].toString();
+      break;
+    }
+  }
+  for (let i = 0; i < blockedsites1.length; i++) {
+    if (window.location.hostname == blockedsites1[i].toString() || window.location.href == blockedsites1[i].toString()) {
+      document.body.innerHTML = generateHTML('site is blocked');
+      const displaySite = document.getElementById('site');
+      displaySite.textContent = blockedsites1[i].toString();
+      blockedSite = blockedsites1[i].toString();
       break;
     }
   }

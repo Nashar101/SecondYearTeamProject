@@ -133,6 +133,14 @@ export class AntiProcrastinationComponent implements OnInit {
         }
       });
     });
+    if (this.todos.length === 0) {
+      this.isEmpty();
+    }
+  }
+  isEmpty() {
+    chrome.runtime.sendMessage(this.extensionID2, { empty: 'empty' }, function (response) {
+      if (!response.success) console.log('an error occurred');
+    });
   }
   //use these to display the List item values in the HTML website
   newTodo: string = '';
@@ -191,7 +199,11 @@ export class AntiProcrastinationComponent implements OnInit {
       this.minutes = 0;
       this.seconds = 0;
       this.startTimer2(this.todos.length - 1);
-      this.add(todo.link, todo.dueDate);
+      if (todo.type === 'Timed') {
+        this.add(todo.link, todo.dueDate);
+      } else {
+        this.permaAdd(todo.link);
+      }
     } else {
       alert('Please enter a List item');
     }
@@ -229,6 +241,9 @@ export class AntiProcrastinationComponent implements OnInit {
         });
         //this.Listdelete(this.todos[number1].link, number1);
         this.todos.splice(number1, 1);
+        if (this.todos.length === 0) {
+          this.isEmpty();
+        }
         return;
       }
     }, 1000);

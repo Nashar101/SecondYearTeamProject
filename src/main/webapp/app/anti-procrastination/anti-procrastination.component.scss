@@ -96,7 +96,7 @@ textarea {
   padding: 1rem;
 }
 .addBlock__Field-labels p {
-  font-size: 22px;
+  font-size: min(22px, 2.9558698727015559vw);
   collapse: #716d6d;
   font-weight: bold;
   font-family: 'Poppins', sans-serif;
@@ -109,6 +109,16 @@ textarea {
 .daysMinHrSec label {
   font-family: 'Poppins', sans-serif;
 }
+
+#test {
+  font-size: min(1.70625vw, 16px);
+}
+/**@media  only screen and (max-width: 800px) {
+
+  #test{
+    font-size: min(1.40625vw, 8px);
+  }
+}**/
 
 .blockedSites__Field {
   min-width: 650px;
@@ -140,7 +150,7 @@ hr {
 
 .blockedSites__Delete {
   position: absolute;
-  left: 800px;
+  left: min(800px, 75vw);
   background-color: #e0e4e7;
   outline: none;
   border: none;

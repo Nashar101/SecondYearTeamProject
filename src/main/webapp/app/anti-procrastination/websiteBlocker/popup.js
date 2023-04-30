@@ -28,6 +28,8 @@ class List {
   seconds = 0;
 }
 function displayitems() {
+  console.log('this is permaBlocked' + permaBlocked[0]);
+  console.log('THIS IS PERMAblOCKED LENGTH' + permaBlocked.length);
   const myListContainer = document.getElementById('timerList');
   const myList = document.createElement('ul');
   myList.id = 'timerList';
@@ -51,8 +53,8 @@ function displayitems() {
       if (time <= 0 || displaylink[i] == 'undefined' || isNaN(time)) {
         timeRemaining.splice(i, 1);
         console.log('remove from popup');
-        var remove = myListContainer.getElementsByTagName('li')[i];
-        myListContainer.removeChild(remove);
+        var remove = myList.getElementsByTagName('li')[i];
+        myList.removeChild(remove);
         localStorage.setItem('LIST', JSON.stringify(displaylink));
         chrome.storage.local.set({ foo: displaylink }, function () {
           console.log('Settings saved');
@@ -80,17 +82,23 @@ function displayitems() {
   myListContainer.appendChild(myList);
 }
 
-chrome.storage.local.get(['foo1'], result => {
-  timeRemaining = result.foo1;
+init();
+function init() {
+  chrome.storage.local.get(['foo2'], result => {
+    permaBlocked = result.foo2;
+  });
+  chrome.storage.local.get(['foo1'], result => {
+    timeRemaining = result.foo1;
+    /**chrome.storage.local.get(['foo'], result => {
+      displaylink = result.foo;
+    });**/
+    displayitems();
+  });
+
   chrome.storage.local.get(['foo'], result => {
     displaylink = result.foo;
   });
-  chrome.storage.local.get(['foo2'], result => {
-    permaBlocked = result.foo;
-  });
-  displayitems();
-});
-
+}
 const setID = ID => {
   document.getElementById('ExtensionID').textContent = ID.ExtensionID;
 };
