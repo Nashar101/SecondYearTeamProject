@@ -12,9 +12,14 @@
         <span class="title">to-dos</span>
         <div class="window">
           <ul class="list" id="todo-list">
-            <li class="item" *ngFor="let item of todoItems">
-              <input type="checkbox" (click)="moveItem($event, item)" />
-              <span (click)="showDetails(item)" [ngClass]="{ selected: selectedItem === item }">
+            <li class="item" *ngFor="let item of todoItems" role="listitem">
+              <input type="checkbox" tabindex="0" (click)="moveItem($event, item)" (keydown)="handleCheckboxKeydown($event, item)" />
+              <span
+                tabindex="0"
+                (click)="showDetails(item)"
+                (keydown)="handleTextKeydown($event, item)"
+                [ngClass]="{ selected: selectedItem === item }"
+              >
                 {{ item.heading }}
               </span>
             </li>
@@ -26,9 +31,20 @@
         <span class="title">dones</span>
         <div class="window">
           <ul class="list" id="done-list">
-            <li class="item" *ngFor="let item of doneItems">
-              <input type="checkbox" (click)="moveItem($event, item)" [checked]="item.completed" />
-              <span (click)="showDetails(item)" [ngClass]="{ selected: selectedItem === item }">
+            <li class="item" *ngFor="let item of doneItems" role="listitem">
+              <input
+                type="checkbox"
+                tabindex="0"
+                (click)="moveItem($event, item)"
+                (keydown)="handleCheckboxKeydown($event, item)"
+                [checked]="item.completed"
+              />
+              <span
+                tabindex="0"
+                (click)="showDetails(item)"
+                (keydown)="handleTextKeydown($event, item)"
+                [ngClass]="{ selected: selectedItem === item }"
+              >
                 {{ item.heading }}
               </span>
             </li>
@@ -37,10 +53,11 @@
       </div>
       <div class="empty-space"></div>
       <div class="Detail-Window" *ngIf="selectedItem">
-        <button class="close-button" (click)="closeDetailWindow()">&times;</button>
+        <button class="close-button" tabindex="0" (click)="closeDetailWindow()" aria-label="Close the detail window">&times;</button>
         <div>
-          <h3>Heading</h3>
+          <label for="detail-heading">Heading</label>
           <textarea
+            id="detail-heading"
             class="Detail-Heading"
             placeholder="Heading"
             [ngModel]="selectedItem.heading"
@@ -48,8 +65,9 @@
           ></textarea>
         </div>
         <div>
-          <h3 class="card-title">Description</h3>
+          <label for="detail-description">Description</label>
           <textarea
+            id="detail-description"
             class="Detail-Description"
             rows="6"
             placeholder="Description"
@@ -61,14 +79,14 @@
           <p>Created: {{ selectedItem.creationTime }}</p>
           <p>Last Edited: {{ selectedItem.lastEditTime }}</p>
         </div>
-        <button (click)="saveChanges()" type="save">Save</button>
-        <button (click)="cancelChanges()" type="cancel">Cancel</button>
+        <button (click)="saveChanges()" tabindex="0" type="button" aria-label="Save changes">Save</button>
+        <button (click)="cancelChanges()" tabindex="0" type="button" aria-label="Cancel changes">Cancel</button>
       </div>
     </div>
-    <button class="delete-button" (click)="deleteItem()">
+    <button class="delete-button" tabindex="0" (click)="deleteItem()" aria-label="Delete the chosen item">
       <span class="delete-button-icon">-</span>
     </button>
-    <button class="add-button" (click)="createNewItem()">
+    <button class="add-button" tabindex="0" (click)="createNewItem()" aria-label="Add a new item">
       <span class="add-button-icon">+</span>
     </button>
     <div class="empty-space"></div>

@@ -7,6 +7,7 @@
         <fa-icon icon="bars"></fa-icon>
       </a>
       <div class="navbar-wrapper" [ngClass]="{ 'navbar-open': isNavbarOpen }">
+        <button class="toggle-theme-button" tabindex="0" (click)="toggleTheme()" aria-label="Toggle theme">Toggle theme</button>
         <router-outlet name="navbar"></router-outlet>
       </div>
     </div>

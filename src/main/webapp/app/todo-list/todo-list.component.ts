@@ -149,6 +149,21 @@ export class TodoListComponent implements OnInit {
     });
   }
 
+  handleCheckboxKeydown(event: KeyboardEvent, item: any) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      const mouseEvent = new MouseEvent('click');
+      this.moveItem(mouseEvent, item);
+    }
+  }
+
+  handleTextKeydown(event: KeyboardEvent, item: any) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this.showDetails(item);
+    }
+  }
+
   ngOnInit(): void {
     this.loadAll();
   }
