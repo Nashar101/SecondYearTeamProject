@@ -2,6 +2,94 @@
 Main page styles
 ========================================================================== */
 
+.home__container {
+  padding: 1rem;
+  background-color: #e0e4e7;
+}
+.home__container__welcome {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.home__container__welcome h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 200px;
+  color: #363d4e;
+  padding-bottom: 0;
+  line-height: 130px;
+}
+
+.home__container__welcome p {
+  font-weight: 400;
+  font-size: 30px;
+
+  color: #878787;
+  max-width: 500px;
+  padding-left: 16px;
+}
+/*.home__container__welcome-lines{
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: 0;
+}
+.home__container__welcome-hl{
+  width: 120px;
+  height: 0;
+
+  border: 5px solid #363D4E;
+  transform: rotate(179.69deg);
+}
+.home__container__welcome-vl{
+  width: 120px;
+  height: 0;
+
+  border: 5px solid #363D4E;
+  transform: rotate(89.69deg);
+}*/
+
+.home__container-login {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.home__container-login input {
+  width: 400px;
+  height: 50px;
+  background: #ebebeb;
+  border-radius: 11px;
+  border: 0;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 19px;
+  /* identical to box height */
+}
+
+::placeholder {
+  color: #d2d2d2;
+  padding-left: 1rem;
+}
+
+.home__container-login button {
+  width: 400px;
+  height: 50px;
+  background: #363d4e;
+  border-radius: 11px;
+  border: 0;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px;
+}
+
+.home__container-logo {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/*
 .hipster {
   display: inline-block;
   width: 347px;
@@ -10,7 +98,7 @@ Main page styles
   background-size: contain;
 }
 
-/* wait autoprefixer update to allow simple generation of high pixel density media query */
+!* wait autoprefixer update to allow simple generation of high pixel density media query *!
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
   only screen and (-moz-min-device-pixel-ratio: 2),
   only screen and (-o-min-device-pixel-ratio: 2/1),
@@ -21,3 +109,4 @@ Main page styles
     background-size: contain;
   }
 }
+*/

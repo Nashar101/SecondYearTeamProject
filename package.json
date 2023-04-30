@@ -103,6 +103,8 @@
     "@types/chrome": "^0.0.224",
     "@types/npm": "^7.19.0",
     "bootstrap": "^5.2.0",
+    "chart.js": "^4.3.0",
+    "chartjs": "^0.3.24",
     "chrome-types": "^0.1.178",
     "dayjs": "1.11.5",
     "ngx-infinite-scroll": "14.0.0",
