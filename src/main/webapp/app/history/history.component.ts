@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Chart, registerables } from 'chart.js';
+Chart.register(...registerables);
 
 import { HistoryService } from '../entities/history/service/history.service';
 import { IHistory, NewHistory } from '../entities/history/history.model';
