@@ -3,11 +3,13 @@
   position: relative;
   height: 100%;
   width: 100%;
+  background-color: var(--background-color);
 }
 
 .title {
   font-size: 18px;
   font-weight: bold;
+  color: var(--title-color);
 }
 
 /*todo-items and done-items*/
@@ -20,7 +22,7 @@
   height: 35vh;
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #f5f5f5;
+  background-color: var(--window-background-color);
   padding: 5px 2% 5px 2%;
   transition: width 0.2s;
 }
@@ -55,7 +57,7 @@
   padding: 15px;
   border-radius: 25px;
   margin-bottom: 20px;
-  background: white;
+  color: var(--item-text-color);
   font-weight: bold;
   display: flex;
   align-items: center;
@@ -72,7 +74,7 @@
   -moz-appearance: none;
   bottom: 0px;
   border-radius: 50%;
-  border: 1px solid rgba(17, 17, 17, 0.68);
+  border: 1px solid var(--border-color);
   outline: none;
   cursor: pointer;
 }
@@ -83,15 +85,16 @@
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 80%;
+  color: var(--item-text-color);
 }
 
 .item input[type='checkbox']:checked {
-  background-color: #2196f3;
-  border-color: #2196f3;
+  background-color: var(--checked-color);
+  border-color: var(--checked-color);
 }
 
 .selected {
-  color: gray;
+  color: var(--selected-text-color);
 }
 
 /* Detail window*/
@@ -102,7 +105,7 @@
   right: 2%;
   height: 75vh;
   width: 45%;
-  background-color: white;
+  background-color: var(--detail-window-background-color);
   border-radius: 25px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   opacity: 0;
@@ -133,7 +136,7 @@
   background-color: transparent;
   border: none;
   font-size: 24px;
-  color: black;
+  color: var(--close-button-color);
   font-weight: bold;
   width: 30px;
   height: 30px;

@@ -1,4 +1,5 @@
-import { Component, OnInit, RendererFactory2, Renderer2, ElementRef } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Component, OnInit, RendererFactory2, Renderer2, ElementRef } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -13,6 +14,7 @@ import { AccountService } from 'app/core/auth/account.service';
 })
 export class MainComponent implements OnInit {
   private renderer: Renderer2;
+  private darkMode = false;
   isNavbarOpen = false;
   constructor(
     private accountService: AccountService,
@@ -20,9 +22,12 @@ export class MainComponent implements OnInit {
     private router: Router,
     private translateService: TranslateService,
     private elementRef: ElementRef,
-    rootRenderer: RendererFactory2
+    rootRenderer: RendererFactory2,
+    @Inject(DOCUMENT) private document: Document
   ) {
     this.renderer = rootRenderer.createRenderer(document.querySelector('html'), null);
+    this.darkMode = localStorage.getItem('darkMode') === 'true';
+    this.setTheme();
   }
 
   ngOnInit(): void {
@@ -66,6 +71,20 @@ export class MainComponent implements OnInit {
     const clickedInsideNavbar = this.elementRef.nativeElement.querySelector('.navbar-container').contains(event.target);
     if (!clickedInsideNavbar) {
       this.isNavbarOpen = false;
+    }
+  }
+
+  toggleTheme() {
+    this.darkMode = !this.darkMode;
+    localStorage.setItem('darkMode', this.darkMode.toString());
+    this.setTheme();
+  }
+
+  private setTheme() {
+    if (this.darkMode) {
+      this.document.documentElement.classList.add('dark-mode');
+    } else {
+      this.document.documentElement.classList.remove('dark-mode');
     }
   }
 
