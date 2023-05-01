@@ -1,13 +1,27 @@
 /*The todo list page */
+body {
+  background-color: var(--background-color);
+  transition-duration: 0.3s;
+  border-radius: 15px;
+  padding: 2%;
+}
+
 .todo-list {
   position: relative;
   height: 100%;
   width: 100%;
 }
 
+.title-big {
+  color: var(--text-color);
+  transition-duration: 0.3s;
+}
+
 .title {
   font-size: 18px;
   font-weight: bold;
+  color: var(--text-color);
+  transition-duration: 0.3s;
 }
 
 /*todo-items and done-items*/
@@ -16,17 +30,17 @@
   position: relative;
   top: 10px;
   left: 2%;
-  width: 92%;
+  width: 96%;
   height: 35vh;
   border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #f5f5f5;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: var(--window-background-color);
   padding: 5px 2% 5px 2%;
   transition: width 0.2s;
 }
 
 .half-width {
-  width: 45% !important;
+  width: 47% !important;
 }
 
 .empty-space {
@@ -55,11 +69,13 @@
   padding: 15px;
   border-radius: 25px;
   margin-bottom: 20px;
-  background: white;
+  background: var(--item-background-color);
+  color: var(--item-text-color);
   font-weight: bold;
   display: flex;
   align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition-duration: 0.3s;
 }
 
 .item input[type='checkbox'] {
@@ -75,6 +91,7 @@
   border: 1px solid rgba(17, 17, 17, 0.68);
   outline: none;
   cursor: pointer;
+  transition-duration: 0.3s;
 }
 
 .item span {
@@ -83,15 +100,19 @@
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 80%;
+  color: var(--item-text-color);
+  transition-duration: 0.3s;
 }
 
 .item input[type='checkbox']:checked {
-  background-color: #2196f3;
-  border-color: #2196f3;
+  background-color: var(--checked-color);
+  border-color: var(--checked-color);
+  transition-duration: 0.3s;
 }
 
-.selected {
-  color: gray;
+.item.selected span {
+  color: var(--selected-text-color);
+  transition-duration: 0.3s;
 }
 
 /* Detail window*/
@@ -102,7 +123,7 @@
   right: 2%;
   height: 75vh;
   width: 45%;
-  background-color: white;
+  background-color: var(--window-background-color);
   border-radius: 25px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   opacity: 0;
@@ -124,6 +145,13 @@
   max-height: 40vh;
   width: 100%;
   overflow-y: auto;
+  background-color: var(--detail-textarea-color);
+  color: var(--text-color);
+  transition-duration: 0.3s;
+}
+
+.detail-label {
+  color: var(--label-color);
 }
 
 .close-button {
@@ -133,12 +161,13 @@
   background-color: transparent;
   border: none;
   font-size: 24px;
-  color: black;
+  color: var(--close-button-color);
   font-weight: bold;
   width: 30px;
   height: 30px;
   text-align: center;
   cursor: pointer;
+  transition-duration: 0.3s;
 }
 
 /*Add and delete*/
@@ -208,12 +237,12 @@ textarea.Detail-Description {
   resize: vertical;
 }
 
-button[type='save'],
-button[type='cancel'] {
-  background-color: #388e3c;
+.save-button,
+.cancel-button {
+  background-color: var(--save-button-bg-color);
   border: none;
   border-radius: 5px;
-  color: white;
+  color: var(--text-color);
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -221,14 +250,18 @@ button[type='cancel'] {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
-  transition-duration: 0.4s;
+  transition-duration: 0.3s;
 }
 
-button[type='cancel'] {
-  background-color: #d32f2f;
+.cancel-button {
+  background-color: var(--cancel-button-bg-color);
 }
 
-button[type='save']:hover,
-button[type='cancel']:hover {
+.save-button:hover,
+.cancel-button:hover {
   opacity: 0.8;
+}
+
+.detail-time {
+  color: var(--text-color);
 }

@@ -3,18 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>To-do List</title>
   </head>
   <body>
-    <h1>To-do List</h1>
+    <title>To-do List</title>
+    <h1 class="title-big">To-do List</h1>
     <div class="todo-list">
       <div class="todo-items">
         <span class="title">to-dos</span>
         <div class="window">
           <ul class="list" id="todo-list">
-            <li class="item" *ngFor="let item of todoItems">
-              <input type="checkbox" (click)="moveItem($event, item)" />
-              <span (click)="showDetails(item)" [ngClass]="{ selected: selectedItem === item }">
+            <li class="item" *ngFor="let item of todoItems" role="listitem" [ngClass]="{ selected: selectedItem === item }">
+              <input type="checkbox" tabindex="0" (click)="moveItem($event, item)" (keydown)="handleCheckboxKeydown($event, item)" />
+              <span
+                tabindex="0"
+                (click)="showDetails(item)"
+                (keydown)="handleTextKeydown($event, item)"
+                [ngClass]="{ selected: selectedItem === item }"
+              >
                 {{ item.heading }}
               </span>
             </li>
@@ -26,9 +31,20 @@
         <span class="title">dones</span>
         <div class="window">
           <ul class="list" id="done-list">
-            <li class="item" *ngFor="let item of doneItems">
-              <input type="checkbox" (click)="moveItem($event, item)" [checked]="item.completed" />
-              <span (click)="showDetails(item)" [ngClass]="{ selected: selectedItem === item }">
+            <li class="item" *ngFor="let item of doneItems" role="listitem" [ngClass]="{ selected: selectedItem === item }">
+              <input
+                type="checkbox"
+                tabindex="0"
+                (click)="moveItem($event, item)"
+                (keydown)="handleCheckboxKeydown($event, item)"
+                [checked]="item.completed"
+              />
+              <span
+                tabindex="0"
+                (click)="showDetails(item)"
+                (keydown)="handleTextKeydown($event, item)"
+                [ngClass]="{ selected: selectedItem === item }"
+              >
                 {{ item.heading }}
               </span>
             </li>
@@ -39,7 +55,7 @@
       <div class="Detail-Window" *ngIf="selectedItem">
         <button class="close-button" (click)="closeDetailWindow()">&times;</button>
         <div>
-          <h3>Heading</h3>
+          <span for="detail-heading" class="title">Heading</span>
           <textarea
             class="Detail-Heading"
             placeholder="Heading"
@@ -48,7 +64,7 @@
           ></textarea>
         </div>
         <div>
-          <h3 class="card-title">Description</h3>
+          <span for="detail-description" class="title">Description</span>
           <textarea
             class="Detail-Description"
             rows="6"
@@ -57,12 +73,12 @@
             (ngModelChange)="updateDescription($event)"
           ></textarea>
         </div>
-        <div>
+        <div class="detail-time">
           <p>Created: {{ selectedItem.creationTime }}</p>
           <p>Last Edited: {{ selectedItem.lastEditTime }}</p>
         </div>
-        <button (click)="saveChanges()" type="save">Save</button>
-        <button (click)="cancelChanges()" type="cancel">Cancel</button>
+        <button class="save-button" (click)="saveChanges()" tabindex="0" aria-label="Save changes">Save</button>
+        <button class="cancel-button" (click)="cancelChanges()" tabindex="0" aria-label="Cancel changes">Cancel</button>
       </div>
     </div>
     <button class="delete-button" (click)="deleteItem()">
