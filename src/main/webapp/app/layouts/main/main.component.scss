@@ -11,6 +11,8 @@
   left: 10px;
   z-index: 1040;
   cursor: pointer;
+  color: var(--text-color);
+  transition-duration: 0.3s;
 }
 
 .navbar-toggler-icon {
