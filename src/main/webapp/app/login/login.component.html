@@ -1,5 +1,10 @@
+<link rel="stylesheet" href="login.component.scss" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+
 <div>
-  <div class="d-flex justify-content-center">
+  <div class="loginPage__container d-flex">
     <div class="col-lg-6 col-md-8 col-sm-10">
       <h1 jhiTranslate="login.title" data-cy="loginTitle">Sign in</h1>
       <div class="alert alert-danger" *ngIf="authenticationError" jhiTranslate="login.messages.error.authentication" data-cy="loginError">
@@ -10,7 +15,7 @@
           <label class="username-label" for="username" jhiTranslate="global.form.username.label">Username</label>
           <input
             type="text"
-            class="form-control"
+            class="loginPage__container__login-input form-control"
             name="username"
             id="username"
             placeholder="{{ 'global.form.username.placeholder' | translate }}"
@@ -36,7 +41,7 @@
         <div class="form-check">
           <label class="form-check-label" for="rememberMe">
             <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" formControlName="rememberMe" />
-            <span jhiTranslate="login.form.rememberme">Remember me</span>
+            <span class="rememberMe" jhiTranslate="login.form.rememberme">Remember me</span>
           </label>
         </div>
 
@@ -48,10 +53,16 @@
         >
       </div>
 
-      <div class="alert alert-warning">
-        <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>
-        <a class="alert-link" routerLink="/account/register" jhiTranslate="global.messages.info.register.link">Register a new account</a>
+      <div class="logo__container">
+        <div class="alert alert-warning">
+          <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>
+          <a class="alert-link" routerLink="/account/register" jhiTranslate="global.messages.info.register.link">Register a new account</a>
+        </div>
       </div>
+    </div>
+
+    <div class="logo__container-logo">
+      <img class="resize" src="https://i.ibb.co/m6Sj07C/home-logo.png" alt="home-logo" border="0" />
     </div>
   </div>
 </div>
