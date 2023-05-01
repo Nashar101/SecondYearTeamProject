@@ -49,21 +49,31 @@ Navbar
 
 .nav-item {
   font-size: 1.6em;
-  color: var(--text-color);
   transition-duration: 0.3s;
 }
 
-.nav-item:hover {
+.nav-item > .nav-link {
+  color: var(--text-color);
+}
+
+.nav-item:hover > .nav-link {
   color: #797979;
 }
 
-li.clicked {
-  color: var(--selected-text-color);
-  transition-duration: 0.3s;
+li.clicked > .nav-link {
+  color: #797979;
 }
 
-li.init {
+li.init > .nav-link {
   color: red;
+}
+
+.account-link {
+  color: var(--text-color);
+}
+
+.account-link:hover {
+  color: #797979;
 }
 
 /* ==========================================================================
@@ -95,10 +105,6 @@ Logo styles
   transition-duration: 0.3s;
   border-radius: 50%;
   display: inline-block;
-}
-
-span {
-  color: #797979;
 }
 
 @media (max-width: 991.98px) {
