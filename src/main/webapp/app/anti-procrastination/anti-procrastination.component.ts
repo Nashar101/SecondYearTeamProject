@@ -375,13 +375,6 @@ export class AntiProcrastinationComponent implements OnInit {
     });
   }
 
-  /**Listdelete(URL: string, position: number) {
-    chrome.runtime.sendMessage(this.extensionID2, { delete: URL, remove: position }, function (response) {
-      if (!response.success) console.log('an error occurred');
-      console.log('this should work');
-    });
-  }**/
-
   isValidURL(URL: string) {
     var inputElement = document.createElement('input');
     inputElement.type = 'url';
