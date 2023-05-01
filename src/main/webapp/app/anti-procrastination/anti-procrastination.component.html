@@ -1,4 +1,4 @@
-<html lang="en" style="">
+<html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, height=device-height intial-scale=1.0" charset="UTF-8" />
     <title>Anti Procrastination</title>
@@ -8,126 +8,126 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
   </head>
-
-  <div class="History">
-    <div class="addWebsite">
-      <h1 style="color: #545454; font-weight: bold">Add a website</h1>
-      <div class="addWebsite__Field" style="display: flex">
-        <textarea class="addWebsite__URL" placeholder="Enter a website URL" [(ngModel)]="newTodo"></textarea>
-        <textarea class="addWebsite__ID" placeholder="Enter extensionID" [(ngModel)]="extensionID"></textarea>
-        <button class="urlButton" type="button" (click)="setExtensionID()">+</button>
-      </div>
-
-      <div class="addBlock__Field">
-        <div class="addBlock__Field-labels" style="display: flex">
-          <p>Block Duration</p>
-          <label>{{ working }}</label>
+  <div style="border-radius: 25px">
+    <div class="History">
+      <div class="addWebsite">
+        <h1 class="universal_Color" style="font-weight: bold">Add a website</h1>
+        <div class="addWebsite__Field" style="display: flex">
+          <textarea class="addWebsite__URL" placeholder="Enter a website URL" [(ngModel)]="newTodo"></textarea>
+          <textarea class="addWebsite__ID" placeholder="Enter extensionID" [(ngModel)]="extensionID"></textarea>
+          <button class="urlButton" type="button" (click)="setExtensionID()">+</button>
         </div>
 
-        <div style="display: flex">
-          <div style="display: flex; padding-top: 1em">
-            <label style="font-size: min(22px, 2.7vw); padding-right: 1.5rem; color: #676262; font-family: 'Poppins', sans-serif"
-              >Permanent</label
-            >
-            <input id="Permanent?" type="checkbox" class="larger" />
+        <div class="addBlock__Field">
+          <div class="addBlock__Field-labels" style="display: flex">
+            <p class="universal_Color">Block Duration</p>
+            <label>{{ working }}</label>
           </div>
-          <div style="padding-top: 0.8rem; padding-left: 2rem; display: flex">
-            <div style="padding-left: 2px; display: flex">
-              <label style="font-size: min(22px, 2.7vw); padding-right: 35px; color: #676262; font-family: 'Poppins', sans-serif"
-                >Timer</label
+
+          <div style="display: flex">
+            <div style="display: flex; padding-top: 1em">
+              <label class="universal_Color" style="font-size: min(22px, 2.7vw); padding-right: 1.5rem; font-family: 'Poppins', sans-serif"
+                >Permanent</label
               >
-              <input
-                type="number"
-                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                min="0"
-                max="99"
-                maxlength="2"
-                class="size"
-                style="text-align: center; background: #ebebeb; outline: none; border: none"
-                [(ngModel)]="days"
-              />
-              <b style="font-size: 30px; margin-top: -6px; color: #424242">:</b>
-              <input
-                type="number"
-                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                min="0"
-                max="24"
-                maxlength="2"
-                class="size"
-                style="text-align: center; background: #ebebeb; outline: none; border: none"
-                [(ngModel)]="hours"
-              />
-              <b style="font-size: 30px; margin-top: -6px; color: #424242">:</b>
-              <input
-                type="number"
-                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                min="0"
-                max="60"
-                maxlength="2"
-                class="size"
-                style="text-align: center; background: #ebebeb; outline: none; border: none"
-                [(ngModel)]="minutes"
-              />
-              <b style="font-size: 30px; margin-top: -6px; color: #424242">:</b>
-              <input
-                type="number"
-                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                min="0"
-                max="60"
-                maxlength="2"
-                class="size"
-                style="text-align: center; background: #ebebeb; outline: none; border: none"
-                [(ngModel)]="seconds"
-              />
+              <input id="Permanent?" type="checkbox" class="larger" />
             </div>
-            <div style="display: flex">
-              <button
-                style="margin-top: -7px; margin-left: 35px; padding: -10px; font-size: 30px; border: none; background: transparent"
-                type="button"
-                (click)="saveTodo()"
-              >
-                +
-              </button>
+            <div style="padding-top: 0.8rem; padding-left: 2rem; display: flex">
+              <div class="universal_Color" style="padding-left: 2px; display: flex">
+                <label style="font-size: min(22px, 2.7vw); padding-right: 35px; font-family: 'Poppins', sans-serif">Timer</label>
+                <input
+                  type="number"
+                  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                  min="0"
+                  max="99"
+                  maxlength="2"
+                  class="size"
+                  style="text-align: center; outline: none; border: none"
+                  [(ngModel)]="days"
+                />
+                <b style="font-size: 30px; margin-top: -6px">:</b>
+                <input
+                  type="number"
+                  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                  min="0"
+                  max="24"
+                  maxlength="2"
+                  class="size"
+                  style="text-align: center; outline: none; border: none"
+                  [(ngModel)]="hours"
+                />
+                <b style="font-size: 30px; margin-top: -6px">:</b>
+                <input
+                  type="number"
+                  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                  min="0"
+                  max="60"
+                  maxlength="2"
+                  class="size"
+                  style="text-align: center; outline: none; border: none"
+                  [(ngModel)]="minutes"
+                />
+                <b style="font-size: 30px; margin-top: -6px">:</b>
+                <input
+                  type="number"
+                  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                  min="0"
+                  max="60"
+                  maxlength="2"
+                  class="size"
+                  style="text-align: center; outline: none; border: none"
+                  [(ngModel)]="seconds"
+                />
+              </div>
+              <div style="display: flex">
+                <button
+                  class="universal_Color"
+                  style="margin-top: -7px; margin-left: 35px; padding: -10px; font-size: 30px; border: none; background: transparent"
+                  type="button"
+                  (click)="saveTodo()"
+                >
+                  +
+                </button>
+              </div>
             </div>
+          </div>
+          <div class="daysMinHrSec" id="test" style="display: flex">
+            <label style="margin-left: min(307px, 45.836898395721924vw); margin-right: 2px">Days</label>
+            <label style="margin-left: 31px">Hours</label>
+            <label style="margin-left: 20px">Minutes</label>
+            <label style="margin-left: 11px">Seconds</label>
           </div>
         </div>
-        <div class="daysMinHrSec" id="test" style="display: flex; color: #767676">
-          <label style="margin-left: min(307px, 29.836898395721924vw); margin-right: 2px">Days</label>
-          <label style="margin-left: 31px">Hours</label>
-          <label style="margin-left: 20px">Minutes</label>
-          <label style="margin-left: 11px">Seconds</label>
+      </div>
+
+      <hr />
+
+      <div class="blockedSites__Field">
+        <label class="universal_Color" style="font-weight: bold; min-font-size: 16px; font-size: min(30px, 3.9vw)">Blocked Sites</label>
+        <div class="universal_Color" style="font-size: min(27px, 3.6vw)">
+          <label style="margin-left: 15px">URL</label>
+          <label style="margin-left: min(358px, 32.694063926940636vw)">Type</label>
+          <label style="margin-left: min(165px, 12.64367816091954vw)">Time Left</label>
         </div>
-      </div>
-    </div>
 
-    <hr />
-
-    <div class="blockedSites__Field">
-      <label style="color: #646464; font-weight: bold; min-font-size: 16px; font-size: min(30px, 3.9vw)">Blocked Sites</label>
-      <div style="color: #767676; font-size: min(27px, 3.6vw)">
-        <label style="margin-left: 15px">URL</label>
-        <label style="margin-left: min(358px, 32.694063926940636vw)">Type</label>
-        <label style="margin-left: min(165px, 12.64367816091954vw)">Time Left</label>
-      </div>
-
-      <table class="table table-striped" style="background: transparent; color: transparent">
-        <body style="background: transparent; font-size: min(22px, 2.8017064846416381vw)">
-          <div class="blockedSites__rowField">
-            <div class="blockedSites__rows" *ngFor="let todo of todos; let i = index">
-              <label style="margin-left: 7px">{{ todo.link }}</label>
-              <label style="position: absolute; left: min(459px, 47.391058020477816vw)">{{ todo.type }}</label>
-              <label style="position: absolute; left: min(682px, 46.55290102389078vw)"
-                >{{ todo.days }}{{ todo.idk }}{{ todo.hours }}{{ todo.idk }}{{ todo.minutes }}{{ todo.idk }}{{ todo.seconds }}</label
-              >
-              <label style="position: absolute; left: min(682px, 64.55290102389078vw)"
-                >{{ todo.empty }}{{ todo.idk1 }}{{ todo.empty }}{{ todo.idk1 }}{{ todo.empty }}</label
-              >
-              <label></label>
-              <button class="blockedSites__Delete" (click)="remove(i)">X</button>
+        <table class="table table-striped" style="background: transparent; color: transparent">
+          <body class="universal_Color" style="background: transparent; font-size: min(22px, 2.8017064846416381vw)">
+            <div class="blockedSites__rowField">
+              <div class="blockedSites__rows" *ngFor="let todo of todos; let i = index">
+                <label style="margin-left: 7px">{{ todo.link }}</label>
+                <label style="position: absolute; left: min(459px, 47.391058020477816vw)">{{ todo.type }}</label>
+                <label style="position: absolute; left: min(682px, 46.55290102389078vw)"
+                  >{{ todo.days }}{{ todo.idk }}{{ todo.hours }}{{ todo.idk }}{{ todo.minutes }}{{ todo.idk }}{{ todo.seconds }}</label
+                >
+                <label style="position: absolute; left: min(682px, 64.55290102389078vw)"
+                  >{{ todo.empty }}{{ todo.idk1 }}{{ todo.empty }}{{ todo.idk1 }}{{ todo.empty }}</label
+                >
+                <label></label>
+                <button class="blockedSites__Delete" (click)="remove(i)">X</button>
+              </div>
             </div>
-          </div>
-        </body>
-      </table>
+          </body>
+        </table>
+      </div>
     </div>
   </div>
 </html>
