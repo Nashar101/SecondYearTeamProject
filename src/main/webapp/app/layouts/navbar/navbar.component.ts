@@ -24,6 +24,7 @@ export class NavbarComponent implements OnInit {
   version = '';
   account: Account | null = null;
   entitiesNavbarItems: any[] = [];
+  accountTextColor = 'var(--text-color)';
 
   constructor(
     private loginService: LoginService,
@@ -49,6 +50,11 @@ export class NavbarComponent implements OnInit {
       this.account = account;
     });
     this.listInit();
+
+    const firstNavItem = document.querySelector('.nav-item');
+    if (firstNavItem) {
+      firstNavItem.classList.add('init');
+    }
   }
 
   check: number = 0;
@@ -61,27 +67,27 @@ export class NavbarComponent implements OnInit {
       li.classList.add('clicked');
     });
   }
-  highlight() {
-    const liItems = document.querySelectorAll('li');
-    liItems.forEach(li => {
-      li.addEventListener('load', () => {
-        console.log('testing');
-      });
-    });
-    this.check++;
-
-    liItems.forEach(li => {
-      li.addEventListener('click', () => {
-        liItems.forEach(item => {
-          item.classList.remove('clicked');
-          li.classList.remove('init');
-        });
-        li.classList.add('clicked');
-      });
-    });
-    console.log(this.check);
-    console.log('I work');
-  }
+  //highlight() {
+  //  const liItems = document.querySelectorAll('li');
+  //  liItems.forEach(li => {
+  //    li.addEventListener('load', () => {
+  //      console.log('testing');
+  //    });
+  //  });
+  //  this.check++;
+  //
+  //  liItems.forEach(li => {
+  //    li.addEventListener('click', () => {
+  //      liItems.forEach(item => {
+  //        item.classList.remove('clicked');
+  //        li.classList.remove('init');
+  //      });
+  //      li.classList.add('clicked');
+  //    });
+  //  });
+  //  console.log(this.check);
+  //  console.log('I work');
+  //}
   changeLanguage(languageKey: string): void {
     this.sessionStorageService.store('locale', languageKey);
     this.translateService.use(languageKey);
