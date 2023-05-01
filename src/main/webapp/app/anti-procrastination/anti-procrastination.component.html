@@ -13,8 +13,8 @@
       <div class="addWebsite">
         <h1 class="universal_Color" style="font-weight: bold">Add a website</h1>
         <div class="addWebsite__Field" style="display: flex">
-          <textarea class="addWebsite__URL" placeholder="Enter a website URL" [(ngModel)]="newTodo"></textarea>
-          <textarea class="addWebsite__ID" placeholder="Enter extensionID" [(ngModel)]="extensionID"></textarea>
+          <textarea class="addWebsite__URL" placeholder="Enter a website URL" role="Enter website URL" [(ngModel)]="newTodo"></textarea>
+          <textarea class="addWebsite__ID" placeholder="Enter extensionID" role="Enter extension ID" [(ngModel)]="extensionID"></textarea>
           <button class="urlButton" type="button" (click)="setExtensionID()">+</button>
         </div>
 
@@ -29,7 +29,7 @@
               <label class="universal_Color" style="font-size: min(22px, 2.7vw); padding-right: 1.5rem; font-family: 'Poppins', sans-serif"
                 >Permanent</label
               >
-              <input id="Permanent?" type="checkbox" class="larger" />
+              <input id="Permanent?" type="checkbox" class="larger" role="Permanent" />
             </div>
             <div style="padding-top: 0.8rem; padding-left: 2rem; display: flex">
               <div class="universal_Color" style="padding-left: 2px; display: flex">
@@ -41,6 +41,7 @@
                   max="99"
                   maxlength="2"
                   class="size"
+                  role="Days"
                   style="text-align: center; outline: none; border: none"
                   [(ngModel)]="days"
                 />
@@ -53,6 +54,7 @@
                   maxlength="2"
                   class="size"
                   style="text-align: center; outline: none; border: none"
+                  role="Hours"
                   [(ngModel)]="hours"
                 />
                 <b style="font-size: 30px; margin-top: -6px">:</b>
@@ -64,6 +66,7 @@
                   maxlength="2"
                   class="size"
                   style="text-align: center; outline: none; border: none"
+                  role="Minutes"
                   [(ngModel)]="minutes"
                 />
                 <b style="font-size: 30px; margin-top: -6px">:</b>
@@ -75,6 +78,7 @@
                   maxlength="2"
                   class="size"
                   style="text-align: center; outline: none; border: none"
+                  role="seconds"
                   [(ngModel)]="seconds"
                 />
               </div>
@@ -84,6 +88,7 @@
                   style="margin-top: -7px; margin-left: 35px; padding: -10px; font-size: 30px; border: none; background: transparent"
                   type="button"
                   (click)="saveTodo()"
+                  role="add"
                 >
                   +
                 </button>
@@ -122,7 +127,7 @@
                   >{{ todo.empty }}{{ todo.idk1 }}{{ todo.empty }}{{ todo.idk1 }}{{ todo.empty }}</label
                 >
                 <label></label>
-                <button class="blockedSites__Delete" (click)="remove(i)">X</button>
+                <button class="blockedSites__Delete" role="remove" (click)="remove(i)">X</button>
               </div>
             </div>
           </body>

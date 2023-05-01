@@ -4,7 +4,8 @@ Main page styles
 
 .home__container {
   padding: 1rem;
-  background-color: #e0e4e7;
+  background-color: var(--background-color);
+  border-radius: 15px;
 }
 .home__container__welcome {
   display: flex;
@@ -24,7 +25,7 @@ Main page styles
   font-weight: 400;
   font-size: 30px;
 
-  color: #878787;
+  color: var(--login-fg);
   max-width: 500px;
   padding-left: 16px;
 }
