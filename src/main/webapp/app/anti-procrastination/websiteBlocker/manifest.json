@@ -1,10 +1,10 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Anti-Procrastination",
   "version": "0.0.1",
   "type": "module",
   "background": {
-    "scripts": ["background.js"]
+    "service_worker": "background.js"
   },
   "externally_connectable": {
     "matches": ["<all_urls>"]
@@ -12,7 +12,7 @@
   "browser_action": {
     "default_popup": "popup.html"
   },
-  "permissions": ["storage", "activeTab"],
+  "permissions": ["storage"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],

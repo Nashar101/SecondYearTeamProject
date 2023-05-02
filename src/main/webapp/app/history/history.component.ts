@@ -35,7 +35,6 @@ export class HistoryComponent implements OnInit {
         this.historyItems = response.body || [];
         this.historyItems = this.historyItems.filter(list => list.user?.id === userID);
         let historyList = new list();
-        console.log('TESTING' + this.historyItems[0].subject);
         for (let i = 0; i < this.historyItems.length; i++) {
           //@ts-ignore
           historyList.subject[i] = this.historyItems[i].subject;
@@ -49,48 +48,51 @@ export class HistoryComponent implements OnInit {
           historyList.upcomingTestTarget[i] = this.historyItems[i].upcomingTestTarget;
         }
         this.newList = historyList;
-
-        this.myChart = new Chart('myChart', {
-          type: 'line',
-          data: {
-            labels: this.newList.subject,
-            datasets: [
-              {
-                label: 'Test Grades',
-                data: this.newList.subjectScore,
-                borderWidth: 4,
-                borderColor: '#C20505',
-              },
-            ],
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: true,
-                border: {
-                  color: '#F5F5F5',
+        console.log('this is list length' + this.newList.subject.length);
+        if (this.newList.subject.length !== 0) {
+          console.log('list not empty, printing chart');
+          this.myChart = new Chart('myChart', {
+            type: 'line',
+            data: {
+              labels: this.newList.subject,
+              datasets: [
+                {
+                  label: 'Test Grades',
+                  data: this.newList.subjectScore,
+                  borderWidth: 4,
+                  borderColor: '#C20505',
                 },
-                grid: {
-                  color: '#FAF8F8',
+              ],
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  border: {
+                    color: '#F5F5F5',
+                  },
+                  grid: {
+                    color: '#FAF8F8',
+                  },
+                  ticks: {
+                    color: '#A8A8A8',
+                  },
                 },
-                ticks: {
-                  color: '#A8A8A8',
-                },
-              },
-              x: {
-                border: {
-                  color: '#FAF8F8',
-                },
-                grid: {
-                  display: false,
-                },
-                ticks: {
-                  color: '#A8A8A8',
+                x: {
+                  border: {
+                    color: '#FAF8F8',
+                  },
+                  grid: {
+                    display: false,
+                  },
+                  ticks: {
+                    color: '#A8A8A8',
+                  },
                 },
               },
             },
-          },
-        });
+          });
+        }
       });
     });
   }
@@ -118,12 +120,13 @@ export class HistoryComponent implements OnInit {
             user: { id: userId, login: account.login },
           };
           this.historyListService.create(newItem).subscribe();
-          this.newList.subject.push(this.newSubject);
-          this.newList.subjectScore.push(this.score);
+          //this.newList.subject.push(this.newSubject);
+          //this.newList.subjectScore.push(this.score);
           this.newSubject = '';
           this.score = 0;
-
-          this.myChart.destroy();
+          if (this.newList.subject.length !== 0) {
+            this.myChart.destroy();
+          }
           this.init();
         });
       }
