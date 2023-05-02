@@ -1,0 +1,29 @@
+{
+  "teamprojectApp": {
+    "historyTwo": {
+      "home": {
+        "title": "History Twos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new History Two",
+        "createOrEditLabel": "Create or edit a History Two",
+        "notFound": "No History Twos found"
+      },
+      "created": "A new History Two is created with identifier {{ param }}",
+      "updated": "A History Two is updated with identifier {{ param }}",
+      "deleted": "A History Two is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete History Two {{ id }}?"
+      },
+      "detail": {
+        "title": "History Two"
+      },
+      "id": "ID",
+      "subject": "Subject",
+      "subjectScore": "Subject Score",
+      "subjectTarget": "Subject Target",
+      "upcomingTest": "Upcoming Test",
+      "upcomingTestTarget": "Upcoming Test Target",
+      "user": "User"
+    }
+  }
+}
