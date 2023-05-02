@@ -61,8 +61,11 @@ button {
 }
 
 .logo-img-slogan {
+  position: absolute;
   width: 500px;
   height: 231px;
+  bottom: 30px;
+  right: 30px;
   display: inline-block;
   vertical-align: middle;
   background: url('../../content/images/logo-slogan.png') no-repeat center center;
