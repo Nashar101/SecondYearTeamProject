@@ -45,12 +45,18 @@ spring:
   liquibase:
     contexts: prod
   mail:
-    host: localhost
-    port: 25
-    username:
-    password:
-  thymeleaf:
-    cache: true
+    host: smtp.gmail.com
+    port: 587
+    username: antiprocrastapp@gmail.com
+    password: gsfwalqhyhzrjvdy
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    thymeleaf:
+      cache: true
 
 # ===================================================================
 # To enable TLS in production, generate a certificate using:

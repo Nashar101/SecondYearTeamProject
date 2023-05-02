@@ -359,6 +359,8 @@ export class AntiProcrastinationComponent implements OnInit {
       this.extensionIDService.update(this.idlist[0]).subscribe();
     });
     this.clear10();
+    this.todos = [];
+    this.loadAll();
   }
 
   clear10() {
