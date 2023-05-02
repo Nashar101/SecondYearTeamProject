@@ -60,6 +60,15 @@ button {
   bottom: 5px;
 }
 
+.logo-img-slogan {
+  width: 500px;
+  height: 231px;
+  display: inline-block;
+  vertical-align: middle;
+  background: url('../../content/images/logo-slogan.png') no-repeat center center;
+  background-size: contain;
+}
+
 .resize {
   width: 400px;
   height: auto;
