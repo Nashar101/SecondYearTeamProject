@@ -116,6 +116,7 @@ function startCountDown() {
 let blockedSite = '';
 
 function main() {
+  //refresh
   for (let i = 0; i < blockedsites.length; i++) {
     if (window.location.hostname == blockedsites[i].toString() || window.location.href == blockedsites[i].toString()) {
       document.body.innerHTML = generateHTML('site is blocked');
