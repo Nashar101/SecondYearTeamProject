@@ -97,40 +97,73 @@ export class HistoryComponent implements OnInit {
     });
   }
 
+  upcomingFunc(): void {}
+
   newSubject: string = '';
   //@ts-ignore
   score: number;
+
+  //@ts-ignore
+  target: number;
   constructor(private accountService: AccountService, private http: HttpClient, protected historyListService: HistoryTwoService) {}
   add(): void {
-    if (this.newSubject === '' || this.score === 0) {
+    if (this.newSubject === '') {
       return;
+    } else if (this.target === 0 || this.target == null) {
+      this.accountService.identity().subscribe(account => {
+        if (account) {
+          console.log(account.login);
+          this.http.get<any>('/api/account').subscribe(account => {
+            const userId = account.id;
+            //@ts-ignore
+            const newItem: NewHistoryTwo = {
+              subject: this.newSubject,
+              subjectScore: this.score,
+              subjectTarget: 0,
+              upcomingTest: '',
+              upcomingTestTarget: 0,
+              user: { id: userId, login: account.login },
+            };
+            this.historyListService.create(newItem).subscribe();
+            //this.newList.subject.push(this.newSubject);
+            //this.newList.subjectScore.push(this.score);
+            this.newSubject = '';
+            this.score = 0;
+            if (this.newList.subject.length !== 0) {
+              this.myChart.destroy();
+            }
+            this.init();
+          });
+        }
+      });
+    } else if (this.score === 0 || this.score == null) {
+      this.accountService.identity().subscribe(account => {
+        if (account) {
+          console.log(account.login);
+          this.http.get<any>('/api/account').subscribe(account => {
+            const userId = account.id;
+            //@ts-ignore
+            const newItem: NewHistoryTwo = {
+              subject: '',
+              subjectScore: 0,
+              subjectTarget: this.target,
+              upcomingTest: this.newSubject,
+              upcomingTestTarget: this.target,
+              user: { id: userId, login: account.login },
+            };
+            this.historyListService.create(newItem).subscribe();
+            //this.newList.subject.push(this.newSubject);
+            //this.newList.subjectScore.push(this.score);
+            this.newSubject = '';
+            this.score = 0;
+            if (this.newList.subject.length !== 0) {
+              this.myChart.destroy();
+            }
+            this.init();
+          });
+        }
+      });
     }
-    this.accountService.identity().subscribe(account => {
-      if (account) {
-        console.log(account.login);
-        this.http.get<any>('/api/account').subscribe(account => {
-          const userId = account.id;
-          //@ts-ignore
-          const newItem: NewHistoryTwo = {
-            subject: this.newSubject,
-            subjectScore: this.score,
-            subjectTarget: 0,
-            upcomingTest: '',
-            upcomingTestTarget: 0,
-            user: { id: userId, login: account.login },
-          };
-          this.historyListService.create(newItem).subscribe();
-          //this.newList.subject.push(this.newSubject);
-          //this.newList.subjectScore.push(this.score);
-          this.newSubject = '';
-          this.score = 0;
-          if (this.newList.subject.length !== 0) {
-            this.myChart.destroy();
-          }
-          this.init();
-        });
-      }
-    });
   }
   ngOnInit(): void {
     let labels: string[] = ['Maths Test 1', 'English Test 1', 'Biology Test 1', 'Maths Test 2', 'Maths Test 3'];
