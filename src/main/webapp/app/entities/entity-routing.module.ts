@@ -81,6 +81,11 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'teamprojectApp.extensionID.home.title' },
         loadChildren: () => import('./extension-id/extension-id.module').then(m => m.ExtensionIDModule),
       },
+      {
+        path: 'history-two',
+        data: { pageTitle: 'teamprojectApp.historyTwo.home.title' },
+        loadChildren: () => import('./history-two/history-two.module').then(m => m.HistoryTwoModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

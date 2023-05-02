@@ -6,6 +6,7 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import dayjs from 'dayjs/esm';
 
 import { AccountService } from 'app/core/auth/account.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'jhi-main',
@@ -22,6 +23,7 @@ export class MainComponent implements OnInit {
     private router: Router,
     private translateService: TranslateService,
     private elementRef: ElementRef,
+    private http: HttpClient,
     rootRenderer: RendererFactory2,
     @Inject(DOCUMENT) private document: Document
   ) {

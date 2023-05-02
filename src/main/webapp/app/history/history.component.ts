@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
 
-import { HistoryService } from '../entities/history/service/history.service';
-import { IHistory, NewHistory } from '../entities/history/history.model';
-
+import { HistoryTwoService } from '../entities/history-two/service/history-two.service';
+import { IHistoryTwo, NewHistoryTwo } from '../entities/history-two/history-two.model';
 import { AccountService } from '../core/auth/account.service';
 import { HttpClient } from '@angular/common/http';
+
 export class list {
   ID!: number;
   subjectScore: number[] = [];
@@ -22,10 +22,11 @@ export class list {
   styleUrls: ['./history.component.scss'],
 })
 export class HistoryComponent implements OnInit {
-  historyItems?: IHistory[];
+  historyItems?: IHistoryTwo[];
   //@ts-ignore
   newList: list;
-
+  //@ts-ignore
+  myChart: Chart;
   init(): void {
     this.http.get<any>('/api/account').subscribe(account => {
       const userID = account.id;
@@ -48,9 +49,8 @@ export class HistoryComponent implements OnInit {
           historyList.upcomingTestTarget[i] = this.historyItems[i].upcomingTestTarget;
         }
         this.newList = historyList;
-        let labels: string[] = ['Maths Test 1', 'English Test 1', 'Biology Test 1', 'Maths Test 2', 'Maths Test 3'];
-        let itemData: number[] = [80, 70, 85, 90, 87];
-        var myChart = new Chart('myChart', {
+
+        this.myChart = new Chart('myChart', {
           type: 'line',
           data: {
             labels: this.newList.subject,
@@ -94,30 +94,41 @@ export class HistoryComponent implements OnInit {
       });
     });
   }
-  constructor(private accountService: AccountService, private http: HttpClient, protected historyListService: HistoryService) {}
 
-  /**add(): void{
+  newSubject: string = '';
+  //@ts-ignore
+  score: number;
+  constructor(private accountService: AccountService, private http: HttpClient, protected historyListService: HistoryTwoService) {}
+  add(): void {
+    if (this.newSubject === '' || this.score === 0) {
+      return;
+    }
     this.accountService.identity().subscribe(account => {
       if (account) {
         console.log(account.login);
-        this.http.get<any>('/api/account').subscribe(response => {
-          const userId = response.id;
+        this.http.get<any>('/api/account').subscribe(account => {
+          const userId = account.id;
           //@ts-ignore
-          const newItem: NewHistory = {
-            subject: this.newList[0].subject,
-            subjectScore:  this.newList[0].subjectScore,
-            subjectTarget: this.newList[0].subjectTarget,
-            upcomingTest: this.newList[0].upcomingTest,
-            upcomingTestTarget : this.newList[0].upcomingTestTarget,
+          const newItem: NewHistoryTwo = {
+            subject: this.newSubject,
+            subjectScore: this.score,
+            subjectTarget: 0,
+            upcomingTest: '',
+            upcomingTestTarget: 0,
             user: { id: userId, login: account.login },
           };
           this.historyListService.create(newItem).subscribe();
+          this.newList.subject.push(this.newSubject);
+          this.newList.subjectScore.push(this.score);
+          this.newSubject = '';
+          this.score = 0;
+
+          this.myChart.destroy();
           this.init();
         });
       }
     });
-
-  }**/
+  }
   ngOnInit(): void {
     let labels: string[] = ['Maths Test 1', 'English Test 1', 'Biology Test 1', 'Maths Test 2', 'Maths Test 3'];
     let itemData: number[] = [80, 70, 85, 90, 87];

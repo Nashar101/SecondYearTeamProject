@@ -29,16 +29,16 @@
         </div>
         <span class="whatSubject">
           <h3>Subject</h3>
-          <input id="subjectValue" name="subjectValue" />
+          <input id="subjectValue" name="subjectValue" [(ngModel)]="newSubject" />
         </span>
         <div class="target&date">
           <div class="target">
             <h3>Target</h3>
-            <input id="targetValue" name="targetValue" />
+            <input id="targetValue" name="targetValue" [(ngModel)]="score" />
           </div>
         </div>
       </div>
-
+      <button (click)="add()">+</button>
       <div class="upcomingTest">
         <h1>Upcoming Test</h1>
         <div class="upcomingTestDisplay">

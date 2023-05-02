@@ -1,14 +1,10 @@
-let i = 0;
 let blockedSites = [];
 let permaBlocked = [];
 let timeRemaining = [];
-let extensionID1 = chrome.runtime.id;
-let testing = 100;
 chrome.runtime.onMessageExternal.addListener(function (request, sender, sendResponse) {
   if (request.openUrlInEditor) {
     blockedSites.push(request.openUrlInEditor);
     timeRemaining.push(request.displayTimeRemaining);
-    i++;
     //alert('message received ' + request.openUrlInEditor + ' ' + request.displayTimeRemaining);
     sendResponse({ success: true, AckFromBG: 'I have received your messgae. Thanks!' }); // sending back the acknowlege to the webpage
     console.log('List now contains');
@@ -25,9 +21,7 @@ chrome.runtime.onMessageExternal.addListener(function (request, sender, sendResp
     timeRemaining = timeRemaining.splice(request.remove, 1);
     localStorage.setItem('LIST', JSON.stringify(blockedSites));
     localStorage.setItem('LIST1', JSON.stringify(timeRemaining));
-    chrome.storage.local.set({ foo: blockedSites }, function () {
-      //console.log('Settings saved');
-    });
+    chrome.storage.local.set({ foo: blockedSites }, function () {});
     chrome.storage.local.set({ foo1: timeRemaining }, function () {});
     return true;
   } else if (request.Permdelete) {
