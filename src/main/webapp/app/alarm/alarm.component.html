@@ -84,7 +84,7 @@
               <label> {{ alarm.hours }}:{{ alarm.minutes }}:{{ alarm.seconds }} </label>
             </td>
             <td class="buttonField">
-              <button class="alarmPlayPause" (click)="this.alarm.ticking = togglePlay(this.alarm.ticking, this.alarm.id)"></button>
+              <button class="alarmPlayPause" (click)="play(i)"></button>
             </td>
             <td class="buttonField"><button class="alarmDeleteButton" (click)="deleteAlarm(this.alarm.id)">X</button></td>
           </tr>
