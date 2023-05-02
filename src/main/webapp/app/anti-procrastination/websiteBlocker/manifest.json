@@ -6,6 +6,9 @@
   "background": {
     "scripts": ["background.js"]
   },
+  "icons": {
+    "128": "logo1-hat.png"
+  },
   "externally_connectable": {
     "matches": ["<all_urls>"]
   },

@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="historyTwo">
+      <h2 data-cy="historyTwoDetailsHeading"><span jhiTranslate="teamprojectApp.historyTwo.detail.title">History Two</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ historyTwo.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.historyTwo.subject">Subject</span></dt>
+        <dd>
+          <span>{{ historyTwo.subject }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.historyTwo.subjectScore">Subject Score</span></dt>
+        <dd>
+          <span>{{ historyTwo.subjectScore }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.historyTwo.subjectTarget">Subject Target</span></dt>
+        <dd>
+          <span>{{ historyTwo.subjectTarget }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.historyTwo.upcomingTest">Upcoming Test</span></dt>
+        <dd>
+          <span>{{ historyTwo.upcomingTest }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.historyTwo.upcomingTestTarget">Upcoming Test Target</span></dt>
+        <dd>
+          <span>{{ historyTwo.upcomingTestTarget }}</span>
+        </dd>
+        <dt><span jhiTranslate="teamprojectApp.historyTwo.user">User</span></dt>
+        <dd>
+          <span>{{ historyTwo.user?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/history-two', historyTwo.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

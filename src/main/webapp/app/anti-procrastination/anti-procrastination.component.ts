@@ -5,10 +5,20 @@ import {
 } from '../entities/antiprocrastination-list-two/antiprocrastination-list-two.model';
 import { AntiprocrastinationListTwoService } from '../entities/antiprocrastination-list-two/service/antiprocrastination-list-two.service';
 import { ExtensionIDService } from '../entities/extension-id/service/extension-id.service';
-import { AccountService } from '../core/auth/account.service';
-import { HttpClient } from '@angular/common/http';
-import dayjs from 'dayjs';
+
 import { IExtensionID } from '../entities/extension-id/extension-id.model';
+
+import { AccountService } from '../core/auth/account.service';
+import dayjs from 'dayjs';
+import { HttpClient } from '@angular/common/http';
+
+export class scheduleList {
+  start!: Date;
+  end!: Date;
+  heading!: string;
+  date!: Date;
+  details!: string;
+}
 
 export class List {
   id!: number;
@@ -38,10 +48,11 @@ export class AntiProcrastinationComponent implements OnInit {
     private http: HttpClient
   ) {}
 
+  //this function takes items from schedule database and populates a list in our component
+
   ngOnInit(): void {
     this.getExtensionID();
     console.log(this.extensionID2);
-    this.loadAll();
   }
   // List used to display data on the website
   todos: List[] = [];
@@ -65,6 +76,9 @@ export class AntiProcrastinationComponent implements OnInit {
         this.extensionID2 = this.idlist[0].extensionID;
         console.log(this.extensionID2);
         this.exID = this.idlist[0].id;
+
+        this.isEmpty();
+        this.loadAll();
       });
     });
   }
@@ -79,7 +93,6 @@ export class AntiProcrastinationComponent implements OnInit {
         this.listItems = items;
         this.listItems = this.listItems.filter(list => list.user?.id === userID);
         //@ts-ignore
-        this.getExtensionID();
 
         //this.setExtensionID();
         for (let i = 0; i < items.length; i++) {
@@ -133,9 +146,6 @@ export class AntiProcrastinationComponent implements OnInit {
         }
       });
     });
-    if (this.todos.length === 0) {
-      this.isEmpty();
-    }
   }
   isEmpty() {
     chrome.runtime.sendMessage(this.extensionID2, { empty: 'empty' }, function (response) {
@@ -249,6 +259,7 @@ export class AntiProcrastinationComponent implements OnInit {
     }, 1000);
   }
 
+  // this adds a site to my database
   setAll(
     link: string,
     type: string,
@@ -290,7 +301,7 @@ export class AntiProcrastinationComponent implements OnInit {
       }
     });
   }
-  //remove link from database after timer hits 0
+  //remove link from database after timer hits 0 or user clicks on x
   delete(id: number) {
     this.antiProcrastinationListService2.delete(id).subscribe();
   }
@@ -318,7 +329,7 @@ export class AntiProcrastinationComponent implements OnInit {
       alert('The action was cancelled');
     }
   }
-  //set Chrome extension ID on startup
+  //set Chrome extension ID on startup or edit it if it already exists
   setExtensionID() {
     let previous = this.extensionID2;
     if (this.extensionID.length != 32) {

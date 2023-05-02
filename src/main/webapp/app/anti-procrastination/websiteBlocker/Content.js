@@ -43,21 +43,6 @@ function boot() {
     subject: 'showPageAction',
   });
 
-  chrome.runtime.onMessage.addListener((msg, sender, response) => {
-    // First, validate the message's structure.
-    if (msg.from === 'popup' && msg.subject === 'DOMInfo') {
-      // Collect the necessary data.
-      // (For your specific requirements `document.querySelectorAll(...)`
-      //  should be equivalent to jquery's `$(...)`.)
-      var domInfo = {
-        ExtensionID: chrome.runtime.id,
-      };
-
-      // Directly respond to the sender (popup),
-      // through the specified callback.
-      response(domInfo);
-    }
-  });
   updateList();
 }
 
@@ -116,6 +101,7 @@ function startCountDown() {
 let blockedSite = '';
 
 function main() {
+  //refresh
   for (let i = 0; i < blockedsites.length; i++) {
     if (window.location.hostname == blockedsites[i].toString() || window.location.href == blockedsites[i].toString()) {
       document.body.innerHTML = generateHTML('site is blocked');

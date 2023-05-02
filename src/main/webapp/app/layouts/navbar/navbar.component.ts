@@ -10,6 +10,8 @@ import { AccountService } from 'app/core/auth/account.service';
 import { LoginService } from 'app/login/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
 import { EntityNavbarItems } from 'app/entities/entity-navbar-items';
+import { HttpClient } from '@angular/common/http';
+import closeDocument = chrome.offscreen.closeDocument;
 
 @Component({
   selector: 'jhi-navbar',
@@ -32,7 +34,8 @@ export class NavbarComponent implements OnInit {
     private sessionStorageService: SessionStorageService,
     private accountService: AccountService,
     private profileService: ProfileService,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {
     if (VERSION) {
       this.version = VERSION.toLowerCase().startsWith('v') ? VERSION : `v${VERSION}`;
@@ -67,27 +70,6 @@ export class NavbarComponent implements OnInit {
       li.classList.add('clicked');
     });
   }
-  //highlight() {
-  //  const liItems = document.querySelectorAll('li');
-  //  liItems.forEach(li => {
-  //    li.addEventListener('load', () => {
-  //      console.log('testing');
-  //    });
-  //  });
-  //  this.check++;
-  //
-  //  liItems.forEach(li => {
-  //    li.addEventListener('click', () => {
-  //      liItems.forEach(item => {
-  //        item.classList.remove('clicked');
-  //        li.classList.remove('init');
-  //      });
-  //      li.classList.add('clicked');
-  //    });
-  //  });
-  //  console.log(this.check);
-  //  console.log('I work');
-  //}
   changeLanguage(languageKey: string): void {
     this.sessionStorageService.store('locale', languageKey);
     this.translateService.use(languageKey);

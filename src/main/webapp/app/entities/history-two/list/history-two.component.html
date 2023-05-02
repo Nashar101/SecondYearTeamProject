@@ -1,0 +1,125 @@
+<div>
+  <h2 id="page-heading" data-cy="HistoryTwoHeading">
+    <span jhiTranslate="teamprojectApp.historyTwo.home.title">History Twos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="teamprojectApp.historyTwo.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-history-two"
+        [routerLink]="['/history-two/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="teamprojectApp.historyTwo.home.createLabel"> Create a new History Two </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="historyTwos?.length === 0">
+    <span jhiTranslate="teamprojectApp.historyTwo.home.notFound">No History Twos found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="historyTwos && historyTwos.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="subject">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.historyTwo.subject">Subject</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="subjectScore">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.historyTwo.subjectScore">Subject Score</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="subjectTarget">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.historyTwo.subjectTarget">Subject Target</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="upcomingTest">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.historyTwo.upcomingTest">Upcoming Test</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="upcomingTestTarget">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.historyTwo.upcomingTestTarget">Upcoming Test Target</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="user.login">
+            <div class="d-flex">
+              <span jhiTranslate="teamprojectApp.historyTwo.user">User</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let historyTwo of historyTwos; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/history-two', historyTwo.id, 'view']">{{ historyTwo.id }}</a>
+          </td>
+          <td>{{ historyTwo.subject }}</td>
+          <td>{{ historyTwo.subjectScore }}</td>
+          <td>{{ historyTwo.subjectTarget }}</td>
+          <td>{{ historyTwo.upcomingTest }}</td>
+          <td>{{ historyTwo.upcomingTestTarget }}</td>
+          <td>
+            {{ historyTwo.user?.login }}
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/history-two', historyTwo.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/history-two', historyTwo.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(historyTwo)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

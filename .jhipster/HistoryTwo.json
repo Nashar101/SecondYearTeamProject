@@ -1,0 +1,43 @@
+{
+  "applications": "*",
+  "changelogDate": "20230501222343",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "history_two",
+  "fields": [
+    {
+      "fieldName": "subject",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "subjectScore",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "subjectTarget",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "upcomingTest",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "upcomingTestTarget",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "HistoryTwo",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "relationshipName": "user",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

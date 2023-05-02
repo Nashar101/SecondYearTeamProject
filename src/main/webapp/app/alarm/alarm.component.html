@@ -5,97 +5,108 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Alarm</title>
   </head>
-  <body style="min-height: 600px">
-    <h1 style="padding: 40px">Alarm</h1>
-    <div style="padding-left: 40px; width: 1000px">
-      <div class="optionsTab">
-        <div style="position: relative; left: 325px; bottom: 30px">
-          <label style="padding-right: 20px">Hours</label><label>Mins</label><label style="padding-left: 25px">Secs</label>
-        </div>
-        <div style="position: relative; right: 100px; display: flex">
-          <input placeholder="Insert alarm name" type="text" minlength="1" maxlength="24" [(ngModel)]="alarmName" />
-          <select id="typeBox" [(ngModel)]="type">
-            <option value="alarm">Alarm</option>
-            <option value="timer">Timer</option>
-          </select>
-          <div style="display: flex; padding-left: 20px">
-            <input
-              placeholder="0"
-              type="number"
-              min="0"
-              max="24"
-              style="text-align: right; background: #ebebeb; outline: none; border: none; width: 50px"
-              [(ngModel)]="hours"
-            />
-            <b style="font-size: 30px; margin-top: -6px; color: #424242">:</b>
-            <input
-              placeholder="00"
-              type="number"
-              min="0"
-              max="60"
-              style="text-align: right; background: #ebebeb; outline: none; border: none; width: 50px"
-              [(ngModel)]="minutes"
-            />
-            <b style="font-size: 30px; margin-top: -6px; color: #424242">:</b>
-            <input
-              placeholder="00"
-              type="number"
-              min="0"
-              max="60"
-              style="text-align: right; background: #ebebeb; outline: none; border: none; width: 50px"
-              [(ngModel)]="seconds"
-            />
-          </div>
-          <div style="padding-left: 20px">
-            <button class="alarmAddButton" (click)="saveAlarm()">+</button>
-            <button class="alarmClearButton" (click)="clearAlarms()">Clear</button>
-          </div>
-        </div>
+  <body class="body">
+    <h1 class="title-big">Alarm</h1>
+    <div class="optionsTab">
+      <span class="title">Create new alarm:</span>
+      <input
+        class="alarmNameText"
+        placeholder="Insert alarm name"
+        type="text"
+        minlength="1"
+        maxlength="24"
+        [(ngModel)]="alarmName"
+        (keydown)="handleKeydown($event)"
+        aria-label="Insert alarm name"
+      />
+      <select class="typeChoice" id="typeBox" [(ngModel)]="type" aria-label="Choose the type of alarm">
+        <option value="alarm" aria-label="alarm">Alarm</option>
+        <option value="timer" aria-label="timer">Timer</option>
+      </select>
+      <div class="timeHeader">
+        <label style="padding-right: 20px">Hours</label><label>Mins</label><label style="padding-left: 25px">Secs</label>
+      </div>
+      <div class="timeChoice">
+        <input
+          placeholder="0"
+          type="number"
+          min="0"
+          max="24"
+          class="timeBox"
+          [(ngModel)]="hours"
+          (keydown)="handleKeydown($event)"
+          aria-label="hours"
+        />
+        <b class="colon">:</b>
+        <input
+          placeholder="00"
+          type="number"
+          min="0"
+          max="60"
+          class="timeBox"
+          [(ngModel)]="minutes"
+          (keydown)="handleKeydown($event)"
+          aria-label="minutes"
+        />
+        <b class="colon">:</b>
+        <input
+          placeholder="00"
+          type="number"
+          min="0"
+          max="60"
+          class="timeBox"
+          [(ngModel)]="seconds"
+          (keydown)="handleKeydown($event)"
+          aria-label="seconds"
+        />
+      </div>
+      <div class="buttons">
+        <button class="alarmAddButton" (click)="saveAlarm()" aria-label="add alarm">
+          <span style="position: relative; top: -2px">+</span>
+        </button>
+        <button class="alarmClearButton" (click)="clearAlarms()" aria-label="clear all alarms">
+          <span style="position: relative; top: -2px">Clear</span>
+        </button>
       </div>
     </div>
-    <div>
-      <h4 style="display: inline-block; padding-left: 40px; padding-top: 20px">Active Alarms:</h4>
-      <h4 style="float: right; padding-top: 20px; padding-right: 590px">Finished Alarms:</h4>
-    </div>
-    <div style="padding-left: 40px">
-      <table class="tableAlarms">
-        <tr *ngFor="let alarm of alarms; let i = index" class="rowStyle">
-          <td>
-            <label>{{ alarm.id }}</label>
-          </td>
-          <td class="alarmNameField">
-            <label>{{ alarm.alarmName }}</label>
-          </td>
-          <td class="typeField">
-            <label>{{ alarm.type }}</label>
-          </td>
-          <td class="timeField">
-            <label> {{ alarm.hours }}:{{ alarm.minutes }}:{{ alarm.seconds }} </label>
-          </td>
-          <td class="buttonField">
-            <button class="alarmPlayPause" (click)="this.alarm.ticking = togglePlay(this.alarm.ticking, this.alarm.id)"></button>
-          </td>
-          <td class="buttonField"><button class="alarmDeleteButton" (click)="deleteAlarm(this.alarm.id)">X</button></td>
-        </tr>
-      </table>
-      <table class="tableFinishedAlarms">
-        <tr *ngFor="let alarm of finishedAlarms; let i = index" class="rowStyle">
-          <td>
-            <label>{{ alarm.id }}</label>
-          </td>
-          <td class="alarmNameField">
-            <label>{{ alarm.alarmName }}</label>
-          </td>
-
-          <td class="typeField">
-            <label>{{ alarm.type }}</label>
-          </td>
-          <td class="timeField">
-            <label> {{ alarm.hours }}:{{ alarm.minutes }}:{{ alarm.seconds }} </label>
-          </td>
-          <td class="buttonField"><button class="alarmDeleteButton" (click)="finishedAlarmDelete(this.alarm.id)">X</button></td>
-        </tr>
-      </table>
+    <div class="tables">
+      <div class="alarmsSection">
+        <span class="title">Active Alarms:</span>
+        <table class="tableAlarms">
+          <tr *ngFor="let alarm of alarms; let i = index" class="rowStyle" role="table">
+            <td class="alarmNameField">
+              <label>{{ alarm.alarmName }}</label>
+            </td>
+            <td class="typeField">
+              <label>{{ alarm.type }}</label>
+            </td>
+            <td class="timeField">
+              <label> {{ alarm.hours }}:{{ alarm.minutes }}:{{ alarm.seconds }} </label>
+            </td>
+            <td class="buttonField">
+              <button class="alarmPlayPause" (click)="play(i)"></button>
+            </td>
+            <td class="buttonField"><button class="alarmDeleteButton" (click)="deleteAlarm(this.alarm.id)">X</button></td>
+          </tr>
+        </table>
+      </div>
+      <div class="finishedAlarmsSection">
+        <span class="title">Finished Alarms:</span>
+        <table class="tableFinishedAlarms">
+          <tr *ngFor="let alarm of finishedAlarms; let i = index" class="rowStyle" role="table">
+            <td class="alarmNameField">
+              <label>{{ alarm.alarmName }}</label>
+            </td>
+            <td class="typeField">
+              <label>{{ alarm.type }}</label>
+            </td>
+            <td class="timeField">
+              <label> {{ alarm.hours }}:{{ alarm.minutes }}:{{ alarm.seconds }} </label>
+            </td>
+            <td class="buttonField"><button class="alarmDeleteButton" (click)="finishedAlarmDelete(this.alarm.id)">X</button></td>
+          </tr>
+        </table>
+      </div>
     </div>
   </body>
 </html>

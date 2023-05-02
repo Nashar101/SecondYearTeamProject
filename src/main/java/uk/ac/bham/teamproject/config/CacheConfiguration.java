@@ -66,6 +66,7 @@ public class CacheConfiguration {
             createCache(cm, uk.ac.bham.teamproject.domain.Notification.class.getName());
             createCache(cm, uk.ac.bham.teamproject.domain.AntiprocrastinationListTwo.class.getName());
             createCache(cm, uk.ac.bham.teamproject.domain.ExtensionID.class.getName());
+            createCache(cm, uk.ac.bham.teamproject.domain.HistoryTwo.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

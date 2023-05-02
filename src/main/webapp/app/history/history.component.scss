@@ -1,12 +1,13 @@
 body {
-  background-color: #e0e4e7;
+  background-color: var(--history-bg);
+  border-radius: 15px;
 }
 
 h1 {
   font-family: 'Raleway', sans-serif;
   font-weight: 600;
   font-size: 32px;
-  color: #444444;
+  color: var(--history-fg);
   padding: 0;
   margin: 0;
   margin-top: 15px;
@@ -18,14 +19,14 @@ h2 {
   font-weight: 600;
   font-size: 20px;
   line-height: 48px;
-  color: #565151;
+  color: var(--history-fg);
 }
 
 h3 {
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
   font-size: 20px;
-  color: #565151;
+  color: var(--history-fg);
   padding-bottom: 7px;
   padding-top: 7px;
   margin: 0;
@@ -36,7 +37,7 @@ h3 {
   grid-template-columns: 70% 30%;
   outline: #000000;
   height: 100%;
-  background-color: #e0e4e7;
+  background-color: var(--history-bg);
 }
 
 .yourProgress {
@@ -66,6 +67,7 @@ h3 {
   grid-row-end: 2;
   grid-column-start: 1;
   grid-column-end: 3;
+  padding-top: 1rem;
 }
 .whatSubject {
   margin-bottom: 20px;
@@ -83,11 +85,12 @@ input,
 select {
   width: 200px;
   height: 30px;
-  background: #ebebeb;
+  background: var(--history-input-bg);
   border-radius: 3px;
   outline: none;
   border-width: 0;
   border: none;
+  color: var(--login-fg);
 }
 
 *:focus {
@@ -95,10 +98,16 @@ select {
 }
 .upcomingTestDisplay {
   width: 100%;
-  height: 150px;
-  background: #e0e4e7;
+  background: var(--history-upcTstDsp);
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
-  margin-bottom: 15px;
+  padding-bottom: 1rem;
+}
+
+.buttonAdd {
+  margin: 6px;
+  background: var(--history-upcTstDsp);
+  color: var(--history-fg);
+  box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
 }
 
 .upcomingTestCards {
@@ -137,6 +146,6 @@ li {
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
-  color: #565151;
+  color: var(--history-fg);
   padding-top: 2px;
 }

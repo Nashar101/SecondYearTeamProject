@@ -4,7 +4,8 @@ Main page styles
 
 .home__container {
   padding: 1rem;
-  background-color: #e0e4e7;
+  background-color: var(--background-color);
+  border-radius: 15px;
 }
 .home__container__welcome {
   display: flex;
@@ -24,7 +25,7 @@ Main page styles
   font-weight: 400;
   font-size: 30px;
 
-  color: #878787;
+  color: var(--login-fg);
   max-width: 500px;
   padding-left: 16px;
 }
@@ -56,37 +57,23 @@ Main page styles
   margin-top: 30px;
 }
 
-.home__container-login input {
-  width: 400px;
-  height: 50px;
-  background: #ebebeb;
-  border-radius: 11px;
-  border: 0;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 400;
-  font-size: 19px;
-  /* identical to box height */
-}
-
 ::placeholder {
   color: #d2d2d2;
   padding-left: 1rem;
 }
 
-.home__container-login button {
-  width: 400px;
-  height: 50px;
-  background: #363d4e;
-  border-radius: 11px;
-  border: 0;
-  color: #ffffff;
-  font-family: 'Poppins', sans-serif;
-  font-size: 22px;
-}
-
 .home__container-logo {
   display: flex;
   justify-content: flex-end;
+}
+
+.logo-img-slogan {
+  width: 1000px;
+  height: 462px;
+  display: inline-block;
+  vertical-align: middle;
+  background: url('../../content/images/logo-slogan.png') no-repeat center center;
+  background-size: contain;
 }
 
 /*
