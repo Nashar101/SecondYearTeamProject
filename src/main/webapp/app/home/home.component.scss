@@ -67,6 +67,15 @@ Main page styles
   justify-content: flex-end;
 }
 
+.logo-img-slogan {
+  width: 1000px;
+  height: 462px;
+  display: inline-block;
+  vertical-align: middle;
+  background: url('../../content/images/logo-slogan.png') no-repeat center center;
+  background-size: contain;
+}
+
 /*
 .hipster {
   display: inline-block;

@@ -36,16 +36,16 @@
             <h3>Target</h3>
             <input id="targetValue" name="targetValue" [(ngModel)]="score" />
           </div>
+          <button class="buttonAdd" (click)="add()">+</button>
         </div>
       </div>
-      <button (click)="add()">+</button>
       <div class="upcomingTest">
         <h1>Upcoming Test</h1>
         <div class="upcomingTestDisplay">
           <div class="upcomingTestCards">
             <ul>
               <li class="upcomingTest-Subject">Maths</li>
-              <li class="upcomingTest-Target">Target</li>
+              <li class="upcomingTest-Target">Target Score</li>
             </ul>
           </div>
         </div>

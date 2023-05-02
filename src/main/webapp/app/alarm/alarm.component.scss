@@ -1,16 +1,28 @@
-.alarmAddButton {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background-color: #615ed9;
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center;
-  border: none;
-  outline: none;
-  cursor: pointer;
+.body {
+  background-color: var(--background-color);
+  transition-duration: 0.3s;
+  border-radius: 15px;
+  padding: 2%;
 }
+
+.title-big {
+  color: var(--text-color);
+  transition-duration: 0.3s;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--text-color);
+  transition-duration: 0.3s;
+}
+
+.colon {
+  font-size: 30px;
+  margin-top: -6px;
+  color: var(--text-color);
+}
+
 .alarmDeleteButton {
   width: 32px;
   height: 32px;
@@ -18,9 +30,9 @@
   text-align: center;
   font-weight: bold;
   border-radius: 50%;
-  background-color: red;
+  background-color: #797979;
   alignment: center;
-  color: white;
+  color: black;
   font-size: 20px;
   border: none;
   line-height: 0px;
@@ -31,16 +43,34 @@
   height: 32px;
   border-radius: 50%;
   alignment: center;
-  background: url(PlayPause5.png) center;
+  background: url(PlayPause.png) center;
   border: none;
   padding-bottom: 11px;
 }
+
+.alarmAddButton {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #797979;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
 .alarmClearButton {
+  position: relative;
+  top: -2px;
   width: 50px;
   height: 32px;
-  border-radius: 40%;
-  background-color: red;
-  color: white;
+  border-radius: 7px;
+  background-color: #797979;
+  color: black;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   border: none;
   outline: none;
   font-size: 16px;
@@ -49,44 +79,115 @@
 }
 
 .buttonField {
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 2px;
+  padding-right: 4px;
 }
 .alarmNameField {
   padding-left: 20px;
   font-size: 16px;
-  width: 250px;
+  width: 100%;
   font-weight: bold;
 }
 .typeField {
-  width: 50px;
+  width: 10%;
 }
 .timeField {
-  width: 100px;
+  width: 20%;
   padding: 20px;
 }
 .optionsTab {
-  padding-top: 30px;
-  padding-left: 40px;
-  padding-bottom: 30px;
-  display: flex;
-  background-color: white;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  position: relative;
+  display: compact;
+  padding: 5px 2% 5px 2%;
+  left: 0%;
+  width: 20%;
+  height: 75vh;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: var(--window-background-color);
 }
+.alarmNameText {
+  position: relative;
+  top: 2%;
+  width: 100%;
+  max-width: 100%;
+  background: var(--item-background-color);
+  color: var(--item-text-color);
+}
+
+.typeChoice {
+  position: relative;
+  top: 4%;
+  background: var(--item-background-color);
+  color: var(--item-text-color);
+}
+.timeChoice {
+  position: relative;
+  top: 6%;
+}
+.timeBox {
+  text-align: right;
+  background: var(--item-background-color);
+  color: var(--item-text-color);
+  outline: none;
+  border: none;
+  width: 20%;
+}
+.timeHeader {
+  position: relative;
+  top: 5.5%;
+  left: 3%;
+  color: var(--text-color);
+}
+.buttons {
+  position: relative;
+  top: 8%;
+}
+
 .rowStyle {
-  background: white;
+  background: var(--item-background-color);
+  color: var(--item-text-color);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  min-width: 100%;
+}
+
+.tables {
+  position: absolute;
+  top: 13%;
+  width: 90%;
+  right: 3%;
 }
 
 .tableAlarms {
-  display: inline-block;
+  border-collapse: separate;
+  border-spacing: 0 15px;
+  width: 100%;
+}
+.tableFinishedAlarms {
   border-collapse: separate;
   border-spacing: 0 15px;
 }
-.tableFinishedAlarms {
-  float: right;
-  color: red;
-  border-collapse: separate;
-  border-spacing: 0 15px;
-  padding-right: 250px;
+.alarmsSection {
+  position: absolute;
+  top: 10px;
+  right: 42%;
+  width: 40%;
+  height: 75vh;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: var(--window-background-color);
+  padding: 5px 2% 5px 2%;
+  transition: width 0.2s;
+}
+.finishedAlarmsSection {
+  position: absolute;
+  top: 10px;
+  right: 0%;
+  height: 75vh;
+  width: 40%;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: var(--window-background-color);
+  padding: 5px 2% 5px 2%;
+  transition: width 0.2s;
 }
