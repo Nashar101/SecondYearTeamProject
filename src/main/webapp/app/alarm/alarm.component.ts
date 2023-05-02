@@ -311,4 +311,11 @@ export class AlarmComponent implements OnInit {
     }
     return ticking;
   }
+  play(i: number) {
+    if (this.alarms[i].ticking === false) {
+      this.alarms[i].ticking = true;
+    } else {
+      this.alarms[i].ticking = false;
+    }
+  }
 }
