@@ -107,6 +107,8 @@
     "chartjs": "^0.3.24",
     "chrome-types": "^0.1.178",
     "dayjs": "1.11.5",
+    "global": "^4.4.0",
+    "moment": "^2.29.4",
     "ngx-infinite-scroll": "14.0.0",
     "ngx-webstorage": "10.0.1",
     "nodemailer": "^6.9.1",

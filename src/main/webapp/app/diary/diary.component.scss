@@ -3,12 +3,19 @@
   padding: 0;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: auto;
   background: var(--background-color-w);
   padding: 0;
   width: 100%;
   height: 100%;
+  display: block;
 }
 label {
   color: var(--anti-text-color-w);
