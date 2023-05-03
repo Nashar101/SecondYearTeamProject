@@ -77,8 +77,18 @@
           <p>Created: {{ selectedItem.creationTime }}</p>
           <p>Last Edited: {{ selectedItem.lastEditTime }}</p>
         </div>
-        <button class="save-button" (click)="saveChanges()" tabindex="0" aria-label="Save changes">Save</button>
-        <button class="cancel-button" (click)="cancelChanges()" tabindex="0" aria-label="Cancel changes">Cancel</button>
+        <button class="save-button" (click)="saveChanges()" tabindex="0" aria-label="Save changes" (keyup)="handleSaveKeydown($event)">
+          Save
+        </button>
+        <button
+          class="cancel-button"
+          (click)="cancelChanges()"
+          tabindex="0"
+          aria-label="Cancel changes"
+          (keyup)="handleCancelKeydown($event)"
+        >
+          Cancel
+        </button>
       </div>
     </div>
     <button class="delete-button" (click)="deleteItem()">
