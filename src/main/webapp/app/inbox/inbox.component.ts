@@ -1,12 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { ITodolistItem } from '../entities/todolist-item/todolist-item.model';
+import { EmailService } from '../entities/email/service/email.service';
+import { IEmail, NewEmail } from '../entities/email/email.model';
+import { TodolistItemService } from '../entities/todolist-item/service/todolist-item.service';
+import { UserService } from '../entities/user/user.service';
+import { AccountService } from '../core/auth/account.service';
+import { HttpClient } from '@angular/common/http';
 
-interface Email {
-  date: string;
-  sender: string;
-  subject: string;
-  selected: boolean;
+export class Email {
+  date!: string;
+  sender!: string;
+  subject!: string;
+  selected!: boolean;
+  content!: string;
+  id!: number;
 }
 
 @Component({
@@ -15,6 +22,7 @@ interface Email {
   styleUrls: ['./inbox.component.scss'],
 })
 export class InboxComponent implements OnInit {
+  constructor(private email: EmailService, private http: HttpClient) {}
   private readonly emailSubject = new BehaviorSubject<Email[]>([]);
   emails$: Observable<Email[]> = this.emailSubject.asObservable();
 
@@ -33,14 +41,36 @@ export class InboxComponent implements OnInit {
     this.emailSubject.next(emails);
   }
 
+  listItems?: IEmail[];
+  Init(): void {
+    this.http.get<any>('/api/account').subscribe(account => {
+      const userID = account.id;
+      console.log(userID);
+      this.email.query().subscribe(response => {
+        const items = response.body || [];
+        this.listItems = items;
+        this.listItems = this.listItems.filter(list => list.user?.id === userID);
+        for (let i = 0; i < this.listItems.length; i++) {
+          let add = new Email();
+          add.id = this.listItems[i].id;
+          //@ts-ignore
+          add.subject = this.listItems[i].subject;
+          //@ts-ignore
+          add.sender = this.listItems[i].recipient;
+          //@ts-ignore
+          add.selected = this.listItems[i].read;
+          //@ts-ignore
+          add.date = this.listItems[i].receivedDate;
+          //@ts-ignore
+          add.content = this.listItems[i].content;
+          this.emails.push(add);
+        }
+      });
+    });
+  }
+
   ngOnInit(): void {
-    this.emails = [
-      { date: 'April 26, 2023', sender: 'antiprocrastapp@gmail.com', subject: 'Task Completed', selected: false },
-      { date: 'March 14, 2023', sender: 'antiprocrastapp@gmail.com', subject: 'New URL blocked', selected: false },
-      { date: 'April 12, 2023', sender: 'antiprocrastapp@gmail.com', subject: 'Task Completed', selected: false },
-      { date: 'April 8, 2023', sender: 'antiprocrastapp@gmail.com', subject: 'New URL blocked', selected: false },
-      { date: 'April 19, 2023', sender: 'antiprocrastapp@gmail.com', subject: 'Task Completed', selected: false },
-    ];
+    this.Init();
   }
 
   sortEmails(sortType: string): void {
@@ -64,6 +94,7 @@ export class InboxComponent implements OnInit {
       this.emails.splice(index, 1);
       this.emails = [...this.emails];
     }
+    this.email.delete(email.id).subscribe();
   }
 
   deleteSelected() {

@@ -164,6 +164,22 @@ export class TodoListComponent implements OnInit {
     }
   }
 
+  handleSaveKeydown(event: KeyboardEvent) {
+    console.log('Save keydown event triggered');
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this.saveChanges();
+    }
+  }
+
+  handleCancelKeydown(event: KeyboardEvent) {
+    console.log('Cancel keydown event triggered');
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this.cancelChanges();
+    }
+  }
+
   ngOnInit(): void {
     this.loadAll();
   }
