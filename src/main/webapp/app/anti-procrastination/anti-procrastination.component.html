@@ -11,7 +11,13 @@
   <div style="border-radius: 25px">
     <div class="History">
       <div class="addWebsite">
-        <h1 class="universal_Color" style="font-weight: bold">Add a website</h1>
+        <div style="display: flex">
+          <h1 class="universal_Color" style="font-weight: bold">Add a website</h1>
+          <label class="universal_Color" style="margin-top: 30px; font-size: 18px"
+            >Please follow this <a href="https://youtu.be/yCel6FxPgW4">tutorial</a> in order to block websites</label
+          >
+        </div>
+
         <div class="addWebsite__Field" style="display: flex">
           <textarea class="addWebsite__URL" placeholder="Enter a website URL" role="Enter website URL" [(ngModel)]="newTodo"></textarea>
           <textarea class="addWebsite__ID" placeholder="Enter extensionID" role="Enter extension ID" [(ngModel)]="extensionID"></textarea>
