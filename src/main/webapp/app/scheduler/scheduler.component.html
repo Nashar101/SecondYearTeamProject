@@ -1,1 +1,200 @@
-<p>scheduler works!</p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Your Weekly Schedule</title>
+    <style>
+      table {
+        border-collapse: separate;
+        width: 100%;
+        border-spacing: 0.5em;
+      }
+      h1 {
+        text-align: center;
+        font-size: 2rem;
+      }
+      th,
+      td {
+        text-align: center;
+        font-size: 1rem;
+      }
+      #schedule-form {
+        position: absolute;
+        top: 50%;
+        left: 45%;
+        transform: translate(-15%, -15%);
+        width: 20em;
+        background-color: white;
+        border-radius: 1em;
+        padding: 1.5em;
+        box-shadow: 0em 0em 1em rgba(0, 0, 0, 0.3);
+        display: none;
+        font-size: 1rem;
+      }
+      #schedule-form input {
+        display: block;
+        margin-bottom: 1em;
+        width: 10em;
+        padding: 0.5em;
+        border-radius: 0.5em;
+        border: 0.1em solid black;
+      }
+      #schedule-form button {
+        display: block;
+        margin-top: 1em;
+        padding: 0.5em;
+        border-radius: 0.5em;
+        border: none;
+        background-color: lime;
+      }
+      .live-schedule-row {
+        background-color: #f5f5f5;
+      }
+      #add-schedule-btn {
+        background-color: lime;
+        font-size: 1rem;
+      }
+      .schedule-cell button {
+        background-color: lightskyblue;
+      }
+      .schedule-box {
+        background-color: #f5f5f5;
+        border-radius: 0.5em;
+        padding: 1em;
+        margin-bottom: 1em;
+        box-shadow: 0em 0em 1em rgba(0, 0, 0, 0.3);
+      }
+      .live-schedule-box {
+        background-color: #f5f5f5;
+        border-radius: 0.5em;
+        padding: 1em;
+        margin-bottom: 1em;
+        box-shadow: 0em 0em 1em rgba(0, 0, 0, 0.3);
+      }
+      .day-box {
+        background-color: #f5f5f5;
+        border-radius: 0.5em;
+        padding: 1em;
+        margin-bottom: 1em;
+        box-shadow: 0em 0em 1em rgba(0, 0, 0, 0.3);
+        height: 3em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+      }
+      #decrease-size {
+        position: absolute;
+        top: 1em;
+        right: 3.5em;
+        width: 1.5em;
+        background-color: red;
+      }
+      #increase-size {
+        position: absolute;
+        top: 1em;
+        right: 1em;
+        width: 1.5em;
+        background-color: lime;
+      }
+      .schedule-form-font {
+        font-size: 1rem;
+      }
+      :focus {
+        outline-color: deepskyblue;
+      }
+      #time-input {
+        width: 10em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Your Weekly Schedule</h1>
+    <button id="add-schedule-btn" (click)="open(); titlefocus()" aria-label="Add Schedule" tabindex="1" accesskey="a">Add Schedule</button>
+    <label for="font-size-input" tabindex="2">Change font size:</label>
+    <select id="font-size-input" name="font-size" (change)="onFontSizeChange()" tabindex="3">
+      <option value="16">Small</option>
+      <option value="18">Medium</option>
+      <option value="20">Large</option>
+    </select>
+    <div id="schedule-form" style="display: none" class="schedule-form-font">
+      <h2>Add Schedule</h2>
+      <label for="title-input">Title:</label>
+      <input type="text" id="title-input" name="title" [(ngModel)]="newschedule.title" />
+      <label for="description-input">Description:</label>
+      <input type="text" id="description-input" name="description" [(ngModel)]="newschedule.description" />
+      <label for="time-input">
+        Type in a time for this schedule in a day-month-year hour:minute:seconds - hour:minute:seconds format:</label
+      >
+      <span style="position: relative; top: 0.025px">(e.g 01-01-2023 12:00:00 - 14:00:00)</span>
+      <input type="text" id="time-input" name="time" style="width: 15em" [(ngModel)]="newschedule.time" />
+      <label for="day-input">Select a day you would like to put this schedule in:</label>
+      <select id="day-input" name="day" [(ngModel)]="day">
+        <option value="Monday">Monday</option>
+        <option value="Tuesday">Tuesday</option>
+        <option value="Wednesday">Wednesday</option>
+        <option value="Thursday">Thursday</option>
+        <option value="Friday">Friday</option>
+        <option value="Saturday">Saturday</option>
+        <option value="Sunday">Sunday</option>
+      </select>
+      <button id="add-btn" (click)="add()" aria-label="Add">Add</button>
+      <button id="cancel-btn" (click)="close()" style="background-color: red" aria-label="Cancel">Cancel</button>
+      <button id="decrease-size" (click)="decreasesize()" style="background-color: red" aria-label="Decrease">-</button>
+      <button id="increase-size" (click)="increasesize()" style="background-color: lime" aria-label="Increase">+</button>
+    </div>
+    <table aria-label="Your Weekly Schedule">
+      <tr class="schedule-row">
+        <th scope="col">
+          <div class="day-box">Monday</div>
+        </th>
+        <th scope="col">
+          <div class="day-box">Tuesday</div>
+        </th>
+        <th scope="col">
+          <div class="day-box">Wednesday</div>
+        </th>
+        <th scope="col">
+          <div class="day-box">Thursday</div>
+        </th>
+        <th scope="col">
+          <div class="day-box">Friday</div>
+        </th>
+        <th scope="col">
+          <div class="day-box">Saturday</div>
+        </th>
+        <th scope="col">
+          <div class="day-box">Sunday</div>
+        </th>
+        <th scope="col">
+          <div class="day-box">Live Schedule</div>
+        </th>
+      </tr>
+      <tr class="schedule-row live-schedule-row"></tr>
+      <ng-container *ngFor="let day of ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']">
+        <td [id]="day" class="schedule-cell">
+          <div *ngFor="let schedule of Arrayforschedules[day]; let i = index" class="schedule-box">
+            <p>{{ schedule.title }}</p>
+            <p>{{ schedule.description }}</p>
+            <p>{{ schedule.time }}</p>
+            <button (click)="edit(day, i)" aria-label="Edit" tabindex="4" accesskey="c">Edit</button>
+            <button (click)="delete(day, i)" aria-label="Delete" accesskey="d">Delete</button>
+          </div>
+        </td>
+      </ng-container>
+      <td class="schedule-cell">
+        <div *ngFor="let liveSchedule of Arrayforliveschedules" class="live-schedule-box">
+          <p>{{ liveSchedule.title }}</p>
+          <p>{{ liveSchedule.description }}</p>
+          <p>{{ liveSchedule.time }}</p>
+        </div>
+        <div *ngFor="let schedule of Arrayforschedules[day]; let i = index">
+          <p>{{ schedule.title }}</p>
+          <p>{{ schedule.description }}</p>
+          <p>{{ schedule.time }}</p>
+        </div>
+      </td>
+    </table>
+    <script src="typescript.js"></script>
+  </body>
+</html>
