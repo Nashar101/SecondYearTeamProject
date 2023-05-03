@@ -3,21 +3,18 @@ import { IAlarm, NewAlarm } from '../entities/alarm/alarm.model';
 import { AccountService } from 'app/core/auth/account.service';
 import { UserService } from 'app/entities/user/user.service';
 import { AlarmService } from '../entities/alarm/service/alarm.service';
+import { HttpClient } from '@angular/common/http';
+import { IUser } from '../entities/user/user.model';
 
 export class alarmsList {
   id!: number;
-
   alarmName!: string;
-
   type!: string;
-
   hours!: number;
-
   minutes!: number;
-
   seconds!: number;
-
   ticking!: Boolean;
+  user!: Pick<IUser, 'id' | 'login'> | null;
 }
 export class finishedAlarmsList {
   alarmName!: string;
@@ -25,6 +22,7 @@ export class finishedAlarmsList {
   hours!: number;
   minutes!: number;
   seconds!: number;
+  user!: { id: number; login: string };
 }
 @Component({
   selector: 'jhi-alarm',
@@ -32,8 +30,12 @@ export class finishedAlarmsList {
   styleUrls: ['./alarm.component.scss'],
 })
 export class AlarmComponent implements OnInit {
-  constructor(protected alarmService: AlarmService) {}
-
+  constructor(
+    protected alarmService: AlarmService,
+    protected userService: UserService,
+    protected accountService: AccountService,
+    protected http: HttpClient
+  ) {}
   ngOnInit(): void {
     this.loadAll();
   }
@@ -45,13 +47,30 @@ export class AlarmComponent implements OnInit {
 
   interval: number = 0;
 
-  alarmUpdate(index: number) {
-    this.alarmService.update(this.alarms[index]).subscribe();
+  alarmUpdate(id: number) {
+    var alarmIndex: number;
+    for (let i = 0; i < this.alarms.length; i++) {
+      if (this.alarms[i].id == id) {
+        alarmIndex = i;
+        break;
+      }
+    }
+    // @ts-ignore
+    this.alarmService.update(this.alarms[alarmIndex]).subscribe();
   }
+  soundAlarm() {
+    let audio = new Audio();
+    audio.src = 'sound/alarm2.mp3';
+    audio.autoplay = true;
+    audio.load();
+    audio.play();
+  }
+
   alarmEnd(index: number) {
     this.finishedAlarms.push(this.alarms[index]);
     this.alarmService.delete(this.alarms[index].id).subscribe();
     this.alarms.splice(index, 1);
+    this.soundAlarm();
   }
 
   finishedAlarmDelete(id: number) {
@@ -104,10 +123,15 @@ export class AlarmComponent implements OnInit {
           }
         }
       }
-      this.alarmUpdate(alarmIndex);
+      //this.alarmUpdate(alarmIndex);
     }, 1000);
   }
-
+  handleKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.saveAlarm();
+    }
+  }
   startTimer(aName: string, ticking: Boolean) {
     var alarmIndex = this.alarms.length - 1;
 
@@ -149,35 +173,41 @@ export class AlarmComponent implements OnInit {
           }
         }
       }
-      this.alarmUpdate(alarmIndex);
+      //this.alarmUpdate(alarmIndex);
     }, 1000);
   }
 
   loadAll(): void {
     this.alarms = [];
     this.finishedAlarms = [];
-    this.alarmService.query().subscribe(response => {
-      const items = response.body || [];
-      this.listItems = items;
-      for (let i = 0; i < items.length; i++) {
-        let alarm = new alarmsList();
-        //@ts-ignore
-        alarm.id = this.listItems[i].id;
-        //@ts-ignore
-        alarm.alarmName = this.listItems[i].alarmName;
-        //@ts-ignore
-        alarm.type = this.listItems[i].type;
-        //@ts-ignore
-        alarm.hours = this.listItems[i].hours;
-        //@ts-ignore
-        alarm.minutes = this.listItems[i].minutes;
-        //@ts-ignore
-        alarm.seconds = this.listItems[i].seconds;
-        // @ts-ignore
-        alarm.ticking = false;
-        this.alarms.push(alarm);
-        this.timeTick(alarm.id, alarm.ticking);
-      }
+    this.http.get<any>('/api/account').subscribe(account => {
+      const userID = account.id;
+      this.alarmService.query().subscribe(response => {
+        const items = response.body || [];
+        this.listItems = items;
+        this.listItems = this.listItems.filter(list => list.user?.id === userID);
+        for (let i = 0; i < items.length; i++) {
+          let alarm = new alarmsList();
+          //@ts-ignore
+          alarm.id = this.listItems[i].id;
+          //@ts-ignore
+          alarm.alarmName = this.listItems[i].alarmName;
+          //@ts-ignore
+          alarm.type = this.listItems[i].type;
+          //@ts-ignore
+          alarm.hours = this.listItems[i].hours;
+          //@ts-ignore
+          alarm.minutes = this.listItems[i].minutes;
+          //@ts-ignore
+          alarm.seconds = this.listItems[i].seconds;
+          // @ts-ignore
+          alarm.ticking = false;
+          // @ts-ignore
+          alarm.user = this.listItems[i].user;
+          this.alarms.push(alarm);
+          this.timeTick(alarm.id, alarm.ticking);
+        }
+      });
     });
   }
 
@@ -219,11 +249,13 @@ export class AlarmComponent implements OnInit {
         alarm.ticking = false;
 
         this.setAll(alarm.alarmName, alarm.type, alarm.hours, alarm.minutes, alarm.seconds);
-        this.alarmService.query().subscribe();
+        //this.alarmService.query().subscribe();
         this.alarmService.query().subscribe(response => {
           const items = response.body || [];
           this.listItems = items;
           alarm.id = this.listItems[items.length - 1].id;
+          // @ts-ignore
+          alarm.user = this.listItems[items.length - 1].user;
         });
         this.alarms.push(alarm);
         this.startTimer(alarm.alarmName, alarm.ticking);
@@ -234,9 +266,23 @@ export class AlarmComponent implements OnInit {
   }
 
   setAll(aName: string, aType: string, aHours: number, aMins: number, aSecs: number): void {
-    // @ts-ignore
-    const newAlarm: NewAlarm = { alarmName: aName, type: aType, hours: aHours, minutes: aMins, seconds: aSecs };
-    this.alarmService.create(newAlarm).subscribe();
+    this.accountService.identity().subscribe(account => {
+      if (account) {
+        this.http.get<any>('/api/account').subscribe(account => {
+          const userID = account.id;
+          // @ts-ignore
+          const newAlarm: NewAlarm = {
+            alarmName: aName,
+            type: aType,
+            hours: aHours,
+            minutes: aMins,
+            seconds: aSecs,
+            user: { id: userID, login: account.login },
+          };
+          this.alarmService.create(newAlarm).subscribe();
+        });
+      }
+    });
   }
 
   clearAlarms() {
@@ -261,7 +307,15 @@ export class AlarmComponent implements OnInit {
       ticking = true;
     } else {
       ticking = false;
+      this.alarmUpdate(id);
     }
     return ticking;
+  }
+  play(i: number) {
+    if (this.alarms[i].ticking === false) {
+      this.alarms[i].ticking = true;
+    } else {
+      this.alarms[i].ticking = false;
+    }
   }
 }

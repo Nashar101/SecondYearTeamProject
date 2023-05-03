@@ -21,7 +21,7 @@
         <div class="upcomingOrCompleted">
           <h3>Upcoming or Completed</h3>
           <form>
-            <select>
+            <select name="selectSubject" [(ngModel)]="selectedOption">
               <option value="Upcoming">Upcoming</option>
               <option value="Completed">Completed</option>
             </select>
@@ -33,20 +33,35 @@
         </span>
         <div class="target&date">
           <div class="target">
-            <h3>Target</h3>
-            <input id="targetValue" name="targetValue" [(ngModel)]="score" />
+            <h3>Grade</h3>
+            <input id="gradeValue" name="gradeValue" [(ngModel)]="score" />
           </div>
-          <button (click)="add()">+</button>
+          <div class="target">
+            <h3>Target</h3>
+            <input id="targetValue" name="targetValue" [(ngModel)]="target" />
+          </div>
+          <button class="buttonAdd" (click)="myFunction()">+</button>
         </div>
       </div>
       <div class="upcomingTest">
         <h1>Upcoming Test</h1>
-        <div class="upcomingTestDisplay">
-          <div class="upcomingTestCards">
-            <ul>
-              <li class="upcomingTest-Subject">Maths</li>
-              <li class="upcomingTest-Target">Target</li>
-            </ul>
+        <div class="upcomingTestDisplay" id="upcomingTestDisplay">
+          <!-- <div class="upcomingLabels">
+            <label *ngFor="let item of newList.upcomingTest">
+              {{ item }}
+            </label>
+
+
+          </div>-->
+          <div class="upcomingLabels">
+            <ng-container *ngFor="let item of newList.upcomingTest">
+              <label *ngIf="item && item !== ' '"> {{ item }} </label>
+            </ng-container>
+          </div>
+          <div class="upcomingLabels">
+            <ng-container *ngFor="let item of newList.subjectTarget">
+              <label *ngIf="item && item !== 0"> Target: {{ item }} </label>
+            </ng-container>
           </div>
         </div>
       </div>

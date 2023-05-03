@@ -1,1 +1,50 @@
-<p>inbox works!</p>
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body>
+    <title>Email Inbox</title>
+    <div class="inbox">
+      <div class="inbox-header">
+        <h1>Email Inbox</h1>
+        <div class="action-bar">
+          <button class="sort-button" data-sort-type="date" (click)="sortEmails('date')">Sort by Date</button>
+          <button class="delete-button" (click)="deleteSelected()">Delete Selected</button>
+        </div>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Date</th>
+          <th>Sender</th>
+          <th>Subject</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let email of emails" (click)="showDetails(email)">
+          <td><input type="checkbox" class="checkbox-wrapper" [(ngModel)]="email.selected" /></td>
+          <td>{{ email.date }}</td>
+          <td>{{ email.sender }}</td>
+          <td>{{ email.subject }}</td>
+          <td><button class="delete-btn" (click)="deleteEmail(email)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="email-details" *ngIf="selectedEmail">
+      <h2>{{ selectedEmail.subject }}</h2>
+      <p>From: {{ selectedEmail.sender }}</p>
+      <p>Sent: {{ selectedEmail.date }}</p>
+      <br />
+      <p>The following to-do item has been completed:</p>
+      <ul>
+        <li>Title: {{ selectedEmail.subject }}</li>
+        <li>Description: {{ selectedEmail.content }}</li>
+        <li>Due Date: {{ selectedEmail.date }}</li>
+      </ul>
+      <p>Thank you for using our application!</p>
+      <button (click)="closeDetails()">Close</button>
+    </div>
+  </body>
+</html>

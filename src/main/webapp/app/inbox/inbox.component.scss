@@ -1,0 +1,145 @@
+/* General styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+h1,
+h2 {
+  margin: 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: var(--inbox-background-color);
+  color: var(--inbox-text-color);
+}
+
+.checkbox-wrapper {
+  margin-right: 8px;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* Inbox styles */
+.inbox {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.inbox-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.action-bar {
+  display: flex;
+  align-items: center;
+}
+
+.sort-button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin-right: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.delete-button {
+  background-color: #f44336;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* Email details styles */
+.email-details {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+  background-color: var(--inbox-background-color);
+  color: var(--inbox-text-color);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 16px;
+}
+
+.email-details h2 {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.email-details p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.email-details ul {
+  margin: 8px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.email-details ul li {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.email-details button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin-top: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.email-details button:focus {
+  outline: none;
+}

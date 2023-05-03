@@ -6,7 +6,7 @@ import {
 import { AntiprocrastinationListTwoService } from '../entities/antiprocrastination-list-two/service/antiprocrastination-list-two.service';
 import { ExtensionIDService } from '../entities/extension-id/service/extension-id.service';
 
-import { IExtensionID } from '../entities/extension-id/extension-id.model';
+import { IExtensionID, NewExtensionID } from '../entities/extension-id/extension-id.model';
 
 import { AccountService } from '../core/auth/account.service';
 import dayjs from 'dayjs';
@@ -340,6 +340,7 @@ export class AntiProcrastinationComponent implements OnInit {
     if (this.extensionID2 == '') {
       this.working = 'Extension ID has been added';
       this.extensionID2 = this.extensionID;
+      console.log('this is extension ID 2 ' + this.extensionID2);
       this.extensionID = '';
     } else {
       this.extensionID2 = this.extensionID;
@@ -349,16 +350,26 @@ export class AntiProcrastinationComponent implements OnInit {
     this.extensionIDService.query().subscribe(response => {
       this.idlist = response.body || [];
       this.idlist = this.idlist.filter(list => list.extensionID === previous);
-
-      console.log('this is current exID' + previous);
-      this.idlist[0].extensionID = this.extensionID2;
-      //items.filter(item => item.extensionID === previous)[0].extensionID = this.extensionID2;
-      //items[0].extensionID = this.extensionID2;
-      //pohlkppdmfbfiikihamgkahfingcilld
-      console.log('this is new exID' + this.idlist[0].extensionID);
-      this.extensionIDService.update(this.idlist[0]).subscribe();
+      if (this.idlist.length == 0) {
+        this.http.get<any>('/api/account').subscribe(account => {
+          const userId = account.id;
+          //@ts-ignore
+          const newItem: NewExtensionID = {
+            extensionID: this.extensionID2,
+            user: { id: userId, login: account.login },
+          };
+          this.extensionIDService.create(newItem).subscribe();
+        });
+      } else {
+        //console.log('this is current exID' + previous);
+        this.idlist[0].extensionID = this.extensionID2;
+        console.log('this is new exID' + this.idlist[0].extensionID);
+        this.extensionIDService.update(this.idlist[0]).subscribe();
+      }
     });
     this.clear10();
+    this.todos = [];
+    this.loadAll();
   }
 
   clear10() {
