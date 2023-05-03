@@ -4,6 +4,10 @@ import { AccountService } from 'app/core/auth/account.service';
 import { UserService } from 'app/entities/user/user.service';
 import { TodolistItemService } from '../entities/todolist-item/service/todolist-item.service';
 import dayjs from 'dayjs';
+import { HttpClient } from '@angular/common/http';
+import { Account } from 'app/core/auth/account.model';
+import { EmailService } from '../entities/email/service/email.service';
+import { NewEmail } from '../entities/email/email.model';
 
 @Component({
   selector: 'jhi-todo-list',
@@ -14,11 +18,15 @@ export class TodoListComponent implements OnInit {
   todoItems: ITodolistItem[] = [];
   doneItems: ITodolistItem[] = [];
 
+  userEmail: string | null = null;
+
   constructor(
     private todolistItemService: TodolistItemService,
     private userService: UserService,
     private accountService: AccountService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private http: HttpClient,
+    private email: EmailService
   ) {}
 
   selectedItem: ITodolistItem | null = null;
@@ -88,10 +96,44 @@ export class TodoListComponent implements OnInit {
     this.closeDetailWindow();
   }
 
+  sendCompletionEmail(item: ITodolistItem): void {
+    if (!this.userEmail) {
+      console.error('User email not found');
+      return;
+    }
+
+    const todoItemDTO = {
+      heading: item.heading,
+      description: item.description,
+      userEmail: this.userEmail,
+    };
+
+    this.http.post('/api/mail/send-todo-completion-email', todoItemDTO).subscribe(
+      () => console.log('Email sent successfully'),
+      error => console.error('Failed to send email:', error)
+    );
+  }
+
   moveItem(event: MouseEvent, item: ITodolistItem): void {
     item.completed = !item.completed;
     this.todolistItemService.update(item).subscribe(() => {
       this.moveItemLocally(item);
+      if (item.completed) {
+        this.http.get<any>('/api/account').subscribe(account => {
+          const userId = account.id;
+          this.sendCompletionEmail(item);
+          //@ts-ignore
+          const newEmail: NewEmail = {
+            subject: item.heading,
+            content: item.description,
+            //@ts-ignore
+            receivedDate: new Date(),
+            recipient: 'antiprocrastapp@gmail.com',
+            user: { id: userId, login: account.login },
+          };
+          this.email.create(newEmail).subscribe();
+        });
+      }
     });
     if (this.selectedItem) {
       const selectedItem = this.todoItems.concat(this.doneItems).find(item => item.id === this.selectedItem!.id);
@@ -181,6 +223,12 @@ export class TodoListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.accountService.identity().subscribe((account: Account | null) => {
+      if (account) {
+        this.userEmail = account.email;
+      }
+    });
+
     this.loadAll();
   }
 }
