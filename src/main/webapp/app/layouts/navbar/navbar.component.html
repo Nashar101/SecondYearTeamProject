@@ -68,17 +68,19 @@
             Diary
           </a>
         </li>
+        <!--
         <li *ngSwitchCase="true" ngbDropdown class="nav-item" routerLinkActive="clicked" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/notificationpage" routerLinkActive="active" (click)="collapseNavbar()">
-            <!--<fa-icon [icon]="'tasks'"></fa-icon> -->
+            <fa-icon [icon]="'tasks'"></fa-icon>
             <span class="dot" style="background-color: #29f4e7"></span>
             Notification
           </a>
         </li>
+        -->
         <li *ngSwitchCase="true" ngbDropdown class="nav-item" routerLinkActive="clicked" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/inbox" routerLinkActive="active" (click)="collapseNavbar()">
             <!--<fa-icon [icon]="'tasks'"></fa-icon> -->
-            <span class="dot"></span>
+            <span class="dot" style="background-color: #29f4e7"></span>
             Inbox
           </a>
         </li>
