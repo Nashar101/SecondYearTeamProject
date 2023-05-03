@@ -15,6 +15,7 @@
     <table>
       <thead>
         <tr>
+          <th></th>
           <th>Date</th>
           <th>Sender</th>
           <th>Subject</th>
@@ -39,7 +40,7 @@
       <p>The following to-do item has been completed:</p>
       <ul>
         <li>Title: {{ selectedEmail.subject }}</li>
-        <li>Description: Work on latest features of the team project and attend the team meeting at 12:00 pm</li>
+        <li>Description: {{ selectedEmail.content }}</li>
         <li>Due Date: {{ selectedEmail.date }}</li>
       </ul>
       <p>Thank you for using our application!</p>
