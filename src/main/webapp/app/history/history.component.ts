@@ -8,6 +8,8 @@ import { IHistoryTwo, NewHistoryTwo } from '../entities/history-two/history-two.
 import { AccountService } from '../core/auth/account.service';
 import { HttpClient } from '@angular/common/http';
 
+const buttonElement = document.querySelector('button');
+
 export class list {
   ID!: number;
   subjectScore: number[] = [];
@@ -27,6 +29,22 @@ export class HistoryComponent implements OnInit {
   newList: list;
   //@ts-ignore
   myChart: Chart;
+
+  //@ts-ignore
+  selectedOption: string;
+
+  myFunction() {
+    // Check the selected option and run your if statement
+    if (this.selectedOption === 'Completed') {
+      this.add();
+      // Do something if option1 is selected
+    } else if (this.selectedOption === 'Upcoming') {
+      // Do something if option2 is selected
+      this.addUpcoming();
+    } else {
+      // Do something else if neither option1 nor option2 is selected
+    }
+  }
   init(): void {
     this.http.get<any>('/api/account').subscribe(account => {
       const userID = account.id;
@@ -48,17 +66,20 @@ export class HistoryComponent implements OnInit {
           historyList.upcomingTestTarget[i] = this.historyItems[i].upcomingTestTarget;
         }
         this.newList = historyList;
+        const nonNullSubjectList = this.newList.subject.filter(subject => subject !== null);
+        const nonNullScoretList = this.newList.subjectScore.filter(score => score !== null);
+
         console.log('this is list length' + this.newList.subject.length);
         if (this.newList.subject.length !== 0) {
           console.log('list not empty, printing chart');
           this.myChart = new Chart('myChart', {
             type: 'line',
             data: {
-              labels: this.newList.subject,
+              labels: nonNullSubjectList,
               datasets: [
                 {
                   label: 'Test Grades',
-                  data: this.newList.subjectScore,
+                  data: nonNullScoretList,
                   borderWidth: 4,
                   borderColor: '#C20505',
                 },
@@ -107,9 +128,10 @@ export class HistoryComponent implements OnInit {
   target: number;
   constructor(private accountService: AccountService, private http: HttpClient, protected historyListService: HistoryTwoService) {}
   add(): void {
+    console.log('helloworld');
     if (this.newSubject === '') {
       return;
-    } else if (this.target === 0 || this.target == null) {
+    } else {
       this.accountService.identity().subscribe(account => {
         if (account) {
           console.log(account.login);
@@ -136,7 +158,13 @@ export class HistoryComponent implements OnInit {
           });
         }
       });
-    } else if (this.score === 0 || this.score == null) {
+    }
+  }
+
+  addUpcoming(): void {
+    if (this.newSubject === '') {
+      return;
+    } else {
       this.accountService.identity().subscribe(account => {
         if (account) {
           console.log(account.login);
@@ -144,8 +172,8 @@ export class HistoryComponent implements OnInit {
             const userId = account.id;
             //@ts-ignore
             const newItem: NewHistoryTwo = {
-              subject: '',
-              subjectScore: 0,
+              subject: null,
+              subjectScore: null,
               subjectTarget: this.target,
               upcomingTest: this.newSubject,
               upcomingTestTarget: this.target,
@@ -156,10 +184,10 @@ export class HistoryComponent implements OnInit {
             //this.newList.subjectScore.push(this.score);
             this.newSubject = '';
             this.score = 0;
-            if (this.newList.subject.length !== 0) {
-              this.myChart.destroy();
-            }
-            this.init();
+            /*if (this.newList.subject.length !== 0) {
+                this.myChart.destroy();
+              }
+              this.init();*/
           });
         }
       });

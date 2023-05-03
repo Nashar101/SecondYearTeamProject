@@ -30,6 +30,11 @@ Bootstrap tweaks
   --history-fg: #444444;
   --history-input-bg: #ebebeb;
   --history-upcTstDsp: #ebebeb;
+
+  --background-color-w: #ffffff;
+  --anti-text-color-w: black;
+  --window-background-color-d: #ebebeb;
+  --window-shadow-background-color: rgba(0, 0, 0, 0.2);
 }
 
 .dark-mode {
@@ -57,6 +62,11 @@ Bootstrap tweaks
   --anti-text-color: #f0f0f0;
   --blocked-rows-color: #424242;
   --blocked-boxes-color: #424242;
+
+  --background-color-w: #2c2c2c;
+  --anti-text-color-w: white;
+  --window-background-color-d: #5b5b5b;
+  --window-shadow-background-color: rgba(255, 255, 255, 0.83);
 }
 
 body,
